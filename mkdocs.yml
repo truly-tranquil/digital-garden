@@ -1,0 +1,12 @@
+site_name: digital garden
+
+theme:
+  name: dracula
+
+favicon: assets\favicon.gif
+
+nav:
+  - home: index.md
+  - about: about.md
+  - random note:
+
