@@ -145,30 +145,36 @@ test('homepage note excerpt turns mentions of other notes into links', async () 
     {
       title: 'First note',
       url: 'buds/first-note/',
+      planted: '2026-01-01',
       excerpt: 'Read The Second Note for more.',
       stage: 'bud',
     },
     {
       title: 'The Second Note',
       url: 'buds/second-note/',
+      planted: '2026-01-01',
       excerpt: 'Follow up.',
       stage: 'bud',
     },
   ];
   class FixedDate extends Date {
-    static now() { return 0; }
+    constructor(...args) {
+      super(...(args.length ? args : [2026, 0, 1, 12]));
+    }
   }
   const context = {
     Date: FixedDate,
     Intl,
     Math,
     base_url: 'https://example.test/garden',
+    clearTimeout() {},
     clearInterval() {},
     document,
     fetch: async () => ({
       ok: true,
       json: async () => vm.runInNewContext(JSON.stringify(notes)),
     }),
+    setTimeout() { return 1; },
     setInterval() { return 1; },
   };
 
@@ -185,4 +191,64 @@ test('homepage note excerpt turns mentions of other notes into links', async () 
   assert.ok(mention);
   assert.equal(mention.textContent, 'The Second Note');
   assert.equal(mention.href, 'https://example.test/garden/buds/second-note/');
+});
+
+test('homepage only shows notes planted today and updates when the local date changes', async () => {
+  const today = new Element();
+  const listeners = {};
+  const document = makeDocument({
+    today,
+    'clock-time': new Element(),
+    'clock-date': new Element(),
+  });
+  document.hidden = false;
+  document.addEventListener = (name, callback) => { listeners[name] = callback; };
+  const notes = [
+    { title: 'Planted today', url: 'buds/today/', planted: '2026-01-01', stage: 'bud' },
+    { title: 'Also planted today', url: 'buds/today-too/', planted: '2026-01-01', stage: 'bud' },
+    { title: 'Planted yesterday', url: 'buds/yesterday/', planted: '2025-12-31', stage: 'bud' },
+  ];
+  let now = new Date(2026, 0, 1, 12).getTime();
+  let nextTimer;
+  class FixedDate extends Date {
+    constructor(...args) {
+      super(...(args.length ? args : [now]));
+    }
+  }
+  const context = {
+    Date: FixedDate,
+    Intl,
+    Math,
+    base_url: 'https://example.test/garden',
+    clearTimeout() {},
+    clearInterval() {},
+    document,
+    fetch: async (url, options) => {
+      assert.equal(options.cache, 'no-store');
+      return {
+        ok: true,
+        json: async () => vm.runInNewContext(JSON.stringify(notes)),
+      };
+    },
+    setTimeout(callback) {
+      nextTimer = callback;
+      return 1;
+    },
+    setInterval() { return 1; },
+  };
+  vm.runInNewContext(inlineScript('home.html', '{% block extra_scripts %}'), context);
+  await new Promise((resolve) => setImmediate(resolve));
+  const firstPick = today.children[0].children[0].textContent;
+  assert.ok(['Planted today', 'Also planted today'].includes(firstPick));
+
+  now = new Date(2026, 0, 2, 0, 1).getTime();
+  nextTimer();
+  assert.equal(today.textContent, 'No notes were planted in the garden today.');
+
+  now = new Date(2026, 0, 3, 0, 1).getTime();
+  document.hidden = true;
+  listeners.visibilitychange();
+  document.hidden = false;
+  listeners.visibilitychange();
+  assert.equal(today.textContent, 'No notes were planted in the garden today.');
 });

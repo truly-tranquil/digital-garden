@@ -1,4 +1,7 @@
 .venv/
+.garden-build/
+.garden-zensical.yml
+.garden-preview/
 __pycache__/
 *.py[cod]
 .pytest_cache/

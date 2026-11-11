@@ -8,19 +8,34 @@
   <section class="widget widget-wide" id="w-stats">
     <h2>the garden right now</h2>
     <div class="stat-row">
-      {% for stat in garden_stage_stats %}
+      {% if page.meta.garden_stage_stats is defined %}
+        {% set stats = page.meta.garden_stage_stats %}
+      {% else %}
+        {% set stats = garden_stage_stats %}
+      {% endif %}
+      {% for stat in stats %}
       <div class="stat stage-{{ stat.stage }}"><strong>{{ stat.count }}</strong><span>{{ stat.label }}</span></div>
       {% endfor %}
-      <div class="stat"><strong>{{ garden_note_total }}</strong><span>notes in all</span></div>
+      {% if page.meta.garden_note_total is defined %}
+        {% set note_total = page.meta.garden_note_total %}
+      {% else %}
+        {% set note_total = garden_note_total %}
+      {% endif %}
+      <div class="stat"><strong>{{ note_total }}</strong><span>notes in all</span></div>
     </div>
   </section>
   <section class="widget" id="w-today"><h2>note of the day</h2><div id="today">finding a note from the garden…</div></section>
   <section class="widget" id="w-recent">
     <h2>recently tended</h2>
-    {% if garden_recent %}
+    {% if page.meta.garden_recent is defined %}
+      {% set recent = page.meta.garden_recent %}
+    {% else %}
+      {% set recent = garden_recent %}
+    {% endif %}
+    {% if recent %}
     <ul class="note-list">
-      {% for note in garden_recent %}
-      <li><a href="{{ note.url|url }}">{{ note.title }}</a> <small>{{ note.tended|string|truncate(10, true, '') }}</small></li>
+      {% for note in recent %}
+      <li><a href="{{ note.url|url }}">{{ note.title }}</a> <small>{{ note.tended }}</small></li>
       {% endfor %}
     </ul>
     {% else %}
@@ -76,64 +91,101 @@
 
   (function () {
     var today = document.getElementById('today');
-    fetch(base_url + '/notes.json')
+    var notes;
+    var dayTimer;
+
+    function renderNote() {
+      if (!notes) return;
+      var now = new Date();
+      var dateKey = [
+        now.getFullYear(),
+        String(now.getMonth() + 1).padStart(2, '0'),
+        String(now.getDate()).padStart(2, '0')
+      ].join('-');
+      var todaysNotes = notes.filter(function (note) {
+        return String(note.planted || '').slice(0, 10) === dateKey;
+      });
+      if (!todaysNotes.length) {
+        today.textContent = 'No notes were planted in the garden today.';
+        return;
+      }
+      var day = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+      var index = ((day % todaysNotes.length) + todaysNotes.length) % todaysNotes.length;
+      var pick = todaysNotes[index];
+      var heading = document.createElement('h3');
+      var link = document.createElement('a');
+      link.href = base_url + '/' + pick.url;
+      link.textContent = pick.title;
+      heading.style.textAlign = 'center';
+      heading.appendChild(link);
+      today.textContent = '';
+      today.appendChild(heading);
+      if (pick.excerpt) {
+        var excerpt = document.createElement('p');
+        excerpt.style.textAlign = 'center';
+        var titles = notes.map(function (note) { return note.title; })
+          .filter(Boolean)
+          .sort(function (a, b) { return b.length - a.length; });
+        if (titles.length) {
+          var escaped = titles.map(function (title) {
+            return title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          });
+          var mentions = new RegExp(
+            '(^|[^\\p{L}\\p{N}_])(' + escaped.join('|') + ')(?=$|[^\\p{L}\\p{N}_])',
+            'giu'
+          );
+          var cursor = 0, match;
+          while ((match = mentions.exec(pick.excerpt)) !== null) {
+            excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor, match.index) + match[1]));
+            var mention = document.createElement('a');
+            var target = notes.find(function (note) {
+              return note.title.toLowerCase() === match[2].toLowerCase();
+            });
+            mention.href = base_url + '/' + target.url;
+            mention.textContent = match[2];
+            excerpt.appendChild(mention);
+            cursor = mentions.lastIndex;
+          }
+          excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor)));
+        } else {
+          excerpt.textContent = pick.excerpt;
+        }
+        today.appendChild(excerpt);
+      }
+    }
+
+    function scheduleNextDay() {
+      clearTimeout(dayTimer);
+      if (document.hidden || !notes) return;
+      var now = new Date();
+      var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      dayTimer = setTimeout(function () {
+        renderNote();
+        scheduleNextDay();
+      }, midnight.getTime() - now.getTime() + 25);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        clearTimeout(dayTimer);
+      } else {
+        renderNote();
+        scheduleNextDay();
+      }
+    });
+
+    fetch(base_url + '/notes.json', { cache: 'no-store' })
       .then(function (response) {
         if (!response.ok) throw new Error('Notes request failed');
         return response.json();
       })
       .then(function (all) {
         if (!Array.isArray(all)) throw new Error('Notes response is invalid');
-        var notes = all.filter(function (note) {
+        notes = all.filter(function (note) {
           return !note.is_index && !note.unlisted && !note.draft && Boolean(note.stage);
         });
-        if (!notes.length) {
-          today.textContent = 'No notes in the garden yet.';
-          return;
-        }
-        var pick = notes[Math.floor(Date.now() / 86400000) % notes.length];
-        var title = notes.find(function (note) {
-          return note.title.toLowerCase() === pick.title.toLowerCase();
-        }).title;
-        var heading = document.createElement('h3');
-        var link = document.createElement('a');
-        link.href = base_url + '/' + pick.url;
-        link.textContent = title;
-        heading.style.textAlign = 'center';
-        heading.appendChild(link);
-        today.textContent = '';
-        today.appendChild(heading);
-        if (pick.excerpt) {
-          var excerpt = document.createElement('p');
-          excerpt.style.textAlign = 'center';
-          var titles = notes.map(function (note) { return note.title; })
-            .filter(Boolean)
-            .sort(function (a, b) { return b.length - a.length; });
-          if (titles.length) {
-            var escaped = titles.map(function (title) {
-              return title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            });
-            var mentions = new RegExp(
-              '(^|[^\\p{L}\\p{N}_])(' + escaped.join('|') + ')(?=$|[^\\p{L}\\p{N}_])',
-              'giu'
-            );
-            var cursor = 0, match;
-            while ((match = mentions.exec(pick.excerpt)) !== null) {
-              excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor, match.index) + match[1]));
-              var mention = document.createElement('a');
-              var target = notes.find(function (note) {
-                return note.title.toLowerCase() === match[2].toLowerCase();
-              });
-              mention.href = base_url + '/' + target.url;
-              mention.textContent = match[2];
-              excerpt.appendChild(mention);
-              cursor = mentions.lastIndex;
-            }
-            excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor)));
-          } else {
-            excerpt.textContent = pick.excerpt;
-          }
-          today.appendChild(excerpt);
-        }
+        renderNote();
+        scheduleNextDay();
       })
       .catch(function () {
         today.textContent = 'The note of the day is temporarily unavailable.';

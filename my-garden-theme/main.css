@@ -741,13 +741,12 @@ a.random-btn { display: inline-block; text-decoration: none; }
   .header-right {
     display: grid;
     grid-column: 1;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     width: 100%;
     min-width: 0;
   }
-  #mkdocs-search-form { grid-column: 2; width: 100%; margin: 0; }
-  .garden-logo { font-size: 1.5rem; }
-  .garden-logo { grid-column: 3; justify-self: end; }
+  #mkdocs-search-form { grid-column: 1; grid-row: 1; width: 100%; max-width: 32rem; margin: 0; }
+  .garden-logo { grid-column: 1; grid-row: 2; justify-self: center; font-size: 1.5rem; }
   .garden-container { grid-template-columns: 1fr; }
   .garden-sidebar {
     display: none;

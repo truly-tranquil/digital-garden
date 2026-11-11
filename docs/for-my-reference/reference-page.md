@@ -380,7 +380,7 @@ enabled: true
 ```bash
 # diction is done with the tip of the tongue on the teeth
 echo "diction is done with the tip of the tongue on the teeth" | tr a-z A-Z
-mkdocs serve
+python garden_build.py serve
 ```
 
 ```json
@@ -775,8 +775,8 @@ width: full
 - `stage` shows a colored badge: `seedling`, `bud` or `evergreen`
 - `tags` show as pills under the title and link to their section on the by-tag page; search for notes by tag with `#tag`
 - `links_to` adds links to other notes by title or filename, even if the text doesn't link to them
-- `planted` and `tended` show as dates, and `tended` sorts the "recently tended" widget
-- `template: home.html` is only for your homepage; it enables the stats, note of the day, recent notes, clock, stage legend and garden graph widgets
+- `planted` records when a note was created, while `tended` shows the last-tended date and sorts the "recently tended" widget
+- `template: home.html` is only for your homepage; it enables the stats, note of the day (notes planted on the visitor's local date only), recent notes, clock, stage legend and garden graph widgets
 - `width: full` widens the page content; this reference page uses it
 - `draft: true` keeps a note out of the built site
 - `aliases` creates redirect pages for old note paths

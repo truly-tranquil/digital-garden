@@ -1,4 +1,4 @@
-"""Garden hooks: wikilinks, backlinks, links-to, embedded notes, tag index page, notes.json."""
+"""Garden content processing and generated assets for MkDocs and Zensical."""
 import html
 import json
 import os
@@ -19,6 +19,7 @@ try:
 except ImportError:
     def event_priority(priority):
         return lambda func: func
+
     class log:
         @staticmethod
         def warning(message):
@@ -806,6 +807,7 @@ def on_page_markdown(markdown, page, config, files):
             markdown = '# %s\n\n%s' % (posixpath.dirname(src), markdown.lstrip())
         markdown += _stage_index(src, STAGE_INDEX[src])
     n = notes.get(src)
+    page.meta.setdefault('garden_section', src.split('/')[0] if '/' in src else 'home')
     if n and not n['is_index']:
         if n['stage']:
             page.meta.setdefault('stage', n['stage'])

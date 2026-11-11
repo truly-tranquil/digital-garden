@@ -1,6 +1,30 @@
 {#- on the 404 page base_url is unreliable, so every link there is built from the configured site_url -#}
-{% set root = (config.site_url or '/').rstrip('/') if lost_page else base_url %}
-{% set v = build_date_utc.strftime('%Y%m%d%H%M') if build_date_utc is defined else '' %}
+{% if page is not defined %}{% set page = false %}{% endif %}
+{% if nav is not defined %}{% set nav = [] %}{% endif %}
+{% if lost_page is not defined %}{% set lost_page = false %}{% endif %}
+{% if page_title is not defined %}{% set page_title = '' %}{% endif %}
+{% if base_url is not defined %}{% set base_url = '/' %}{% endif %}
+{% set garden_outgoing = [] %}
+{% set garden_backlinks = [] %}
+{% set garden_history = [] %}
+{% set garden_related = [] %}
+{% set garden_tag_slugs = [] %}
+{% set garden_description = '' %}
+{% if page and page.meta %}
+  {% if page.meta.garden_outgoing is defined %}{% set garden_outgoing = page.meta.garden_outgoing %}{% endif %}
+  {% if page.meta.garden_backlinks is defined %}{% set garden_backlinks = page.meta.garden_backlinks %}{% endif %}
+  {% if page.meta.garden_history is defined %}{% set garden_history = page.meta.garden_history %}{% endif %}
+  {% if page.meta.garden_related is defined %}{% set garden_related = page.meta.garden_related %}{% endif %}
+  {% if page.meta.garden_tag_slugs is defined %}{% set garden_tag_slugs = page.meta.garden_tag_slugs %}{% endif %}
+  {% if page.meta.garden_description is defined %}{% set garden_description = page.meta.garden_description %}{% endif %}
+{% endif %}
+{% if outgoing is defined %}{% set garden_outgoing = outgoing %}{% endif %}
+{% if backlinks is defined %}{% set garden_backlinks = backlinks %}{% endif %}
+{% if history is defined %}{% set garden_history = history %}{% endif %}
+{% if related is defined %}{% set garden_related = related %}{% endif %}
+{% if description is defined %}{% set garden_description = description %}{% endif %}
+{% set root = (config.site_url or '/')|trim('/') if lost_page else base_url %}
+{% set v = '' %}
 
 {% macro asset(path) %}{% if lost_page %}{{ root }}/{{ path }}{% else %}{{ path|url }}{% endif %}{% endmacro %}
 
@@ -32,9 +56,15 @@
 </ul>
 {% endmacro %}
 
-{% set section = 'search' if not page else (page.url.split('/')[0] or 'home') %}
+{% set section = 'search' %}
+{% if page is defined and page %}
+  {% set section = 'home' %}
+  {% if page.meta is defined and page.meta.garden_section is defined %}
+    {% set section = page.meta.garden_section %}
+  {% endif %}
+{% endif %}
 {% set ns = namespace(i=(0 if page else 6)) %}
-{% if page %}{% for item in nav %}{% if (item.title|lower|replace(' ', '-')) == section %}{% set ns.i = loop.index0 %}{% endif %}{% endfor %}{% endif %}
+{% if page %}{% for item in nav.items %}{% if (item.title|lower|replace(' ', '-')) == section %}{% set ns.i = loop.index0 %}{% endif %}{% endfor %}{% endif %}
 {% if page and not page.is_homepage and page.toc and page.toc.items %}
   {% set toc_items = page.toc.items[0].children if (page.toc.items|length == 1 and page.toc.items[0].children) else page.toc.items %}
 {% else %}
@@ -47,9 +77,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page_title %}{{ page_title|lower }} | {% elif page and page.title and not page.is_homepage %}{{ page.title|lower }} | {% endif %}{{ config.site_name|lower }}</title>
+  <title>{% if page_title %}{{ page_title|lower }} | {% elif page and page.meta.garden_homepage %}{{ config.site_name|lower }}{% elif page and page.meta.title %}{{ page.meta.title|lower }} | {{ config.site_name|lower }}{% elif page and page.title %}{{ page.title|lower }} | {{ config.site_name|lower }}{% else %}{{ config.site_name|lower }}{% endif %}</title>
   {% if lost_page or not page %}<meta name="robots" content="noindex">{% endif %}
-  {% set meta_desc = page.meta.description if (page and page.meta and page.meta.description) else description %}
+  {% set meta_desc = page.meta.description if (page and page.meta and page.meta.description) else garden_description %}
   {% if meta_desc %}
   <meta name="description" content="{{ meta_desc|e }}">
   <meta property="og:description" content="{{ meta_desc|e }}">
@@ -62,11 +92,11 @@
   <meta property="og:url" content="{{ page.canonical_url }}">
   {% endif %}
   {% if og_image %}
-  <meta property="og:image" content="{{ (config.site_url or '').rstrip('/') }}/{{ og_image }}">
-  <meta name="twitter:image" content="{{ (config.site_url or '').rstrip('/') }}/{{ og_image }}">
+  <meta property="og:image" content="{{ (config.site_url or '')|trim('/') }}/{{ og_image }}">
+  <meta name="twitter:image" content="{{ (config.site_url or '')|trim('/') }}/{{ og_image }}">
   {% endif %}
   <meta name="twitter:card" content="{{ 'summary_large_image' if og_image else 'summary' }}">
-  {% if config.extra.feed %}<link rel="alternate" type="application/atom+xml" title="{{ config.site_name|lower }}" href="{{ (config.site_url or '').rstrip('/') }}/{{ config.extra.feed }}">{% endif %}
+  {% if config.extra.feed %}<link rel="alternate" type="application/atom+xml" title="{{ config.site_name|lower }}" href="{{ (config.site_url or '')|trim('/') }}/{{ config.extra.feed }}">{% endif %}
   <link rel="icon" href="{{ asset('assets/favicon.ico') }}">
   {% if has_math %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
@@ -97,7 +127,7 @@
     </div>
 
     <div class="header-right">
-      <form id="mkdocs-search-form" role="search" action="{{ asset('search.html') }}" method="get">
+      <form id="mkdocs-search-form" role="search" action="{{ asset('search/') }}" method="get">
         <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden... (/)" autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
         <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
         <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
@@ -108,7 +138,7 @@
 
   <div class="garden-container{% if toc_items|length > 1 %} has-toc{% endif %}" id="garden-layout">
     <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
-      {{ render_nav(nav, true) }}
+      {{ render_nav(nav.items, true) }}
     </nav>
 
     <main class="garden-content" id="main-content" tabindex="-1">
@@ -130,16 +160,16 @@
           <a class="badge stage-{{ page.meta.stage }}" href="{{ (page.meta.stage ~ 's/')|url }}">{{ page.meta.stage }}</a>
         {% endif %}
         {% if page.meta and page.meta.tags %}
-          {% for tag in page.meta.tags %}{% if page.meta.unlisted %}<span class="tag">#{{ tag }}</span>{% else %}<a class="tag" href="{{ 'by-tag/'|url }}#tag-{{ slug(tag) }}">#{{ tag }}</a>{% endif %}{% endfor %}
+          {% for tag in page.meta.tags %}{% if page.meta.unlisted %}<span class="tag">#{{ tag }}</span>{% else %}<a class="tag" href="{{ 'by-tag/'|url }}#tag-{% if garden_tag_slugs %}{{ garden_tag_slugs[loop.index0] }}{% else %}{{ slug(tag) }}{% endif %}">#{{ tag }}</a>{% endif %}{% endfor %}
         {% endif %}
         {% if page.meta and page.meta.planted %}<span class="date">planted <time datetime="{{ page.meta.planted }}">{{ page.meta.planted }}</time></span>{% endif %}
         {% if page.meta and page.meta.tended %}<span class="date">tended <time datetime="{{ page.meta.tended }}">{{ page.meta.tended }}</time></span>{% endif %}
         <span class="date" id="reading-time"></span>
       </div>
-      {% if outgoing %}
+      {% if garden_outgoing %}
       <div class="page-meta page-links">
         <span class="meta-label">outgoing links</span>
-        {% for o in outgoing %}<a class="link-chip" href="{{ o.url|url }}">{{ o.title }}</a>{% endfor %}
+        {% for o in garden_outgoing %}<a class="link-chip" href="{{ o.url|url }}">{{ o.title }}</a>{% endfor %}
       </div>
       {% endif %}
       {% endif %}
@@ -150,28 +180,28 @@
         </article>
       </div>
 
-      {% if page and backlinks %}
+      {% if garden_backlinks %}
       <section class="backlinks footnote">
         <hr>
         <p class="backlinks-title">backlinks</p>
         <ol>
-          {% for b in backlinks %}<li><a href="{{ b.url|url }}">{{ b.title }}</a>{% if b.context %}<small>{{ b.context }}</small>{% endif %}</li>{% endfor %}
+          {% for b in garden_backlinks %}<li><a href="{{ b.url|url }}">{{ b.title }}</a>{% if b.context %}<small>{{ b.context }}</small>{% endif %}</li>{% endfor %}
         </ol>
       </section>
       {% endif %}
 
-      {% if page and history %}
+      {% if garden_history %}
       <details class="note-history">
         <summary>note history</summary>
-        <ol>{% for commit in history %}<li><time>{{ commit.date }}</time> {{ commit.subject }}</li>{% endfor %}</ol>
+        <ol>{% for commit in garden_history %}<li><time>{{ commit.date }}</time> {{ commit.subject }}</li>{% endfor %}</ol>
       </details>
       {% endif %}
 
-      {% if page and related %}
+      {% if garden_related %}
       <footer class="garden-footer">
         <p class="related-title">related notes</p>
         <ul>
-          {% for r in related %}<li><a href="{{ r.url|url }}">{{ r.title }}</a></li>{% endfor %}
+          {% for r in garden_related %}<li><a href="{{ r.url|url }}">{{ r.title }}</a></li>{% endfor %}
         </ul>
       </footer>
       {% endif %}

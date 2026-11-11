@@ -1,9 +1,10 @@
 (function () {
-  var blocks = document.querySelectorAll('pre.mermaid');
+  var blocks = document.querySelectorAll('pre.mermaid, pre > code.language-mermaid');
   if (!blocks.length) return;
 
   var nodes = [];
-  blocks.forEach(function (pre) {
+  blocks.forEach(function (block) {
+    var pre = block.tagName === 'PRE' ? block : block.parentElement;
     var code = pre.querySelector('code');
     var div = document.createElement('div');
     div.className = 'mermaid';
