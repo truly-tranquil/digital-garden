@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://USERNAME.github.io/REPO/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/about/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/manifesto/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/buds/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/by-tag/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/evergreens/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/for-my-reference/reference-page/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://USERNAME.github.io/REPO/seedlings/</loc>
+         <lastmod>2026-11-11</lastmod>
+    </url>
+</urlset>

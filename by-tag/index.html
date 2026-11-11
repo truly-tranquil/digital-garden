@@ -1,0 +1,421 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>map of contents | digital garden</title>
+  
+  
+  <meta property="og:site_name" content="digital garden">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="map of contents">
+  
+  <link rel="canonical" href="https://USERNAME.github.io/REPO/by-tag/">
+  <meta property="og:url" content="https://USERNAME.github.io/REPO/by-tag/">
+  
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="../assets/favicon.ico">
+
+  <!-- runs before the page paints so there is no flash of the wrong theme -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var t = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
+  <link rel="stylesheet" href="../main.css">
+</head>
+<body data-section="by-tag" style="--folder: var(--rb-6)">
+  <a class="skip-link" href="#main-content">skip to content</a>
+
+  <header class="garden-header">
+    <div class="header-left">
+      <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
+      <a href="../index.html" class="garden-logo">digital garden</a>
+    </div>
+
+    <div class="header-right">
+      <form id="mkdocs-search-form" role="search" action="../search.html" method="get">
+        <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden... (/)" autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
+        <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
+        <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
+      </form>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+    </div>
+  </header>
+
+  <div class="garden-container" id="garden-layout">
+    <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
+      
+<ul>
+  
+    
+      <li style="--folder: var(--rb-0)">
+        <a href=".." class="">home</a>
+      </li>
+    
+  
+    
+      <li style="--folder: var(--rb-1)">
+        <a href="../manifesto/" class="">manifesto</a>
+      </li>
+    
+  
+    
+      <li style="--folder: var(--rb-2)">
+        <a href="../about/" class="">about</a>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-3)">
+        <details >
+          <summary>seedlings</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="../seedlings/" class="">map of contents</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-4)">
+        <details >
+          <summary>buds</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="../buds/" class="">map of contents</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-5)">
+        <details >
+          <summary>evergreens</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="../evergreens/" class="">map of contents</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-6)">
+        <details open>
+          <summary>by tag</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="./" class="active" aria-current="page">map of contents</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-7)">
+        <details >
+          <summary>for my reference</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="../for-my-reference/reference-page/" class="">reference page</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+</ul>
+
+    </nav>
+
+    <main class="garden-content" id="main-content" tabindex="-1">
+      
+      
+      
+      <nav class="breadcrumbs" aria-label="breadcrumbs">
+        <ol>
+          <li><a href="../index.html">home</a></li>
+          
+          <li><a href="./">by tag</a></li>
+          
+          <li aria-current="page">map of contents</li>
+        </ol>
+      </nav>
+      
+      <div class="page-meta">
+        
+        
+        
+        
+        <span class="date" id="reading-time"></span>
+      </div>
+      
+      
+
+      
+        
+      
+      <div class="article-wrap has-toc">
+        
+        <details class="toc" id="toc">
+          <summary>on this page</summary>
+          
+<ul>
+  
+  <li><a href="#tag-formatting">formatting</a></li>
+  
+  <li><a href="#tag-markdown">markdown</a></li>
+  
+  <li><a href="#tag-reference">reference</a></li>
+  
+</ul>
+
+        </details>
+        
+        <article class="garden-article">
+          <h2 id="tag-formatting">formatting<a class="headerlink" href="#tag-formatting" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../for-my-reference/reference-page/">reference page</a></li>
+</ul>
+<h2 id="tag-markdown">markdown<a class="headerlink" href="#tag-markdown" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../for-my-reference/reference-page/">reference page</a></li>
+</ul>
+<h2 id="tag-reference">reference<a class="headerlink" href="#tag-reference" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../for-my-reference/reference-page/">reference page</a></li>
+</ul>
+        </article>
+      </div>
+
+      
+      <section class="backlinks footnote">
+        <hr>
+        <p class="backlinks-title">backlinks</p>
+        <ol>
+          <li><a href="../for-my-reference/reference-page/">reference page</a></li>
+        </ol>
+      </section>
+      
+
+      
+    </main>
+  </div>
+
+  <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
+
+  <script>
+    var base_url = '..';
+
+    // sidebar (starts closed on small screens)
+    var layout = document.getElementById('garden-layout');
+    var toggle = document.getElementById('sidebar-toggle');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    }
+    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    syncToggle();
+    toggle.addEventListener('click', function () {
+      layout.classList.toggle('sidebar-collapsed');
+      syncToggle();
+    });
+
+    // light / dark
+    var modeBtn = document.getElementById('mode-toggle');
+    modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    modeBtn.addEventListener('click', function () {
+      var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    // random note (any element with data-random)
+    document.querySelectorAll('[data-random]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        fetch(base_url + '/notes.json').then(function (r) { return r.json(); }).then(function (all) {
+          var pool = all.filter(function (n) { return !n.is_index; });
+          if (!pool.length) pool = all;
+          var here = location.pathname;
+          var choices = pool.filter(function (n) { return !here.endsWith('/' + n.url) && n.url !== ''; });
+          if (!choices.length) choices = pool;
+          var n = choices[Math.floor(Math.random() * choices.length)];
+          location.href = base_url + '/' + n.url;
+        });
+      });
+    });
+
+    // rainbow footnotes and backlinks
+    function rainbow(i) { return 'var(--rbt-' + (i % 8) + ')'; }
+    document.querySelectorAll('.footnote-ref').forEach(function (a) {
+      var n = parseInt(a.textContent, 10);
+      if (!n) return;
+      a.style.color = rainbow(n - 1);
+      var li = document.getElementById(a.getAttribute('href').slice(1));
+      if (li) li.style.setProperty('--fnc', rainbow(n - 1));
+    });
+    document.querySelectorAll('.backlinks li').forEach(function (li, i) {
+      li.style.setProperty('--fnc', rainbow(i));
+    });
+
+    // reading time
+    (function () {
+      var el = document.getElementById('reading-time');
+      var art = document.querySelector('.garden-article');
+      if (!el || !art) return;
+      var words = art.innerText.trim().split(/\s+/).length;
+      if (words < 40) { el.remove(); return; }
+      el.textContent = Math.max(1, Math.round(words / 200)) + ' min read';
+    })();
+
+    // press / to jump to search
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+      var box = document.getElementById('mkdocs-search-query');
+      if (!box) return;
+      e.preventDefault();
+      box.focus();
+      box.select();
+    });
+
+    // back to top
+    (function () {
+      var btn = document.getElementById('to-top');
+      if (!btn) return;
+      function show() { btn.hidden = window.scrollY < 600; }
+      window.addEventListener('scroll', show, { passive: true });
+      show();
+      btn.addEventListener('click', function () {
+        var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+        document.getElementById('main-content').focus({ preventScroll: true });
+      });
+    })();
+
+    // on this page: open on wide screens, highlight the current section
+    (function () {
+      var toc = document.getElementById('toc');
+      if (!toc) return;
+      if (window.innerWidth >= 1300) toc.open = true;
+      var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
+      var map = {};
+      links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
+      var heads = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      function spy() {
+        var current = null;
+        heads.forEach(function (h) { if (h.getBoundingClientRect().top <= 120) current = h.id; });
+        links.forEach(function (a) { a.classList.remove('current'); a.removeAttribute('aria-current'); });
+        if (current && map[current]) {
+          map[current].classList.add('current');
+          map[current].setAttribute('aria-current', 'true');
+        }
+      }
+      window.addEventListener('scroll', spy, { passive: true });
+      spy();
+    })();
+
+    // copy buttons on code blocks
+    (function () {
+      var live = document.createElement('div');
+      live.className = 'sr-only';
+      live.setAttribute('role', 'status');
+      live.setAttribute('aria-live', 'polite');
+      document.body.appendChild(live);
+      document.querySelectorAll('.garden-article pre:not(.mermaid)').forEach(function (pre) {
+        var host = pre.parentElement;
+        if (!host.classList.contains('highlight')) {
+          host = document.createElement('div');
+          host.className = 'code-wrap';
+          pre.replaceWith(host);
+          host.appendChild(pre);
+        }
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.textContent = 'copy';
+        btn.addEventListener('click', function () {
+          if (!navigator.clipboard) { btn.textContent = 'unavailable'; return; }
+          navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')).then(function () {
+            btn.textContent = 'copied';
+            live.textContent = 'copied to clipboard';
+            setTimeout(function () { btn.textContent = 'copy'; live.textContent = ''; }, 1800);
+          }).catch(function () { btn.textContent = 'failed'; });
+        });
+        host.appendChild(btn);
+      });
+    })();
+
+    // favicons on external links (uses Google's favicon service)
+    document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        if (u.host === location.host || a.querySelector('img')) return;
+        var img = document.createElement('img');
+        img.className = 'link-favicon';
+        img.alt = '';
+        img.src = 'https://www.google.com/s2/favicons?sz=32&domain=' + u.hostname;
+        a.prepend(img);
+      } catch (e) {}
+    });
+  </script>
+  <script src="../garden-search.js"></script>
+  <script src="../garden-mermaid.js"></script>
+  
+</body>
+</html>
