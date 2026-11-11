@@ -1,5 +1,6 @@
 {#- on the 404 page base_url is unreliable, so every link there is built from the configured site_url -#}
 {% set root = (config.site_url or '/').rstrip('/') if lost_page else base_url %}
+{% set v = build_date_utc.strftime('%Y%m%d%H%M') if build_date_utc is defined else '' %}
 
 {% macro asset(path) %}{% if lost_page %}{{ root }}/{{ path }}{% else %}{{ path|url }}{% endif %}{% endmacro %}
 
@@ -34,12 +35,19 @@
 {% set section = 'search' if not page else (page.url.split('/')[0] or 'home') %}
 {% set ns = namespace(i=(0 if page else 6)) %}
 {% if page %}{% for item in nav %}{% if (item.title|lower|replace(' ', '-')) == section %}{% set ns.i = loop.index0 %}{% endif %}{% endfor %}{% endif %}
+{% if page and not page.is_homepage and page.toc and page.toc.items %}
+  {% set toc_items = page.toc.items[0].children if (page.toc.items|length == 1 and page.toc.items[0].children) else page.toc.items %}
+{% else %}
+  {% set toc_items = [] %}
+{% endif %}
+{% set og_image = config.extra.og_image %}
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page_title %}{{ page_title|lower }} | {% elif page and page.title and not page.is_homepage %}{{ page.title|lower }} | {% endif %}{{ config.site_name|lower }}</title>
+  {% if lost_page or not page %}<meta name="robots" content="noindex">{% endif %}
   {% set meta_desc = page.meta.description if (page and page.meta and page.meta.description) else description %}
   {% if meta_desc %}
   <meta name="description" content="{{ meta_desc|e }}">
@@ -52,7 +60,12 @@
   <link rel="canonical" href="{{ page.canonical_url }}">
   <meta property="og:url" content="{{ page.canonical_url }}">
   {% endif %}
-  <meta name="twitter:card" content="summary">
+  {% if og_image %}
+  <meta property="og:image" content="{{ (config.site_url or '').rstrip('/') }}/{{ og_image }}">
+  <meta name="twitter:image" content="{{ (config.site_url or '').rstrip('/') }}/{{ og_image }}">
+  {% endif %}
+  <meta name="twitter:card" content="{{ 'summary_large_image' if og_image else 'summary' }}">
+  {% if config.extra.feed %}<link rel="alternate" type="application/atom+xml" title="{{ config.site_name|lower }}" href="{{ (config.site_url or '').rstrip('/') }}/{{ config.extra.feed }}">{% endif %}
   <link rel="icon" href="{{ asset('assets/favicon.ico') }}">
 
   <!-- runs before the page paints so there is no flash of the wrong theme -->
@@ -68,15 +81,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
-  <link rel="stylesheet" href="{{ asset('main.css') }}">
+  <link rel="stylesheet" href="{{ asset('main.css') }}?v={{ v }}">
 </head>
-<body data-section="{{ section }}" style="--folder: var(--rb-{{ ns.i % 8 }})">
+<body{% if page and page.meta and page.meta.width == 'full' %} class="wide"{% endif %} data-section="{{ section }}" style="--folder: var(--rb-{{ ns.i % 8 }})">
   <a class="skip-link" href="#main-content">skip to content</a>
 
   <header class="garden-header">
     <div class="header-left">
       <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
-      <a href="{{ root }}/index.html" class="garden-logo">{{ config.site_name }}</a>
+      <a href="{{ root }}/" class="garden-logo">{{ config.site_name }}</a>
     </div>
 
     <div class="header-right">
@@ -90,7 +103,7 @@
     </div>
   </header>
 
-  <div class="garden-container" id="garden-layout">
+  <div class="garden-container{% if toc_items|length > 1 %} has-toc{% endif %}" id="garden-layout">
     <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
       {{ render_nav(nav, true) }}
     </nav>
@@ -101,7 +114,7 @@
       {% if crumbs %}
       <nav class="breadcrumbs" aria-label="breadcrumbs">
         <ol>
-          <li><a href="{{ root }}/index.html">home</a></li>
+          <li><a href="{{ root }}/">home</a></li>
           {% for a in crumbs %}{% set first = a.children|first %}
           <li>{% if first and first.is_page %}<a href="{{ first.url|url }}">{{ a.title }}</a>{% else %}{{ a.title }}{% endif %}</li>
           {% endfor %}
@@ -116,8 +129,8 @@
         {% if page.meta and page.meta.tags %}
           {% for tag in page.meta.tags %}<a class="tag" href="{{ 'by-tag/'|url }}#tag-{{ slug(tag) }}">#{{ tag }}</a>{% endfor %}
         {% endif %}
-        {% if page.meta and page.meta.planted %}<span class="date">planted {{ page.meta.planted }}</span>{% endif %}
-        {% if page.meta and page.meta.tended %}<span class="date">tended {{ page.meta.tended }}</span>{% endif %}
+        {% if page.meta and page.meta.planted %}<span class="date">planted <time datetime="{{ page.meta.planted }}">{{ page.meta.planted }}</time></span>{% endif %}
+        {% if page.meta and page.meta.tended %}<span class="date">tended <time datetime="{{ page.meta.tended }}">{{ page.meta.tended }}</time></span>{% endif %}
         <span class="date" id="reading-time"></span>
       </div>
       {% if outgoing %}
@@ -128,18 +141,7 @@
       {% endif %}
       {% endif %}
 
-      {% if page and not page.is_homepage and page.toc and page.toc.items %}
-        {% set toc_items = page.toc.items[0].children if (page.toc.items|length == 1 and page.toc.items[0].children) else page.toc.items %}
-      {% else %}
-        {% set toc_items = [] %}
-      {% endif %}
-      <div class="article-wrap{% if toc_items|length > 1 %} has-toc{% endif %}">
-        {% if toc_items|length > 1 %}
-        <details class="toc" id="toc">
-          <summary>on this page</summary>
-          {{ render_toc(toc_items) }}
-        </details>
-        {% endif %}
+      <div class="article-wrap">
         <article class="garden-article">
           {% block content %}{{ page.content }}{% endblock %}
         </article>
@@ -164,6 +166,16 @@
       </footer>
       {% endif %}
     </main>
+
+    {% if toc_items|length > 1 %}
+    <div class="toc-drawer" id="toc-drawer">
+      <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="true" aria-controls="toc-panel"><span class="sr-only">on this page</span></button>
+      <nav class="toc-panel" id="toc-panel" aria-label="on this page">
+        <p class="toc-title">on this page</p>
+        <div id="toc">{{ render_toc(toc_items) }}</div>
+      </nav>
+    </div>
+    {% endif %}
   </div>
 
   <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
@@ -171,27 +183,46 @@
   <script>
     var base_url = '{{ root }}';
 
-    // sidebar (starts closed on small screens)
+    // sidebar (hidden by default on small screens, remembered on large ones)
     var layout = document.getElementById('garden-layout');
     var toggle = document.getElementById('sidebar-toggle');
-    function syncToggle() {
-      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
     }
-    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
     syncToggle();
     toggle.addEventListener('click', function () {
-      layout.classList.toggle('sidebar-collapsed');
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
       syncToggle();
     });
+    narrow.addEventListener('change', syncToggle);
 
     // light / dark
     var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
     modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
     modeBtn.addEventListener('click', function () {
       var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      setTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
     });
 
     // random note (any element with data-random)
@@ -258,11 +289,47 @@
       });
     })();
 
-    // on this page: open on wide screens, highlight the current section
+    // on this page drawer
+    (function () {
+      var btn = document.getElementById('toc-toggle');
+      if (!btn) return;
+      var panel = document.getElementById('toc-panel');
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      function syncToc() {
+        btn.setAttribute('aria-expanded', String(tocIsOpen()));
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      syncToc();
+      btn.addEventListener('click', function () {
+        if (wide.matches) {
+          layout.classList.toggle('toc-collapsed');
+          try { localStorage.setItem('toc', layout.classList.contains('toc-collapsed') ? 'closed' : 'open'); } catch (e) {}
+        } else {
+          layout.classList.toggle('toc-open');
+        }
+        syncToc();
+      });
+      wide.addEventListener('change', syncToc);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+        btn.focus();
+      });
+      panel.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+      });
+    })();
+
+    // on this page: highlight the current section
     (function () {
       var toc = document.getElementById('toc');
       if (!toc) return;
-      if (window.innerWidth >= 1300) toc.open = true;
       var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
       var map = {};
       links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
@@ -280,6 +347,35 @@
       spy();
     })();
 
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
     // copy buttons on code blocks
     (function () {
       var live = document.createElement('div');
@@ -295,6 +391,7 @@
           pre.replaceWith(host);
           host.appendChild(pre);
         }
+        trackScroller(pre, 'code');
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'copy-btn';
@@ -311,6 +408,10 @@
       });
     })();
 
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
     // favicons on external links (uses Google's favicon service)
     document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
       try {
@@ -324,8 +425,8 @@
       } catch (e) {}
     });
   </script>
-  <script src="{{ asset('garden-search.js') }}"></script>
-  <script src="{{ asset('garden-mermaid.js') }}"></script>
+  <script src="{{ asset('garden-search.js') }}?v={{ v }}"></script>
+  <script src="{{ asset('garden-mermaid.js') }}?v={{ v }}"></script>
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>
