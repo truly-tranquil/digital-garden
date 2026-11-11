@@ -7,12 +7,18 @@
 
 
 
+
+
+  
+
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>map of contents | digital garden</title>
+  
   
   
   <meta property="og:site_name" content="digital garden">
@@ -22,7 +28,9 @@
   <link rel="canonical" href="https://USERNAME.github.io/REPO/seedlings/">
   <meta property="og:url" content="https://USERNAME.github.io/REPO/seedlings/">
   
+  
   <meta name="twitter:card" content="summary">
+  
   <link rel="icon" href="../assets/favicon.ico">
 
   <!-- runs before the page paints so there is no flash of the wrong theme -->
@@ -38,7 +46,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
-  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" href="../main.css?v=202611110158">
 </head>
 <body data-section="seedlings" style="--folder: var(--rb-3)">
   <a class="skip-link" href="#main-content">skip to content</a>
@@ -46,7 +54,7 @@
   <header class="garden-header">
     <div class="header-left">
       <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
-      <a href="../index.html" class="garden-logo">digital garden</a>
+      <a href="../" class="garden-logo">digital garden</a>
     </div>
 
     <div class="header-right">
@@ -188,7 +196,7 @@
       
       <nav class="breadcrumbs" aria-label="breadcrumbs">
         <ol>
-          <li><a href="../index.html">home</a></li>
+          <li><a href="../">home</a></li>
           
           <li><a href="./">seedlings</a></li>
           
@@ -206,11 +214,7 @@
       
       
 
-      
-        
-      
       <div class="article-wrap">
-        
         <article class="garden-article">
           <h1 id="seedlings">seedlings<a class="headerlink" href="#seedlings" title="Permanent link">&para;</a></h1>
 <p><em>nothing planted here yet.</em></p>
@@ -229,6 +233,8 @@
 
       
     </main>
+
+    
   </div>
 
   <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
@@ -236,27 +242,46 @@
   <script>
     var base_url = '..';
 
-    // sidebar (starts closed on small screens)
+    // sidebar (hidden by default on small screens, remembered on large ones)
     var layout = document.getElementById('garden-layout');
     var toggle = document.getElementById('sidebar-toggle');
-    function syncToggle() {
-      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
     }
-    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
     syncToggle();
     toggle.addEventListener('click', function () {
-      layout.classList.toggle('sidebar-collapsed');
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
       syncToggle();
     });
+    narrow.addEventListener('change', syncToggle);
 
     // light / dark
     var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
     modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
     modeBtn.addEventListener('click', function () {
       var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      setTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
     });
 
     // random note (any element with data-random)
@@ -323,11 +348,47 @@
       });
     })();
 
-    // on this page: open on wide screens, highlight the current section
+    // on this page drawer
+    (function () {
+      var btn = document.getElementById('toc-toggle');
+      if (!btn) return;
+      var panel = document.getElementById('toc-panel');
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      function syncToc() {
+        btn.setAttribute('aria-expanded', String(tocIsOpen()));
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      syncToc();
+      btn.addEventListener('click', function () {
+        if (wide.matches) {
+          layout.classList.toggle('toc-collapsed');
+          try { localStorage.setItem('toc', layout.classList.contains('toc-collapsed') ? 'closed' : 'open'); } catch (e) {}
+        } else {
+          layout.classList.toggle('toc-open');
+        }
+        syncToc();
+      });
+      wide.addEventListener('change', syncToc);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+        btn.focus();
+      });
+      panel.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+      });
+    })();
+
+    // on this page: highlight the current section
     (function () {
       var toc = document.getElementById('toc');
       if (!toc) return;
-      if (window.innerWidth >= 1300) toc.open = true;
       var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
       var map = {};
       links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
@@ -345,6 +406,35 @@
       spy();
     })();
 
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
     // copy buttons on code blocks
     (function () {
       var live = document.createElement('div');
@@ -360,6 +450,7 @@
           pre.replaceWith(host);
           host.appendChild(pre);
         }
+        trackScroller(pre, 'code');
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'copy-btn';
@@ -376,6 +467,10 @@
       });
     })();
 
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
     // favicons on external links (uses Google's favicon service)
     document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
       try {
@@ -389,8 +484,8 @@
       } catch (e) {}
     });
   </script>
-  <script src="../garden-search.js"></script>
-  <script src="../garden-mermaid.js"></script>
+  <script src="../garden-search.js?v=202611110158"></script>
+  <script src="../garden-mermaid.js?v=202611110158"></script>
   
 </body>
 </html>
