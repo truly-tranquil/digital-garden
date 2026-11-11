@@ -5,72 +5,139 @@
 {{ page.content }}
 
 <div class="widgets" id="widgets">
-  <section class="widget widget-wide" id="w-stats"><h2>the garden right now</h2><div class="stat-row" id="stat-row"></div></section>
-  <section class="widget" id="w-today"><h2>note of the day</h2><div id="today"></div></section>
-  <section class="widget" id="w-recent"><h2>recently tended</h2><ul class="note-list" id="recent"></ul></section>
-  <section class="widget" id="w-tags"><h2>tags</h2><div class="tag-cloud" id="tags"></div></section>
+  <section class="widget widget-wide" id="w-stats">
+    <h2>the garden right now</h2>
+    <div class="stat-row">
+      {% for stat in garden_stage_stats %}
+      <div class="stat stage-{{ stat.stage }}"><strong>{{ stat.count }}</strong><span>{{ stat.label }}</span></div>
+      {% endfor %}
+      <div class="stat"><strong>{{ garden_note_total }}</strong><span>notes in all</span></div>
+    </div>
+  </section>
+  <section class="widget" id="w-today"><h2>note of the day</h2><div id="today">finding a note from the garden…</div></section>
+  <section class="widget" id="w-recent">
+    <h2>recently tended</h2>
+    {% if garden_recent %}
+    <ul class="note-list">
+      {% for note in garden_recent %}
+      <li><a href="{{ note.url|url }}">{{ note.title }}</a> <small>{{ note.tended|string|truncate(10, true, '') }}</small></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>no notes have been tended yet.</p>
+    {% endif %}
+  </section>
+  <section class="widget" id="w-clock">
+    <h2>garden clock</h2>
+    <div class="clock">
+      <time class="clock-time" id="clock-time">Enable JavaScript to see the local time.</time>
+      <span class="clock-date" id="clock-date">Local date</span>
+    </div>
+  </section>
+  <section class="widget" id="w-legend">
+    <h2>how to read this garden</h2>
+    <ul>
+      <li><strong>seedling:</strong> new ideas and notes in progress</li>
+      <li><strong>bud:</strong> developing notes with some structure</li>
+      <li><strong>evergreen:</strong> mature notes, revised over time</li>
+    </ul>
+  </section>
+  <section class="widget" id="w-graph"><h2>garden graph</h2><p>Explore how notes in the garden connect.</p><a class="graph-link" href="{{ asset('graph.html') }}">open the garden graph</a></section>
 </div>
 {% endblock %}
 
 {% block extra_scripts %}
 <script>
-  fetch(base_url + '/notes.json').then(function (r) { return r.json(); }).then(function (all) {
-    function el(tag, cls, text) {
-      var e = document.createElement(tag);
-      if (cls) e.className = cls;
-      if (text != null) e.textContent = text;
-      return e;
-    }
-    function link(n) {
-      var a = el('a', null, n.title);
-      a.href = base_url + '/' + n.url;
-      return a;
-    }
-    var notes = all.filter(function (n) { return !n.is_index; });
-
-    // stats
-    var row = document.getElementById('stat-row');
-    [['seedling', 'seedlings'], ['bud', 'buds'], ['evergreen', 'evergreens']].forEach(function (s) {
-      var count = notes.filter(function (n) { return n.stage === s[0]; }).length;
-      var tile = el('div', 'stat stage-' + s[0]);
-      tile.appendChild(el('strong', null, String(count)));
-      tile.appendChild(el('span', null, s[1]));
-      row.appendChild(tile);
+  (function () {
+    var time = document.getElementById('clock-time');
+    var date = document.getElementById('clock-date');
+    var timeFormat = new Intl.DateTimeFormat(undefined, {
+      hour: 'numeric', minute: '2-digit', second: '2-digit'
     });
-    var total = el('div', 'stat'); total.appendChild(el('strong', null, String(notes.length))); total.appendChild(el('span', null, 'notes in all'));
-    row.appendChild(total);
-
-    // note of the day (same note all day)
-    if (notes.length) {
-      var pick = notes[Math.floor(Date.now() / 86400000) % notes.length];
-      var t = document.getElementById('today');
-      var h = el('h3'); h.appendChild(link(pick)); t.appendChild(h);
-      t.appendChild(el('p', null, pick.excerpt));
-    }
-
-    // recently tended
-    var recent = notes.slice().sort(function (a, b) { return String(b.tended).localeCompare(String(a.tended)); }).slice(0, 6);
-    var ul = document.getElementById('recent');
-    recent.forEach(function (n) {
-      var li = el('li'); li.appendChild(link(n)); li.appendChild(el('small', null, ' ' + String(n.tended).slice(0, 10)));
-      ul.appendChild(li);
+    var dateFormat = new Intl.DateTimeFormat(undefined, {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
+    var timer;
+    function updateClock() {
+      var now = new Date();
+      time.textContent = timeFormat.format(now);
+      date.textContent = dateFormat.format(now);
+    }
+    function updateVisibility() {
+      clearInterval(timer);
+      if (!document.hidden) {
+        updateClock();
+        timer = setInterval(updateClock, 1000);
+      }
+    }
+    document.addEventListener('visibilitychange', updateVisibility);
+    updateVisibility();
+  })();
 
-    // tags
-    var counts = {}, slugs = {};
-    notes.forEach(function (n) {
-      n.tags.forEach(function (g, i) {
-        counts[g] = (counts[g] || 0) + 1;
-        slugs[g] = n.tag_slugs[i];
+  (function () {
+    var today = document.getElementById('today');
+    fetch(base_url + '/notes.json')
+      .then(function (response) {
+        if (!response.ok) throw new Error('Notes request failed');
+        return response.json();
+      })
+      .then(function (all) {
+        if (!Array.isArray(all)) throw new Error('Notes response is invalid');
+        var notes = all.filter(function (note) {
+          return !note.is_index && !note.unlisted && !note.draft && Boolean(note.stage);
+        });
+        if (!notes.length) {
+          today.textContent = 'No notes in the garden yet.';
+          return;
+        }
+        var pick = notes[Math.floor(Date.now() / 86400000) % notes.length];
+        var title = notes.find(function (note) {
+          return note.title.toLowerCase() === pick.title.toLowerCase();
+        }).title;
+        var heading = document.createElement('h3');
+        var link = document.createElement('a');
+        link.href = base_url + '/' + pick.url;
+        link.textContent = title;
+        heading.style.textAlign = 'center';
+        heading.appendChild(link);
+        today.textContent = '';
+        today.appendChild(heading);
+        if (pick.excerpt) {
+          var excerpt = document.createElement('p');
+          excerpt.style.textAlign = 'center';
+          var titles = notes.map(function (note) { return note.title; })
+            .filter(Boolean)
+            .sort(function (a, b) { return b.length - a.length; });
+          if (titles.length) {
+            var escaped = titles.map(function (title) {
+              return title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var mentions = new RegExp(
+              '(^|[^\\p{L}\\p{N}_])(' + escaped.join('|') + ')(?=$|[^\\p{L}\\p{N}_])',
+              'giu'
+            );
+            var cursor = 0, match;
+            while ((match = mentions.exec(pick.excerpt)) !== null) {
+              excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor, match.index) + match[1]));
+              var mention = document.createElement('a');
+              var target = notes.find(function (note) {
+                return note.title.toLowerCase() === match[2].toLowerCase();
+              });
+              mention.href = base_url + '/' + target.url;
+              mention.textContent = match[2];
+              excerpt.appendChild(mention);
+              cursor = mentions.lastIndex;
+            }
+            excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor)));
+          } else {
+            excerpt.textContent = pick.excerpt;
+          }
+          today.appendChild(excerpt);
+        }
+      })
+      .catch(function () {
+        today.textContent = 'The note of the day is temporarily unavailable.';
       });
-    });
-    var cloud = document.getElementById('tags');
-    Object.keys(counts).sort().forEach(function (g) {
-      var a = el('a', 'tag', '#' + g + ' ' + counts[g]);
-      a.href = base_url + '/by-tag/#tag-' + slugs[g];
-      cloud.appendChild(a);
-    });
-    if (!Object.keys(counts).length) cloud.appendChild(el('p', null, 'no tags yet. add tags: [..] to a note.'));
-  });
+  })();
 </script>
 {% endblock %}

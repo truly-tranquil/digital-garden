@@ -10,5 +10,74 @@
     <a class="random-btn" href="{{ (config.site_url or '/').rstrip('/') }}/"><span aria-hidden="true">🌿</span> back to the garden</a>
     <button type="button" class="random-btn" data-random><span aria-hidden="true">🎲</span> random note</button>
   </div>
+  <section id="did-you-mean" hidden>
+    <h2>did you mean?</h2>
+    <ul id="suggestions"></ul>
+  </section>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  fetch(base_url + '/notes.json').then(function (response) {
+    if (!response.ok) throw new Error('Notes list unavailable');
+    return response.json();
+  }).then(function (notes) {
+    if (!Array.isArray(notes)) throw new Error('Notes list is invalid');
+    function distance(a, b) {
+      var row = Array.from({ length: b.length + 1 }, function (_, i) { return i; });
+      for (var i = 1; i <= a.length; i++) {
+        var previous = row[0];
+        row[0] = i;
+        for (var j = 1; j <= b.length; j++) {
+          var old = row[j];
+          row[j] = Math.min(row[j] + 1, row[j - 1] + 1, previous + (a[i - 1] === b[j - 1] ? 0 : 1));
+          previous = old;
+        }
+      }
+      return row[b.length];
+    }
+    function decode(value) {
+      try { return decodeURIComponent(value); } catch (error) { return value; }
+    }
+    function normalize(value) {
+      return decode(String(value || '')).replace(/\\/g, '/').replace(/^\/+|\/+$/g, '').toLowerCase();
+    }
+    var rootPath = normalize(new URL(base_url, location.href).pathname);
+    var requestPath = normalize(location.pathname);
+    if (rootPath && requestPath.indexOf(rootPath + '/') === 0) {
+      requestPath = requestPath.slice(rootPath.length + 1);
+    }
+    requestPath = requestPath.replace(/\/index\.html$/i, '').replace(/\.html$/i, '');
+    if (!requestPath) return;
+    var ranked = notes.filter(function (note) {
+      return !note.is_index && !note.unlisted && !note.draft && Boolean(note.stage);
+    }).map(function (note) {
+      var path = normalize(note.url);
+      var title = normalize(note.title);
+      var basename = path.split('/').pop();
+      var maxLength = Math.max(requestPath.length, path.length, basename.length, title.length, 1);
+      var score = Math.min(
+        distance(requestPath, path),
+        distance(requestPath, basename),
+        distance(requestPath, title)
+      ) / maxLength;
+      return { note: note, score: score };
+    }).sort(function (a, b) { return a.score - b.score; }).slice(0, 3);
+    var matches = ranked.filter(function (item) { return item.score <= 0.4; });
+    if (!matches.length) return;
+    var list = document.getElementById('suggestions');
+    matches.forEach(function (item) {
+      var li = document.createElement('li');
+      var link = document.createElement('a');
+      link.href = base_url + '/' + item.note.url;
+      link.textContent = item.note.title;
+      li.appendChild(link);
+      list.appendChild(li);
+    });
+    document.getElementById('did-you-mean').hidden = false;
+  }).catch(function (error) {
+    console.error('Could not load garden suggestions:', error);
+  });
+</script>
 {% endblock %}

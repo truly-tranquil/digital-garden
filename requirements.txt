@@ -1,4 +1,5 @@
-mkdocs>=1.6
-mkdocs-callouts
-pymdown-extensions
-pyyaml
+mkdocs==1.6.1
+mkdocs-callouts==1.17.1
+pymdown-extensions==13.0
+PyYAML==6.0.3
+Pygments==2.19.2

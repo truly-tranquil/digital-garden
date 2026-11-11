@@ -1,8 +1,10 @@
 ---
 stage: evergreen
+unlisted: true
 tags: [reference, formatting, markdown]
 planted: 2026-11-10
 tended: 2026-11-10
+width: full
 ---
 
 # reference page
@@ -121,19 +123,19 @@ nested items need four spaces of indentation, and a list needs a blank line befo
 
 square brackets are written with codes in the box below so the garden doesn't turn the examples into real links.
 
-<pre><code>&#91;a link&#93;(https://en.wikipedia.org/wiki/Diction)
+<pre><code>[a link](https://en.wikipedia.org/wiki/Diction)
 &lt;https://en.wikipedia.org/wiki/Diction&gt;
-&#91;a link with a hover title&#93;(https://en.wikipedia.org/wiki/Diction "diction")
-&#91;opens in a new tab&#93;(https://en.wikipedia.org/wiki/Diction){ target="_blank" }
-&#91;another note in the garden&#93;(reference-page.md)
-&#91;a heading in another note&#93;(reference-page.md#headings)
-&#91;jump to a heading on this page&#93;(#headings)
+[a link with a hover title](https://en.wikipedia.org/wiki/Diction "diction")
+[opens in a new tab](https://en.wikipedia.org/wiki/Diction){ target="_blank" }
+[another note in the garden](reference-page.md)
+[a heading in another note](reference-page.md#headings)
+[jump to a heading on this page](#headings)
 &nbsp;
 wikilinks, like in obsidian:
-&#91;&#91;reference-page&#93;&#93;
-&#91;&#91;reference-page|a custom label&#93;&#93;
-&#91;&#91;reference-page#headings&#93;&#93;
-&#91;&#91;reference-page#headings|a custom label&#93;&#93;</code></pre>
+[[reference-page]]
+[[reference-page|a custom label]]
+[[reference-page#headings]]
+[[reference-page#headings|a custom label]]</code></pre>
 
 - [diction is done with the tip of the tongue on the teeth](https://en.wikipedia.org/wiki/Diction)
 - <https://en.wikipedia.org/wiki/Dental_consonant>
@@ -156,8 +158,8 @@ external links get a small favicon in front of them automatically.
 ![alt text](../assets/favicon.ico "a hover title")
 &nbsp;
 or, like in obsidian, by file name from anywhere:
-!&#91;&#91;favicon.ico&#93;&#93;
-!&#91;&#91;favicon.ico|48&#93;&#93;</code></pre>
+![[favicon.ico]]
+![[favicon.ico|48]]</code></pre>
 
 put image files in `docs/assets/`. the path is relative to the note it is written in, so a note in the top level of `docs/` uses `assets/favicon.ico`, and a note inside a folder such as `seedlings/` or `for-my-reference/` needs `../assets/favicon.ico`. the wikilink form finds the file by name, so it works from any folder.
 
@@ -169,12 +171,12 @@ your favicon, which only shows if the path matches where the file really is:
 
 ![diction is done with the tip of the tongue on the teeth](../assets/favicon.ico){ width="48" }
 
-## backlinks and links to
+## outgoing links and backlinks
 
-links between notes are tracked automatically, and this note's own links are not shown to itself.
+links between notes are tracked automatically, and this note's own links are not shown to itself. the page labels them **outgoing links** and **backlinks**.
 
-- a note that links to another note shows that note under **links to** at the top of the page
-- the note being linked to lists the notes that link to it under **cited by** at the bottom, numbered like footnotes
+- a note that links to another note shows its destinations under **outgoing links** near the top of the page
+- the note being linked to lists the notes that link to it under **backlinks** at the bottom, numbered like footnotes
 - this works for wikilinks, normal `.md` links and embeds
 - to add a link without writing one in the text, list it in the front matter with `links_to`, shown in the page metadata section below
 
@@ -182,8 +184,8 @@ links between notes are tracked automatically, and this note's own links are not
 
 an exclamation mark in front of a wikilink pulls another note's content into this one, inside a framed block with a link back to its source. a section name after `#` embeds only that section.
 
-<pre><code>!&#91;&#91;note name&#93;&#93;
-!&#91;&#91;note name#a heading&#93;&#93;</code></pre>
+<pre><code>![[note name]]
+![[note name#a heading]]</code></pre>
 
 this embeds the section called escaping from further down this page:
 
@@ -209,36 +211,55 @@ embeds go two levels deep. relative links and footnotes inside an embedded note 
 
 ## callouts
 
-obsidian-style callouts. add `-` after the type to make it collapsed, or `+` to make it foldable but open. text after the type becomes the title.
+obsidian-style callouts. add `-` after the type to make it collapsed, or `+` to make it foldable but open. text after the type becomes the title. these eight types show the eight callout colors, in order.
 
-<pre><code>&gt; &#91;!note&#93;
+<pre><code>&gt; [!danger]- red, collapsed by default
 &gt; the body of the callout
 &nbsp;
-&gt; &#91;!tip&#93; a custom title
+&gt; [!warning] orange
 &gt; the body of the callout
 &nbsp;
-&gt; &#91;!warning&#93;- collapsed by default
+&gt; [!tip] yellow
 &gt; the body of the callout
 &nbsp;
-&gt; &#91;!question&#93;+ foldable, open by default
-&gt; the body of the callout</code></pre>
+&gt; [!success] green
+&gt; the body of the callout
+&nbsp;
+&gt; [!abstract] turquoise
+&gt; the body of the callout
+&nbsp;
+&gt; [!note] blue
+&gt; the body of the callout
+&nbsp;
+&gt; [!question]+ indigo, foldable and open by default
+&gt; the body of the callout
+&nbsp;
+&gt; [!quote] purple
+&gt; the body of the callout
+&nbsp;</code></pre>
 
-> [!note]
+> [!danger]- red
 > diction is done with the tip of the tongue on the teeth
 
-> [!abstract]
+> [!warning] orange
 > diction is done with the tip of the tongue on the teeth
 
-> [!info]
+> [!tip] yellow
 > diction is done with the tip of the tongue on the teeth
 
-> [!todo]
+> [!success] green
 > diction is done with the tip of the tongue on the teeth
 
-> [!tip]
+> [!abstract] turquoise
 > diction is done with the tip of the tongue on the teeth
 
-> [!success]
+> [!note] blue
+> diction is done with the tip of the tongue on the teeth
+
+> [!question]+ indigo
+> diction is done with the tip of the tongue on the teeth
+
+> [!quote] purple
 > diction is done with the tip of the tongue on the teeth
 
 > [!question]
@@ -414,6 +435,7 @@ diction is done with the tip of the tongue on the teeth.[^tongue] diction is don
 [^throat]: diction is done with the tip of the tongue on the teeth.
 
 [^voice]: diction is done with the tip of the tongue on the teeth.
+
 ## definition lists
 
 ```markdown
@@ -449,7 +471,7 @@ diction is done with the TTT. hover over the underlined letters.
     more content
 ````
 
-the tab labels use the rainbow colors in order, and there are eight so all of them show.
+the first eight tab labels show all eight rainbow colors; additional tabs continue the cycle. on narrow screens, scroll horizontally through the labels.
 
 === "first tab"
     diction is done with the tip of the tongue on the teeth
@@ -476,6 +498,19 @@ the tab labels use the rainbow colors in order, and there are eight so all of th
 
 === "eighth tab"
     diction is done with the tip of the tongue on the teeth
+
+=== "ninth tab"
+    diction is done with the tip of the tongue on the teeth
+
+=== "tenth tab"
+    diction is done with the tip of the tongue on the teeth
+
+=== "eleventh tab"
+    diction is done with the tip of the tongue on the teeth
+
+=== "twelfth tab"
+    diction is done with the tip of the tongue on the teeth
+
 ## attribute lists
 
 add classes, ids and attributes to almost any element. the classes below come from this site's stylesheet. a badge takes one of the stage classes to pick its color: `stage-seedling`, `stage-bud` or `stage-evergreen`. wrap a badge or tag in a link to make it clickable.
@@ -483,17 +518,17 @@ add classes, ids and attributes to almost any element. the classes below come fr
 <pre><code>a paragraph turned into a card.
 {: .card }
 &nbsp;
-&#91;seedling&#93;(../seedlings/index.md){ .badge .stage-seedling }
-&#91;bud&#93;(../buds/index.md){ .badge .stage-bud }
-&#91;evergreen&#93;(../evergreens/index.md){ .badge .stage-evergreen }
-&#91;#reference&#93;(../by-tag/index.md#tag-reference){ .tag }
-&#91;a link&#93;(https://en.wikipedia.org/wiki/Diction){ target="_blank" }
+&lt;span class="badge stage-seedling"&gt;seedling&lt;/span&gt;
+&lt;span class="badge stage-bud"&gt;bud&lt;/span&gt;
+&lt;span class="badge stage-evergreen"&gt;evergreen&lt;/span&gt;
+&lt;span class="tag"&gt;#reference&lt;/span&gt;
+[a link](https://en.wikipedia.org/wiki/Diction){ target="_blank" }
 ![alt text](../assets/favicon.ico){ width="48" }</code></pre>
 
 diction is done with the tip of the tongue on the teeth.
 {: .card }
 
-[seedling](../seedlings/index.md){ .badge .stage-seedling } [bud](../buds/index.md){ .badge .stage-bud } [evergreen](../evergreens/index.md){ .badge .stage-evergreen } [#reference](../by-tag/index.md#tag-reference){ .tag } [#formatting](../by-tag/index.md#tag-formatting){ .tag }
+<span class="badge stage-seedling">seedling</span> <span class="badge stage-bud">bud</span> <span class="badge stage-evergreen">evergreen</span> <span class="tag">#reference</span> <span class="tag">#formatting</span>
 
 ## raw html
 
@@ -672,12 +707,29 @@ graph LR
 ```mermaid
 graph LR
     seedling --> bud --> evergreen
-    bud --> seedling
 ```
+
+## math
+
+inline math uses single dollar signs, and display math uses double dollar signs. KaTeX is only loaded on pages containing math.
+
+````markdown
+The area of a circle is $A = \pi r^2$.
+
+$$
+\int_0^1 x^2\,dx = \frac{1}{3}
+$$
+````
+
+The area of a circle is $A = \pi r^2$.
+
+$$
+\int_0^1 x^2\,dx = \frac{1}{3}
+$$
 
 ## color palette
 
-the eight accent colors side by side, in the order they are used for tabs, footnotes and the numbers under cited by. the sidebar and page accents follow the same order from top to bottom.
+the eight accent colors side by side, in the order they are used for tabs, footnotes and the numbered backlinks. the sidebar and page accents follow the same order from top to bottom.
 
 <div class="swatches">
 <span style="background: var(--rb-0)">1 red</span>
@@ -714,15 +766,28 @@ planted: 2026-11-10
 tended: 2026-11-10
 links_to: [another note, a third note]
 template: home.html
+width: full
+# draft: true
+# aliases: [old-note-name]
 ---
 ```
 
 - `stage` shows a colored badge: `seedling`, `bud` or `evergreen`
-- `tags` show as pills under the title and in the homepage tag cloud, and each pill links to its section on the by tag page
+- `tags` show as pills under the title and link to their section on the by-tag page; search for notes by tag with `#tag`
 - `links_to` adds links to other notes by title or filename, even if the text doesn't link to them
 - `planted` and `tended` show as dates, and `tended` sorts the "recently tended" widget
-- `template: home.html` is only for your homepage, to turn on the widgets
+- `template: home.html` is only for your homepage; it enables the stats, note of the day, recent notes, clock, stage legend and garden graph widgets
+- `width: full` widens the page content; this reference page uses it
+- `draft: true` keeps a note out of the built site
+- `aliases` creates redirect pages for old note paths
+
+## using the garden
+
+- the homepage's **how to read this garden** widget explains the seedling, bud and evergreen stages
+- the **index**, **random** and **style** buttons are at the upper left of the header; style switches between light and dark mode
+- the search field is at the upper right. Press `/` outside a text field to focus it. Use `#tag` in a search to find notes with that tag.
+- on pages with a table of contents, use the drawer on the right to open or collapse it
 
 ## not supported
 
-math written as `$math$` has no equivalent here yet.
+Code block titles and line highlighting are not configured.

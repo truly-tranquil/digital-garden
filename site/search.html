@@ -7,20 +7,33 @@
 
 
 
+
+
+  
+
+
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>digital garden</title>
+  <meta name="robots" content="noindex">
   
   
   <meta property="og:site_name" content="digital garden">
   <meta property="og:type" content="website">
   
   
-  <meta name="twitter:card" content="summary">
+  
+  <meta property="og:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  <meta name="twitter:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/atom+xml" title="digital garden" href="https://truly-tranquil.github.io/digital-garden/feed.xml">
   <link rel="icon" href="./assets/favicon.ico">
+  
 
   <!-- runs before the page paints so there is no flash of the wrong theme -->
   <script>
@@ -32,10 +45,9 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
-  <link rel="stylesheet" href="./main.css">
+  <!-- Newsreader is self-hosted (see @font-face in main.css). the upright file is preloaded so text doesn't jump when it arrives -->
+  <link rel="preload" href="./assets/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./main.css?v=202611110539">
 </head>
 <body data-section="search" style="--folder: var(--rb-6)">
   <a class="skip-link" href="#main-content">skip to content</a>
@@ -43,7 +55,8 @@
   <header class="garden-header">
     <div class="header-left">
       <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
-      <a href="./index.html" class="garden-logo">digital garden</a>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
     </div>
 
     <div class="header-right">
@@ -52,8 +65,7 @@
         <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
         <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
       </form>
-      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
-      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+      <a href="./" class="garden-logo">digital garden</a>
     </div>
   </header>
 
@@ -90,6 +102,18 @@
     
       <li >
         <a href="./seedlings/" class="">map of contents</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/test-note-1/" class="">test note 1</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/test-note-2/" class="">test note 2</a>
       </li>
     
   
@@ -156,25 +180,6 @@
       </li>
     
   
-    
-      <li class="nav-folder" style="--folder: var(--rb-7)">
-        <details >
-          <summary>for my reference</summary>
-          
-<ul>
-  
-    
-      <li >
-        <a href="./for-my-reference/reference-page/" class="">reference page</a>
-      </li>
-    
-  
-</ul>
-
-        </details>
-      </li>
-    
-  
 </ul>
 
     </nav>
@@ -182,14 +187,11 @@
     <main class="garden-content" id="main-content" tabindex="-1">
       
 
-      
-        
-      
       <div class="article-wrap">
-        
         <article class="garden-article">
           
 <h1>search</h1>
+<p id="search-count" role="status" aria-live="polite"></p>
 <div class="search-results" id="search-results"><p>searching the garden…</p></div>
 
         </article>
@@ -198,35 +200,59 @@
       
 
       
-    </main>
-  </div>
 
+      
+    </main>
+
+    
+
+    <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
+  </div>
   <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
 
   <script>
     var base_url = '.';
 
-    // sidebar (starts closed on small screens)
+    // sidebar (hidden by default on small screens, remembered on large ones)
     var layout = document.getElementById('garden-layout');
     var toggle = document.getElementById('sidebar-toggle');
-    function syncToggle() {
-      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
     }
-    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
     syncToggle();
     toggle.addEventListener('click', function () {
-      layout.classList.toggle('sidebar-collapsed');
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
       syncToggle();
     });
+    narrow.addEventListener('change', syncToggle);
 
     // light / dark
     var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
     modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
     modeBtn.addEventListener('click', function () {
       var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      setTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
     });
 
     // random note (any element with data-random)
@@ -293,11 +319,47 @@
       });
     })();
 
-    // on this page: open on wide screens, highlight the current section
+    // on this page drawer
+    (function () {
+      var btn = document.getElementById('toc-toggle');
+      if (!btn) return;
+      var panel = document.getElementById('toc-panel');
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      function syncToc() {
+        btn.setAttribute('aria-expanded', String(tocIsOpen()));
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      syncToc();
+      btn.addEventListener('click', function () {
+        if (wide.matches) {
+          layout.classList.toggle('toc-collapsed');
+          try { localStorage.setItem('toc', layout.classList.contains('toc-collapsed') ? 'closed' : 'open'); } catch (e) {}
+        } else {
+          layout.classList.toggle('toc-open');
+        }
+        syncToc();
+      });
+      wide.addEventListener('change', syncToc);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+        btn.focus();
+      });
+      panel.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+      });
+    })();
+
+    // on this page: highlight the current section
     (function () {
       var toc = document.getElementById('toc');
       if (!toc) return;
-      if (window.innerWidth >= 1300) toc.open = true;
       var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
       var map = {};
       links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
@@ -315,6 +377,35 @@
       spy();
     })();
 
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
     // copy buttons on code blocks
     (function () {
       var live = document.createElement('div');
@@ -330,6 +421,7 @@
           pre.replaceWith(host);
           host.appendChild(pre);
         }
+        trackScroller(pre, 'code');
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'copy-btn';
@@ -346,6 +438,10 @@
       });
     })();
 
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
     // favicons on external links (uses Google's favicon service)
     document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
       try {
@@ -359,29 +455,43 @@
       } catch (e) {}
     });
   </script>
-  <script src="./garden-search.js"></script>
-  <script src="./garden-mermaid.js"></script>
+  <script src="./garden-search.js?v=202611110539"></script>
+  <script src="./garden-mermaid.js?v=202611110539"></script>
+  
   
 <script>
   (function () {
     var q = new URLSearchParams(location.search).get('q') || '';
     var box = document.getElementById('search-results');
+    var count = document.getElementById('search-count');
     var input = document.getElementById('mkdocs-search-query');
     if (input) input.value = q;
-    if (!q.trim()) { box.textContent = 'type something into the search bar.'; return; }
+    if (q.trim()) document.title = q + ' | ' + document.title;
+    if (!q.trim()) {
+      count.textContent = '';
+      box.textContent = 'type something into the search bar.';
+      return;
+    }
+    count.textContent = 'searching…';
     gardenSearch(q, 0).then(function (hits) {
-      box.innerHTML = '';
+      while (box.firstChild) box.removeChild(box.firstChild);
+      count.textContent = hits.length + (hits.length === 1 ? ' result' : ' results') + ' for "' + q + '".';
       if (!hits.length) { box.textContent = 'nothing found for "' + q + '".'; return; }
       hits.forEach(function (h) {
         var art = document.createElement('article');
         var h3 = document.createElement('h3');
         var a = document.createElement('a');
-        a.href = base_url + '/' + h.url; a.textContent = h.title;
+        a.href = base_url + '/' + h.url;
+        gardenMark(a, h.title, h.terms);
         h3.appendChild(a);
-        var p = document.createElement('p'); p.textContent = h.snippet + '…';
+        var p = document.createElement('p');
+        gardenMark(p, h.snippet + (h.snippet.length >= 100 ? '…' : ''), h.terms);
         art.appendChild(h3); art.appendChild(p);
         box.appendChild(art);
       });
+    }).catch(function () {
+      count.textContent = 'search is temporarily unavailable.';
+      box.textContent = 'search is temporarily unavailable. please try again later.';
     });
   })();
 </script>

@@ -41,6 +41,7 @@
   {% set toc_items = [] %}
 {% endif %}
 {% set og_image = config.extra.og_image %}
+{% set has_math = page and 'class="arithmatex"' in page.content %}
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -67,6 +68,9 @@
   <meta name="twitter:card" content="{{ 'summary_large_image' if og_image else 'summary' }}">
   {% if config.extra.feed %}<link rel="alternate" type="application/atom+xml" title="{{ config.site_name|lower }}" href="{{ (config.site_url or '').rstrip('/') }}/{{ config.extra.feed }}">{% endif %}
   <link rel="icon" href="{{ asset('assets/favicon.ico') }}">
+  {% if has_math %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
+  {% endif %}
 
   <!-- runs before the page paints so there is no flash of the wrong theme -->
   <script>
@@ -78,9 +82,8 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
+  <!-- Newsreader is self-hosted (see @font-face in main.css). the upright file is preloaded so text doesn't jump when it arrives -->
+  <link rel="preload" href="{{ asset('assets/fonts/newsreader-variable.woff2') }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ asset('main.css') }}?v={{ v }}">
 </head>
 <body{% if page and page.meta and page.meta.width == 'full' %} class="wide"{% endif %} data-section="{{ section }}" style="--folder: var(--rb-{{ ns.i % 8 }})">
@@ -89,7 +92,8 @@
   <header class="garden-header">
     <div class="header-left">
       <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
-      <a href="{{ root }}/" class="garden-logo">{{ config.site_name }}</a>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
     </div>
 
     <div class="header-right">
@@ -98,8 +102,7 @@
         <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
         <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
       </form>
-      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
-      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+      <a href="{{ root }}/" class="garden-logo">{{ config.site_name }}</a>
     </div>
   </header>
 
@@ -127,7 +130,7 @@
           <a class="badge stage-{{ page.meta.stage }}" href="{{ (page.meta.stage ~ 's/')|url }}">{{ page.meta.stage }}</a>
         {% endif %}
         {% if page.meta and page.meta.tags %}
-          {% for tag in page.meta.tags %}<a class="tag" href="{{ 'by-tag/'|url }}#tag-{{ slug(tag) }}">#{{ tag }}</a>{% endfor %}
+          {% for tag in page.meta.tags %}{% if page.meta.unlisted %}<span class="tag">#{{ tag }}</span>{% else %}<a class="tag" href="{{ 'by-tag/'|url }}#tag-{{ slug(tag) }}">#{{ tag }}</a>{% endif %}{% endfor %}
         {% endif %}
         {% if page.meta and page.meta.planted %}<span class="date">planted <time datetime="{{ page.meta.planted }}">{{ page.meta.planted }}</time></span>{% endif %}
         {% if page.meta and page.meta.tended %}<span class="date">tended <time datetime="{{ page.meta.tended }}">{{ page.meta.tended }}</time></span>{% endif %}
@@ -152,9 +155,16 @@
         <hr>
         <p class="backlinks-title">backlinks</p>
         <ol>
-          {% for b in backlinks %}<li><a href="{{ b.url|url }}">{{ b.title }}</a></li>{% endfor %}
+          {% for b in backlinks %}<li><a href="{{ b.url|url }}">{{ b.title }}</a>{% if b.context %}<small>{{ b.context }}</small>{% endif %}</li>{% endfor %}
         </ol>
       </section>
+      {% endif %}
+
+      {% if page and history %}
+      <details class="note-history">
+        <summary>note history</summary>
+        <ol>{% for commit in history %}<li><time>{{ commit.date }}</time> {{ commit.subject }}</li>{% endfor %}</ol>
+      </details>
       {% endif %}
 
       {% if page and related %}
@@ -176,8 +186,9 @@
       </nav>
     </div>
     {% endif %}
-  </div>
 
+    <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
+  </div>
   <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
 
   <script>
@@ -427,6 +438,10 @@
   </script>
   <script src="{{ asset('garden-search.js') }}?v={{ v }}"></script>
   <script src="{{ asset('garden-mermaid.js') }}?v={{ v }}"></script>
+  {% if has_math %}
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous" onload="renderMathInElement(document.querySelector('.garden-article') || document.body)"></script>
+  {% endif %}
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

@@ -1,4 +1,4 @@
 ---
 template: home.html
 ---
-# ![a gif of a pink and purple star bouncing](assets/favicon.gif) welcome to my digital garden ![a gif of a pink and purple star bouncing](assets/favicon.gif)
+# <picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><img src="assets/favicon.gif" alt=""></picture> welcome to my digital garden <picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><img src="assets/favicon.gif" alt=""></picture>

@@ -1,5 +1,5 @@
 site_name: digital garden
-site_url: https://USERNAME.github.io/REPO/
+site_url: https://truly-tranquil.github.io/digital-garden/
 
 theme:
   name: null
@@ -11,19 +11,42 @@ theme:
 hooks:
   - hooks.py
 
+exclude_docs: |
+  **/drafts/**
+  **/draft-*.md
+  **/templates/**
+  **/*template*.md
+  **/.obsidian/**
+
 plugins:
   - search
   - callouts
 
+extra:
+  feed: feed.xml
+  og_image: assets/og-image.png
+
+validation:
+  nav:
+    omitted_files: info
+  links:
+    anchors: warn
+    unrecognized_links: warn
+
 markdown_extensions:
+  - nl2br
   - admonition
   - attr_list
   - md_in_html
   - footnotes
   - def_list
   - abbr
+  - pymdownx.saneheaders
+  - pymdownx.arithmatex:
+      generic: true
   - toc:
-      permalink: true
+      permalink: "¶"
+      permalink_title: "Link to this section"
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.mark
@@ -47,6 +70,8 @@ nav:
   - about: about.md
   - seedlings:
       - map of contents: seedlings/index.md
+      - test note 1: seedlings/test-note-1.md
+      - test note 2: seedlings/test-note-2.md
   - buds:
       - map of contents: buds/index.md
   - evergreens:

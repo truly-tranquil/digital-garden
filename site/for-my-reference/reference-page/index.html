@@ -7,6 +7,12 @@
 
 
 
+
+
+  
+
+
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -15,18 +21,27 @@
   <title>reference page | digital garden</title>
   
   
-  <meta name="description" content="every piece of formatting this garden supports. each section shows the syntax first, then how it looks on the site. the sample sentence throughout is: diction i…">
-  <meta property="og:description" content="every piece of formatting this garden supports. each section shows the syntax first, then how it looks on the site. the sample sentence throughout is: diction i…">
+  
+  <meta name="description" content="every piece of formatting this garden supports. each section shows the syntax first, then how it looks on the site. the sample sentence throughout is: diction…">
+  <meta property="og:description" content="every piece of formatting this garden supports. each section shows the syntax first, then how it looks on the site. the sample sentence throughout is: diction…">
   
   <meta property="og:site_name" content="digital garden">
   <meta property="og:type" content="article">
   <meta property="og:title" content="reference page">
   
-  <link rel="canonical" href="https://USERNAME.github.io/REPO/for-my-reference/reference-page/">
-  <meta property="og:url" content="https://USERNAME.github.io/REPO/for-my-reference/reference-page/">
+  <link rel="canonical" href="https://truly-tranquil.github.io/digital-garden/for-my-reference/reference-page/">
+  <meta property="og:url" content="https://truly-tranquil.github.io/digital-garden/for-my-reference/reference-page/">
   
-  <meta name="twitter:card" content="summary">
+  
+  <meta property="og:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  <meta name="twitter:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/atom+xml" title="digital garden" href="https://truly-tranquil.github.io/digital-garden/feed.xml">
   <link rel="icon" href="../../assets/favicon.ico">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
+  
 
   <!-- runs before the page paints so there is no flash of the wrong theme -->
   <script>
@@ -38,18 +53,18 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
-  <link rel="stylesheet" href="../../main.css">
+  <!-- Newsreader is self-hosted (see @font-face in main.css). the upright file is preloaded so text doesn't jump when it arrives -->
+  <link rel="preload" href="../../assets/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../main.css?v=202611110539">
 </head>
-<body data-section="for-my-reference" style="--folder: var(--rb-7)">
+<body class="wide" data-section="for-my-reference" style="--folder: var(--rb-0)">
   <a class="skip-link" href="#main-content">skip to content</a>
 
   <header class="garden-header">
     <div class="header-left">
       <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
-      <a href="../../index.html" class="garden-logo">digital garden</a>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
     </div>
 
     <div class="header-right">
@@ -58,12 +73,11 @@
         <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
         <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
       </form>
-      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
-      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+      <a href="../../" class="garden-logo">digital garden</a>
     </div>
   </header>
 
-  <div class="garden-container" id="garden-layout">
+  <div class="garden-container has-toc" id="garden-layout">
     <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
       
 <ul>
@@ -96,6 +110,18 @@
     
       <li >
         <a href="../../seedlings/" class="">map of contents</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="../../seedlings/test-note-1/" class="">test note 1</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="../../seedlings/test-note-2/" class="">test note 2</a>
       </li>
     
   
@@ -162,25 +188,6 @@
       </li>
     
   
-    
-      <li class="nav-folder" style="--folder: var(--rb-7)">
-        <details open>
-          <summary>for my reference</summary>
-          
-<ul>
-  
-    
-      <li >
-        <a href="./" class="active" aria-current="page">reference page</a>
-      </li>
-    
-  
-</ul>
-
-        </details>
-      </li>
-    
-  
 </ul>
 
     </nav>
@@ -191,9 +198,9 @@
       
       <nav class="breadcrumbs" aria-label="breadcrumbs">
         <ol>
-          <li><a href="../../index.html">home</a></li>
+          <li><a href="../../">home</a></li>
           
-          <li><a href="./">for my reference</a></li>
+          <li>for my reference</li>
           
           <li aria-current="page">reference page</li>
         </ol>
@@ -204,128 +211,51 @@
           <a class="badge stage-evergreen" href="../../evergreens/">evergreen</a>
         
         
-          <a class="tag" href="../../by-tag/#tag-reference">#reference</a><a class="tag" href="../../by-tag/#tag-formatting">#formatting</a><a class="tag" href="../../by-tag/#tag-markdown">#markdown</a>
+          <span class="tag">#reference</span><span class="tag">#formatting</span><span class="tag">#markdown</span>
         
-        <span class="date">planted 2026-11-10</span>
-        <span class="date">tended 2026-11-10</span>
+        <span class="date">planted <time datetime="2026-11-10">2026-11-10</time></span>
+        <span class="date">tended <time datetime="2026-11-10">2026-11-10</time></span>
         <span class="date" id="reading-time"></span>
       </div>
       
-      <div class="page-meta page-links">
-        <span class="meta-label">outgoing links</span>
-        <a class="link-chip" href="../../buds/">buds</a><a class="link-chip" href="../../by-tag/">by-tag</a><a class="link-chip" href="../../evergreens/">evergreens</a><a class="link-chip" href="../../seedlings/">seedlings</a>
-      </div>
-      
       
 
-      
-        
-      
-      <div class="article-wrap has-toc">
-        
-        <details class="toc" id="toc">
-          <summary>on this page</summary>
-          
-<ul>
-  
-  <li><a href="#reference-page">reference page</a>
-<ul>
-  
-  <li><a href="#headings">headings</a></li>
-  
-</ul>
-</li>
-  
-  <li><a href="#heading-1-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 1: diction is done with the tip of the tongue on the teeth</a>
-<ul>
-  
-  <li><a href="#heading-2-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 2: diction is done with the tip of the tongue on the teeth</a></li>
-  
-  <li><a href="#emphasis-and-inline-marks">emphasis and inline marks</a></li>
-  
-  <li><a href="#lists">lists</a></li>
-  
-  <li><a href="#links">links</a></li>
-  
-  <li><a href="#images">images</a></li>
-  
-  <li><a href="#backlinks-and-links-to">backlinks and links to</a></li>
-  
-  <li><a href="#embedded-notes">embedded notes</a></li>
-  
-  <li><a href="#blockquotes">blockquotes</a></li>
-  
-  <li><a href="#callouts">callouts</a></li>
-  
-  <li><a href="#code">code</a></li>
-  
-  <li><a href="#tables">tables</a></li>
-  
-  <li><a href="#footnotes">footnotes</a></li>
-  
-  <li><a href="#definition-lists">definition lists</a></li>
-  
-  <li><a href="#abbreviations">abbreviations</a></li>
-  
-  <li><a href="#tabs">tabs</a></li>
-  
-  <li><a href="#attribute-lists">attribute lists</a></li>
-  
-  <li><a href="#raw-html">raw html</a></li>
-  
-  <li><a href="#horizontal-rules">horizontal rules</a></li>
-  
-  <li><a href="#layout-helpers">layout helpers</a></li>
-  
-  <li><a href="#diagrams">diagrams</a></li>
-  
-  <li><a href="#color-palette">color palette</a></li>
-  
-  <li><a href="#escaping">escaping</a></li>
-  
-  <li><a href="#page-metadata">page metadata</a></li>
-  
-  <li><a href="#not-supported">not supported</a></li>
-  
-</ul>
-</li>
-  
-</ul>
-
-        </details>
-        
+      <div class="article-wrap">
         <article class="garden-article">
-          <h1 id="reference-page">reference page<a class="headerlink" href="#reference-page" title="Permanent link">&para;</a></h1>
+          <h1 id="reference-page">reference page<a class="headerlink" href="#reference-page" title="Link to this section">¶</a></h1>
 <p>every piece of formatting this garden supports. each section shows the syntax first, then how it looks on the site. the sample sentence throughout is: diction is done with the tip of the tongue on the teeth.</p>
 <!-- this is a hidden comment. it never shows on the site. -->
 
-<h2 id="headings">headings<a class="headerlink" href="#headings" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown"># heading 1
-## heading 2
-### heading 3
-#### heading 4
-##### heading 5
-###### heading 6</code></pre>
-<h1 id="heading-1-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 1: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-1-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Permanent link">&para;</a></h1>
-<h2 id="heading-2-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 2: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-2-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Permanent link">&para;</a></h2>
-<h3 id="heading-3-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 3: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-3-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Permanent link">&para;</a></h3>
-<h4 id="heading-4-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 4: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-4-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Permanent link">&para;</a></h4>
-<h5 id="heading-5-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 5: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-5-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Permanent link">&para;</a></h5>
-<h6 id="heading-6-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 6: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-6-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Permanent link">&para;</a></h6>
+<h2 id="headings">headings<a class="headerlink" href="#headings" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code><span class="gh"># heading 1</span>
+<span class="gu">## heading 2</span>
+<span class="gu">### heading 3</span>
+<span class="gu">#### heading 4</span>
+<span class="gu">##### heading 5</span>
+<span class="gu">###### heading 6</span>
+</code></pre></div>
+<h1 id="heading-1-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 1: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-1-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Link to this section">¶</a></h1>
+<h2 id="heading-2-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 2: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-2-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Link to this section">¶</a></h2>
+<h3 id="heading-3-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 3: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-3-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Link to this section">¶</a></h3>
+<h4 id="heading-4-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 4: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-4-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Link to this section">¶</a></h4>
+<h5 id="heading-5-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 5: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-5-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Link to this section">¶</a></h5>
+<h6 id="heading-6-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 6: diction is done with the tip of the tongue on the teeth<a class="headerlink" href="#heading-6-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth" title="Link to this section">¶</a></h6>
 <p>a custom heading id, so you can link straight to it:</p>
-<pre class="highlight"><code class="language-markdown">### a heading with a custom id { #my-custom-id }</code></pre>
-<h3 id="my-custom-id">a heading with a custom id<a class="headerlink" href="#my-custom-id" title="Permanent link">&para;</a></h3>
+<div class="language-markdown highlight"><pre><span></span><code><span class="gu">### a heading with a custom id { #my-custom-id }</span>
+</code></pre></div>
+<h3 id="my-custom-id">a heading with a custom id<a class="headerlink" href="#my-custom-id" title="Link to this section">¶</a></h3>
 <p>hover over any heading to see its permalink marker.</p>
-<h2 id="emphasis-and-inline-marks">emphasis and inline marks<a class="headerlink" href="#emphasis-and-inline-marks" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">**bold** or __bold__
-*italic* or _italic_
+<h2 id="emphasis-and-inline-marks">emphasis and inline marks<a class="headerlink" href="#emphasis-and-inline-marks" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code><span class="gs">**bold**</span> or <span class="gs">__bold__</span>
+<span class="ge">*italic*</span> or <span class="ge">_italic_</span>
 ***bold and italic***
-~~strikethrough~~
+<span class="gd">~~strikethrough~~</span>
 ^^underline^^
 ==highlight==
 H~2~O (subscript)
 x^2^ (superscript)
-`inline code`</code></pre>
+<span class="sb">`inline code`</span>
+</code></pre></div>
 <p><strong>diction is done with the tip of the tongue on the teeth</strong></p>
 <p><em>diction is done with the tip of the tongue on the teeth</em></p>
 <p><strong><em>diction is done with the tip of the tongue on the teeth</em></strong></p>
@@ -336,16 +266,17 @@ x^2^ (superscript)
 <p><code>diction is done with the tip of the tongue on the teeth</code></p>
 <p>a paragraph break is a blank line. a line break inside a paragraph needs a <code>&lt;br&gt;</code>:</p>
 <p>diction is done with<br>the tip of the tongue<br>on the teeth</p>
-<h2 id="lists">lists<a class="headerlink" href="#lists" title="Permanent link">&para;</a></h2>
+<h2 id="lists">lists<a class="headerlink" href="#lists" title="Link to this section">¶</a></h2>
 <p>nested items need four spaces of indentation, and a list needs a blank line before it.</p>
-<pre class="highlight"><code class="language-markdown">- unordered item
-- another item
-    - nested item
-        - nested again
+<div class="language-markdown highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span>unordered item
+<span class="k">-</span><span class="w"> </span>another item
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>nested item
+<span class="w">        </span><span class="k">-</span><span class="w"> </span>nested again
 
-1. ordered item
-2. another item
-    1. nested ordered item</code></pre>
+<span class="k">1.</span> ordered item
+<span class="k">2.</span> another item
+<span class="w">    </span><span class="k">1.</span> nested ordered item
+</code></pre></div>
 <ul>
 <li>diction is done with the tip of the tongue on the teeth</li>
 <li>the tongue<ul>
@@ -368,9 +299,10 @@ x^2^ (superscript)
 </li>
 <li>the teeth</li>
 </ul>
-<h3 id="task-lists">task lists<a class="headerlink" href="#task-lists" title="Permanent link">&para;</a></h3>
-<pre class="highlight"><code class="language-markdown">- [x] a finished task
-- [ ] an unfinished task</code></pre>
+<h3 id="task-lists">task lists<a class="headerlink" href="#task-lists" title="Link to this section">¶</a></h3>
+<div class="language-markdown highlight"><pre><span></span><code><span class="k">- [x]</span> a finished task
+<span class="k">- [ ]</span> an unfinished task
+</code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> diction is done with the tip of the tongue on the teeth</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> diction is done with the tip of the tongue on the teeth</li>
@@ -379,21 +311,21 @@ x^2^ (superscript)
 </ul>
 </li>
 </ul>
-<h2 id="links">links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<h2 id="links">links<a class="headerlink" href="#links" title="Link to this section">¶</a></h2>
 <p>square brackets are written with codes in the box below so the garden doesn't turn the examples into real links.</p>
-<pre><code>&#91;a link&#93;(https://en.wikipedia.org/wiki/Diction)
+<pre><code>[a link](https://en.wikipedia.org/wiki/Diction)
 &lt;https://en.wikipedia.org/wiki/Diction&gt;
-&#91;a link with a hover title&#93;(https://en.wikipedia.org/wiki/Diction "diction")
-&#91;opens in a new tab&#93;(https://en.wikipedia.org/wiki/Diction){ target="_blank" }
-&#91;another note in the garden&#93;(reference-page.md)
-&#91;a heading in another note&#93;(reference-page.md#headings)
-&#91;jump to a heading on this page&#93;(#headings)
+[a link with a hover title](https://en.wikipedia.org/wiki/Diction "diction")
+[opens in a new tab](https://en.wikipedia.org/wiki/Diction){ target="_blank" }
+[another note in the garden](reference-page.md)
+[a heading in another note](reference-page.md#headings)
+[jump to a heading on this page](#headings)
 &nbsp;
 wikilinks, like in obsidian:
-&#91;&#91;reference-page&#93;&#93;
-&#91;&#91;reference-page|a custom label&#93;&#93;
-&#91;&#91;reference-page#headings&#93;&#93;
-&#91;&#91;reference-page#headings|a custom label&#93;&#93;</code></pre>
+[[reference-page]]
+[[reference-page|a custom label]]
+[[reference-page#headings]]
+[[reference-page#headings|a custom label]]</code></pre>
 
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Diction">diction is done with the tip of the tongue on the teeth</a></li>
@@ -409,48 +341,50 @@ wikilinks, like in obsidian:
 <li><a href="./#headings">diction is done with the tip of the tongue on the teeth</a></li>
 </ul>
 <p>external links get a small favicon in front of them automatically.</p>
-<h2 id="images">images<a class="headerlink" href="#images" title="Permanent link">&para;</a></h2>
+<h2 id="images">images<a class="headerlink" href="#images" title="Link to this section">¶</a></h2>
 <pre><code>![alt text](../assets/favicon.ico)
 ![alt text](../assets/favicon.ico){ width="48" }
 ![alt text](../assets/favicon.ico "a hover title")
 &nbsp;
 or, like in obsidian, by file name from anywhere:
-!&#91;&#91;favicon.ico&#93;&#93;
-!&#91;&#91;favicon.ico|48&#93;&#93;</code></pre>
+![[favicon.ico]]
+![[favicon.ico|48]]</code></pre>
 
 <p>put image files in <code>docs/assets/</code>. the path is relative to the note it is written in, so a note in the top level of <code>docs/</code> uses <code>assets/favicon.ico</code>, and a note inside a folder such as <code>seedlings/</code> or <code>for-my-reference/</code> needs <code>../assets/favicon.ico</code>. the wikilink form finds the file by name, so it works from any folder.</p>
 <p>a leaf drawn into the page itself, which always works:</p>
 <p><img alt="a leaf" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzcyQTU3QiIgZD0iTTEyIDJDNiA2IDQgMTIgNiAxOGMzLTEgNS0zIDYtNiAxIDMgMyA1IDYgNiAyLTYgMC0xMi02LTE2eiIvPjwvc3ZnPg==" width="48" /></p>
 <p>your favicon, which only shows if the path matches where the file really is:</p>
 <p><img alt="diction is done with the tip of the tongue on the teeth" src="../../assets/favicon.ico" width="48" /></p>
-<h2 id="backlinks-and-links-to">backlinks and links to<a class="headerlink" href="#backlinks-and-links-to" title="Permanent link">&para;</a></h2>
-<p>links between notes are tracked automatically, and this note's own links are not shown to itself.</p>
+<h2 id="outgoing-links-and-backlinks">outgoing links and backlinks<a class="headerlink" href="#outgoing-links-and-backlinks" title="Link to this section">¶</a></h2>
+<p>links between notes are tracked automatically, and this note's own links are not shown to itself. the page labels them <strong>outgoing links</strong> and <strong>backlinks</strong>.</p>
 <ul>
-<li>a note that links to another note shows that note under <strong>links to</strong> at the top of the page</li>
-<li>the note being linked to lists the notes that link to it under <strong>cited by</strong> at the bottom, numbered like footnotes</li>
+<li>a note that links to another note shows its destinations under <strong>outgoing links</strong> near the top of the page</li>
+<li>the note being linked to lists the notes that link to it under <strong>backlinks</strong> at the bottom, numbered like footnotes</li>
 <li>this works for wikilinks, normal <code>.md</code> links and embeds</li>
 <li>to add a link without writing one in the text, list it in the front matter with <code>links_to</code>, shown in the page metadata section below</li>
 </ul>
-<h2 id="embedded-notes">embedded notes<a class="headerlink" href="#embedded-notes" title="Permanent link">&para;</a></h2>
+<h2 id="embedded-notes">embedded notes<a class="headerlink" href="#embedded-notes" title="Link to this section">¶</a></h2>
 <p>an exclamation mark in front of a wikilink pulls another note's content into this one, inside a framed block with a link back to its source. a section name after <code>#</code> embeds only that section.</p>
-<pre><code>!&#91;&#91;note name&#93;&#93;
-!&#91;&#91;note name#a heading&#93;&#93;</code></pre>
+<pre><code>![[note name]]
+![[note name#a heading]]</code></pre>
 
 <p>this embeds the section called escaping from further down this page:</p>
 <div class="embed">
 <p><strong><a href="./#escaping">reference page › escaping</a></strong></p>
 <p>a backslash in front of a character shows it literally.</p>
-<pre class="highlight"><code class="language-markdown">\*not italic\*
-\# not a heading</code></pre>
+<div class="language-markdown highlight"><pre><span></span><code>\*not italic\*
+\# not a heading
+</code></pre></div>
 <p>*diction* is done with the tip of the tongue on the teeth</p>
 </div>
 <p>embeds go two levels deep. relative links and footnotes inside an embedded note may not work, so keep embedded notes simple.</p>
-<h2 id="blockquotes">blockquotes<a class="headerlink" href="#blockquotes" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">&gt; a quote
-&gt;
-&gt; a second paragraph in the same quote
-&gt;
-&gt;&gt; a quote inside a quote</code></pre>
+<h2 id="blockquotes">blockquotes<a class="headerlink" href="#blockquotes" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code><span class="k">&gt; </span><span class="ge">a quote</span>
+<span class="k">&gt;</span>
+<span class="ge">&gt; a second paragraph in the same quote</span>
+<span class="k">&gt;</span>
+<span class="ge">&gt;&gt; a quote inside a quote</span>
+</code></pre></div>
 <blockquote>
 <p>diction is done with the tip of the tongue on the teeth</p>
 <p>diction is done with the tip of the tongue on the teeth</p>
@@ -458,42 +392,63 @@ or, like in obsidian, by file name from anywhere:
 <p>diction is done with the tip of the tongue on the teeth</p>
 </blockquote>
 </blockquote>
-<h2 id="callouts">callouts<a class="headerlink" href="#callouts" title="Permanent link">&para;</a></h2>
-<p>obsidian-style callouts. add <code>-</code> after the type to make it collapsed, or <code>+</code> to make it foldable but open. text after the type becomes the title.</p>
-<pre><code>&gt; &#91;!note&#93;
+<h2 id="callouts">callouts<a class="headerlink" href="#callouts" title="Link to this section">¶</a></h2>
+<p>obsidian-style callouts. add <code>-</code> after the type to make it collapsed, or <code>+</code> to make it foldable but open. text after the type becomes the title. these eight types show the eight callout colors, in order.</p>
+<pre><code>&gt; [!danger]- red, collapsed by default
 &gt; the body of the callout
 &nbsp;
-&gt; &#91;!tip&#93; a custom title
+&gt; [!warning] orange
 &gt; the body of the callout
 &nbsp;
-&gt; &#91;!warning&#93;- collapsed by default
+&gt; [!tip] yellow
 &gt; the body of the callout
 &nbsp;
-&gt; &#91;!question&#93;+ foldable, open by default
-&gt; the body of the callout</code></pre>
+&gt; [!success] green
+&gt; the body of the callout
+&nbsp;
+&gt; [!abstract] turquoise
+&gt; the body of the callout
+&nbsp;
+&gt; [!note] blue
+&gt; the body of the callout
+&nbsp;
+&gt; [!question]+ indigo, foldable and open by default
+&gt; the body of the callout
+&nbsp;
+&gt; [!quote] purple
+&gt; the body of the callout
+&nbsp;</code></pre>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<details class="danger">
+<summary>red</summary>
 <p>diction is done with the tip of the tongue on the teeth</p>
-</div>
-<div class="admonition abstract">
-<p class="admonition-title">Abstract</p>
-<p>diction is done with the tip of the tongue on the teeth</p>
-</div>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>diction is done with the tip of the tongue on the teeth</p>
-</div>
-<div class="admonition todo">
-<p class="admonition-title">Todo</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">orange</p>
 <p>diction is done with the tip of the tongue on the teeth</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">yellow</p>
 <p>diction is done with the tip of the tongue on the teeth</p>
 </div>
 <div class="admonition success">
-<p class="admonition-title">Success</p>
+<p class="admonition-title">green</p>
+<p>diction is done with the tip of the tongue on the teeth</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">turquoise</p>
+<p>diction is done with the tip of the tongue on the teeth</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">blue</p>
+<p>diction is done with the tip of the tongue on the teeth</p>
+</div>
+<details class="question" open="open">
+<summary>indigo</summary>
+<p>diction is done with the tip of the tongue on the teeth</p>
+</details>
+<div class="admonition quote">
+<p class="admonition-title">purple</p>
 <p>diction is done with the tip of the tongue on the teeth</p>
 </div>
 <div class="admonition question">
@@ -536,15 +491,16 @@ or, like in obsidian, by file name from anywhere:
 <summary>foldable, open by default</summary>
 <p>diction is done with the tip of the tongue on the teeth</p>
 </details>
-<h3 id="native-admonitions-and-collapsible-blocks">native admonitions and collapsible blocks<a class="headerlink" href="#native-admonitions-and-collapsible-blocks" title="Permanent link">&para;</a></h3>
-<pre class="highlight"><code class="language-markdown">!!! note "a title"
+<h3 id="native-admonitions-and-collapsible-blocks">native admonitions and collapsible blocks<a class="headerlink" href="#native-admonitions-and-collapsible-blocks" title="Link to this section">¶</a></h3>
+<div class="language-markdown highlight"><pre><span></span><code>!!! note &quot;a title&quot;
     the body, indented four spaces
 
-??? tip "collapsed by default"
+??? tip &quot;collapsed by default&quot;
     the body, indented four spaces
 
-???+ example "open by default"
-    the body, indented four spaces</code></pre>
+???+ example &quot;open by default&quot;
+    the body, indented four spaces
+</code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">a native admonition</p>
 <p>diction is done with the tip of the tongue on the teeth</p>
@@ -557,63 +513,73 @@ or, like in obsidian, by file name from anywhere:
 <summary>collapsible, open by default</summary>
 <p>diction is done with the tip of the tongue on the teeth</p>
 </details>
-<h2 id="code">code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">`inline code`
+<h2 id="code">code<a class="headerlink" href="#code" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code><span class="sb">`inline code`</span>
 
-```python
-print("a fenced block with a language")
-```
+<span class="sb">```python</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a fenced block with a language&quot;</span><span class="p">)</span>
+<span class="sb">```</span>
 
-```
-a fenced block with no language
-```</code></pre>
+<span class="sb">```</span>
+<span class="sb">a fenced block with no language</span>
+<span class="sb">```</span>
+</code></pre></div>
 <p>diction is done with the tip of the tongue on the teeth, as <code>inline code</code>.</p>
-<pre class="highlight"><code class="language-python"># diction is done with the tip of the tongue on the teeth
-@speak_clearly
-def say(sentence: str, volume: int = 3) -&gt; str:
-    """return the sentence, a little louder."""
-    words = [w.upper() for w in sentence.split()]
-    if volume &gt; 2 and words:
-        return " ".join(words) + "!"
-    return sentence
+<div class="language-python highlight"><pre><span></span><code><span class="c1"># diction is done with the tip of the tongue on the teeth</span>
+<span class="nd">@speak_clearly</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">say</span><span class="p">(</span><span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;return the sentence, a little louder.&quot;&quot;&quot;</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span>
+    <span class="k">return</span> <span class="n">sentence</span>
 
-class Tongue(Mouth):
-    teeth = None
+<span class="k">class</span><span class="w"> </span><span class="nc">Tongue</span><span class="p">(</span><span class="n">Mouth</span><span class="p">):</span>
+    <span class="n">teeth</span> <span class="o">=</span> <span class="kc">None</span>
 
-print(say("diction is done with the tip of the tongue on the teeth", 4.5))</code></pre>
-<pre class="highlight"><code class="language-javascript">// diction is done with the tip of the tongue on the teeth
-const say = async (sentence, volume = 3) =&gt; {
-  const words = sentence.split(" ").map((w) =&gt; w.toUpperCase());
-  if (volume &gt; 2 &amp;&amp; words.length) return `${words.join(" ")}!`;
-  return sentence;
-};
-say("diction is done with the tip of the tongue on the teeth");</code></pre>
-<pre class="highlight"><code class="language-css">.tongue:hover &gt; .tip {
-  color: #DF7386;
-  margin: 0 1.5rem;
-  transition: all 0.2s ease;
-}</code></pre>
-<pre class="highlight"><code class="language-html">&lt;!-- diction is done with the tip of the tongue on the teeth --&gt;
-&lt;a class="tongue" href="/teeth" id="tip"&gt;diction is done with the tip of the tongue on the teeth&lt;/a&gt;</code></pre>
-<pre class="highlight"><code class="language-yaml"># diction is done with the tip of the tongue on the teeth
-sentence: diction is done with the tip of the tongue on the teeth
-volume: 3
-tags: [speech, diction]
-enabled: true</code></pre>
-<pre class="highlight"><code class="language-bash"># diction is done with the tip of the tongue on the teeth
-echo "diction is done with the tip of the tongue on the teeth" | tr a-z A-Z
-mkdocs serve</code></pre>
-<pre class="highlight"><code class="language-json">{
-  "sentence": "diction is done with the tip of the tongue on the teeth",
-  "volume": 3,
-  "loud": true,
-  "teeth": null
-}</code></pre>
-<pre class="highlight"><code>a fenced block with no language is plain: diction is done with the tip of the tongue on the teeth</code></pre>
-<h2 id="tables">tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">| left | center | right |
+<span class="nb">print</span><span class="p">(</span><span class="n">say</span><span class="p">(</span><span class="s2">&quot;diction is done with the tip of the tongue on the teeth&quot;</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+</code></pre></div>
+<div class="language-javascript highlight"><pre><span></span><code><span class="c1">// diction is done with the tip of the tongue on the teeth</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">say</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">sentence</span><span class="p">,</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sentence</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">w</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">w</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">volume</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">words</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="si">}</span><span class="sb">!`</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">sentence</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">say</span><span class="p">(</span><span class="s2">&quot;diction is done with the tip of the tongue on the teeth&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="language-css highlight"><pre><span></span><code><span class="p">.</span><span class="nc">tongue</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="nc">tip</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#DF7386</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="language-html highlight"><pre><span></span><code><span class="cm">&lt;!-- diction is done with the tip of the tongue on the teeth --&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tongue&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/teeth&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tip&quot;</span><span class="p">&gt;</span>diction is done with the tip of the tongue on the teeth<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="language-yaml highlight"><pre><span></span><code><span class="c1"># diction is done with the tip of the tongue on the teeth</span>
+<span class="nt">sentence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">diction is done with the tip of the tongue on the teeth</span>
+<span class="nt">volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">speech</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">diction</span><span class="p p-Indicator">]</span>
+<span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span class="c1"># diction is done with the tip of the tongue on the teeth</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;diction is done with the tip of the tongue on the teeth&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>a-z<span class="w"> </span>A-Z
+mkdocs<span class="w"> </span>serve
+</code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;sentence&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;diction is done with the tip of the tongue on the teeth&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;volume&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;loud&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;teeth&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code>a fenced block with no language is plain: diction is done with the tip of the tongue on the teeth
+</code></pre></div>
+<h2 id="tables">tables<a class="headerlink" href="#tables" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code>| left | center | right |
 | :--- | :----: | ----: |
-| a    |   b    |     c |</code></pre>
+| a    |   b    |     c |
+</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -635,34 +601,38 @@ mkdocs serve</code></pre>
 </tr>
 </tbody>
 </table>
-<h2 id="footnotes">footnotes<a class="headerlink" href="#footnotes" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">a sentence with a footnote.[^note]
+<h2 id="footnotes">footnotes<a class="headerlink" href="#footnotes" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code>a sentence with a footnote.[^note]
 
-[^note]: the footnote text, which collects at the bottom of the page.</code></pre>
+[<span class="nl">^note</span>]: <span class="na">the footnote text, which collects at the bottom of the page.</span>
+</code></pre></div>
 <p>footnote markers and their numbers are colored in rainbow order, repeating after eight. this page uses all eight so every color shows.</p>
 <p>diction is done with the tip of the tongue on the teeth.<sup id="fnref:tongue"><a class="footnote-ref" href="#fn:tongue">1</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:teeth"><a class="footnote-ref" href="#fn:teeth">2</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:lips"><a class="footnote-ref" href="#fn:lips">3</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:breath"><a class="footnote-ref" href="#fn:breath">4</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:jaw"><a class="footnote-ref" href="#fn:jaw">5</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:palate"><a class="footnote-ref" href="#fn:palate">6</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:throat"><a class="footnote-ref" href="#fn:throat">7</a></sup> diction is done with the tip of the tongue on the teeth.<sup id="fnref:voice"><a class="footnote-ref" href="#fn:voice">8</a></sup></p>
-<h2 id="definition-lists">definition lists<a class="headerlink" href="#definition-lists" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">term
-:   its definition, with a colon and three spaces</code></pre>
+<h2 id="definition-lists">definition lists<a class="headerlink" href="#definition-lists" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code>term
+:   its definition, with a colon and three spaces
+</code></pre></div>
 <dl>
 <dt>tongue</dt>
 <dd>diction is done with the tip of the tongue on the teeth</dd>
 <dt>teeth</dt>
 <dd>diction is done with the tip of the tongue on the teeth</dd>
 </dl>
-<h2 id="abbreviations">abbreviations<a class="headerlink" href="#abbreviations" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">the TTT is hoverable.
+<h2 id="abbreviations">abbreviations<a class="headerlink" href="#abbreviations" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code>the TTT is hoverable.
 
-*[TTT]: tip of the tongue on the teeth</code></pre>
+*[TTT]: tip of the tongue on the teeth
+</code></pre></div>
 <p>diction is done with the <abbr title="tip of the tongue on the teeth">TTT</abbr>. hover over the underlined letters.</p>
-<h2 id="tabs">tabs<a class="headerlink" href="#tabs" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">=== "first tab"
+<h2 id="tabs">tabs<a class="headerlink" href="#tabs" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code>=== &quot;first tab&quot;
     the content, indented four spaces
 
-=== "second tab"
-    more content</code></pre>
-<p>the tab labels use the rainbow colors in order, and there are eight so all of them show.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">first tab</label><label for="__tabbed_1_2">second tab</label><label for="__tabbed_1_3">third tab</label><label for="__tabbed_1_4">fourth tab</label><label for="__tabbed_1_5">fifth tab</label><label for="__tabbed_1_6">sixth tab</label><label for="__tabbed_1_7">seventh tab</label><label for="__tabbed_1_8">eighth tab</label></div>
+=== &quot;second tab&quot;
+    more content
+</code></pre></div>
+<p>the first eight tab labels show all eight rainbow colors; additional tabs continue the cycle. on narrow screens, scroll horizontally through the labels.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:12"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><input id="__tabbed_1_10" name="__tabbed_1" type="radio" /><input id="__tabbed_1_11" name="__tabbed_1" type="radio" /><input id="__tabbed_1_12" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">first tab</label><label for="__tabbed_1_2">second tab</label><label for="__tabbed_1_3">third tab</label><label for="__tabbed_1_4">fourth tab</label><label for="__tabbed_1_5">fifth tab</label><label for="__tabbed_1_6">sixth tab</label><label for="__tabbed_1_7">seventh tab</label><label for="__tabbed_1_8">eighth tab</label><label for="__tabbed_1_9">ninth tab</label><label for="__tabbed_1_10">tenth tab</label><label for="__tabbed_1_11">eleventh tab</label><label for="__tabbed_1_12">twelfth tab</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>diction is done with the tip of the tongue on the teeth</p>
@@ -692,37 +662,50 @@ mkdocs serve</code></pre>
 <div class="tabbed-block">
 <p>diction is done with the tip of the tongue on the teeth</p>
 </div>
+<div class="tabbed-block">
+<p>diction is done with the tip of the tongue on the teeth</p>
+</div>
+<div class="tabbed-block">
+<p>diction is done with the tip of the tongue on the teeth</p>
+</div>
+<div class="tabbed-block">
+<p>diction is done with the tip of the tongue on the teeth</p>
+</div>
+<div class="tabbed-block">
+<p>diction is done with the tip of the tongue on the teeth</p>
 </div>
 </div>
-<h2 id="attribute-lists">attribute lists<a class="headerlink" href="#attribute-lists" title="Permanent link">&para;</a></h2>
+</div>
+<h2 id="attribute-lists">attribute lists<a class="headerlink" href="#attribute-lists" title="Link to this section">¶</a></h2>
 <p>add classes, ids and attributes to almost any element. the classes below come from this site's stylesheet. a badge takes one of the stage classes to pick its color: <code>stage-seedling</code>, <code>stage-bud</code> or <code>stage-evergreen</code>. wrap a badge or tag in a link to make it clickable.</p>
 <pre><code>a paragraph turned into a card.
 {: .card }
 &nbsp;
-&#91;seedling&#93;(../seedlings/index.md){ .badge .stage-seedling }
-&#91;bud&#93;(../buds/index.md){ .badge .stage-bud }
-&#91;evergreen&#93;(../evergreens/index.md){ .badge .stage-evergreen }
-&#91;#reference&#93;(../by-tag/index.md#tag-reference){ .tag }
-&#91;a link&#93;(https://en.wikipedia.org/wiki/Diction){ target="_blank" }
+&lt;span class="badge stage-seedling"&gt;seedling&lt;/span&gt;
+&lt;span class="badge stage-bud"&gt;bud&lt;/span&gt;
+&lt;span class="badge stage-evergreen"&gt;evergreen&lt;/span&gt;
+&lt;span class="tag"&gt;#reference&lt;/span&gt;
+[a link](https://en.wikipedia.org/wiki/Diction){ target="_blank" }
 ![alt text](../assets/favicon.ico){ width="48" }</code></pre>
 
-<p class="card">diction is done with the tip of the tongue on the teeth.</p>
-<p><a class="badge stage-seedling" href="../../seedlings/">seedling</a> <a class="badge stage-bud" href="../../buds/">bud</a> <a class="badge stage-evergreen" href="../../evergreens/">evergreen</a> <a class="tag" href="../../by-tag/#tag-reference">#reference</a> <a class="tag" href="../../by-tag/#tag-formatting">#formatting</a></p>
-<h2 id="raw-html">raw html<a class="headerlink" href="#raw-html" title="Permanent link">&para;</a></h2>
+<p class="card">diction is done with the tip of the tongue on the teeth.<br /></p>
+<p><span class="badge stage-seedling">seedling</span> <span class="badge stage-bud">bud</span> <span class="badge stage-evergreen">evergreen</span> <span class="tag">#reference</span> <span class="tag">#formatting</span></p>
+<h2 id="raw-html">raw html<a class="headerlink" href="#raw-html" title="Link to this section">¶</a></h2>
 <p>html works anywhere in markdown.</p>
-<pre class="highlight"><code class="language-html">&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;K&lt;/kbd&gt;
-&lt;mark&gt;highlighted&lt;/mark&gt;
-&lt;u&gt;underlined&lt;/u&gt;
-&lt;small&gt;small text&lt;/small&gt;
-H&lt;sub&gt;2&lt;/sub&gt;O and x&lt;sup&gt;2&lt;/sup&gt;
-&lt;abbr title="tip of the tongue on the teeth"&gt;TTT&lt;/abbr&gt;
-&lt;!-- a hidden comment --&gt;
-&lt;details markdown="1"&gt;
-&lt;summary&gt;a collapsible section&lt;/summary&gt;
+<div class="language-html highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">kbd</span><span class="p">&gt;</span>Ctrl<span class="p">&lt;/</span><span class="nt">kbd</span><span class="p">&gt;</span> + <span class="p">&lt;</span><span class="nt">kbd</span><span class="p">&gt;</span>K<span class="p">&lt;/</span><span class="nt">kbd</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">mark</span><span class="p">&gt;</span>highlighted<span class="p">&lt;/</span><span class="nt">mark</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">u</span><span class="p">&gt;</span>underlined<span class="p">&lt;/</span><span class="nt">u</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span>small text<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>
+H<span class="p">&lt;</span><span class="nt">sub</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">sub</span><span class="p">&gt;</span>O and x<span class="p">&lt;</span><span class="nt">sup</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">sup</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">abbr</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;tip of the tongue on the teeth&quot;</span><span class="p">&gt;</span>TTT<span class="p">&lt;/</span><span class="nt">abbr</span><span class="p">&gt;</span>
+<span class="cm">&lt;!-- a hidden comment --&gt;</span>
+<span class="p">&lt;</span><span class="nt">details</span> <span class="na">markdown</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">summary</span><span class="p">&gt;</span>a collapsible section<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span>
 
 the contents, which can contain **markdown**.
 
-&lt;/details&gt;</code></pre>
+<span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+</code></pre></div>
 <p>press <kbd>Ctrl</kbd> + <kbd>K</kbd> and say: diction is done with the tip of the tongue on the teeth</p>
 <p><mark>diction is done with the tip of the tongue on the teeth</mark></p>
 <p><u>diction is done with the tip of the tongue on the teeth</u></p>
@@ -732,33 +715,35 @@ the contents, which can contain **markdown**.
 <summary>a collapsible section: diction is done with the tip of the tongue on the teeth</summary>
 <p>diction is done with the tip of the tongue on the <strong>teeth</strong>.</p>
 </details>
-<h2 id="horizontal-rules">horizontal rules<a class="headerlink" href="#horizontal-rules" title="Permanent link">&para;</a></h2>
-<pre class="highlight"><code class="language-markdown">---</code></pre>
+<h2 id="horizontal-rules">horizontal rules<a class="headerlink" href="#horizontal-rules" title="Link to this section">¶</a></h2>
+<div class="language-markdown highlight"><pre><span></span><code>---
+</code></pre></div>
 <p>diction is done with the tip of the tongue on the teeth</p>
 <hr />
 <p>diction is done with the tip of the tongue on the teeth</p>
-<h2 id="layout-helpers">layout helpers<a class="headerlink" href="#layout-helpers" title="Permanent link">&para;</a></h2>
+<h2 id="layout-helpers">layout helpers<a class="headerlink" href="#layout-helpers" title="Link to this section">¶</a></h2>
 <p>these use <code>md_in_html</code>, so write <code>markdown</code> on each div and leave blank lines around the content.</p>
-<pre class="highlight"><code class="language-html">&lt;div class="grid" markdown&gt;
+<div class="language-html highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;grid&quot;</span> <span class="na">markdown</span><span class="p">&gt;</span>
 
-&lt;div class="card" markdown&gt;
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span> <span class="na">markdown</span><span class="p">&gt;</span>
 
 **card one**
 
 the content
 
-&lt;/div&gt;
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-&lt;div class="card" markdown&gt;
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span> <span class="na">markdown</span><span class="p">&gt;</span>
 
 **card two**
 
 the content
 
-&lt;/div&gt;
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-&lt;/div&gt;</code></pre>
-<h3 id="grid-of-cards">grid of cards<a class="headerlink" href="#grid-of-cards" title="Permanent link">&para;</a></h3>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<h3 id="grid-of-cards">grid of cards<a class="headerlink" href="#grid-of-cards" title="Link to this section">¶</a></h3>
 <div class="grid">
 <div class="card">
 <p><strong>card one</strong></p>
@@ -773,10 +758,11 @@ the content
 <p>diction is done with the tip of the tongue on the teeth</p>
 </div>
 </div>
-<h3 id="masonry">masonry<a class="headerlink" href="#masonry" title="Permanent link">&para;</a></h3>
-<pre class="highlight"><code class="language-html">&lt;div class="masonry" markdown&gt;
+<h3 id="masonry">masonry<a class="headerlink" href="#masonry" title="Link to this section">¶</a></h3>
+<div class="language-html highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;masonry&quot;</span> <span class="na">markdown</span><span class="p">&gt;</span>
 cards of different heights go here
-&lt;/div&gt;</code></pre>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
 <div class="masonry">
 <div class="card">
 <p><strong>short card</strong></p>
@@ -795,24 +781,37 @@ cards of different heights go here
 <p>diction is done with the tip of the tongue on the teeth</p>
 </div>
 </div>
-<h3 id="text-columns">text columns<a class="headerlink" href="#text-columns" title="Permanent link">&para;</a></h3>
-<pre class="highlight"><code class="language-html">&lt;div class="columns-2" markdown&gt;
+<h3 id="text-columns">text columns<a class="headerlink" href="#text-columns" title="Link to this section">¶</a></h3>
+<div class="language-html highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;columns-2&quot;</span> <span class="na">markdown</span><span class="p">&gt;</span>
 text that flows into two columns (use columns-3 for three)
-&lt;/div&gt;</code></pre>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
 <div class="columns-2">
 <p>diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth. diction is done with the tip of the tongue on the teeth.</p>
 </div>
-<h2 id="diagrams">diagrams<a class="headerlink" href="#diagrams" title="Permanent link">&para;</a></h2>
+<h2 id="diagrams">diagrams<a class="headerlink" href="#diagrams" title="Link to this section">¶</a></h2>
 <p>mermaid diagrams go in a fenced block with the language <code>mermaid</code>. they follow the light and dark theme, and the mermaid library only loads on pages that contain a diagram.</p>
-<pre class="highlight"><code class="language-markdown">```mermaid
-graph LR
-    seedling --&gt; bud --&gt; evergreen
-```</code></pre>
+<div class="language-markdown highlight"><pre><span></span><code><span class="sb">```mermaid</span>
+<span class="s">graph LR</span>
+<span class="s">    seedling --&gt; bud --&gt; evergreen</span>
+<span class="sb">```</span>
+</code></pre></div>
 <pre class="mermaid"><code>graph LR
-    seedling --&gt; bud --&gt; evergreen
-    bud --&gt; seedling</code></pre>
-<h2 id="color-palette">color palette<a class="headerlink" href="#color-palette" title="Permanent link">&para;</a></h2>
-<p>the eight accent colors side by side, in the order they are used for tabs, footnotes and the numbers under cited by. the sidebar and page accents follow the same order from top to bottom.</p>
+    seedling --&gt; bud --&gt; evergreen</code></pre>
+<h2 id="math">math<a class="headerlink" href="#math" title="Link to this section">¶</a></h2>
+<p>inline math uses single dollar signs, and display math uses double dollar signs. KaTeX is only loaded on pages containing math.</p>
+<div class="language-markdown highlight"><pre><span></span><code>The area of a circle is $A = \pi r^2$.
+
+$$
+\int_0^1 x^2\,dx = \frac{1}{3}
+$$
+</code></pre></div>
+<p>The area of a circle is <span class="arithmatex">\(A = \pi r^2\)</span>.</p>
+<div class="arithmatex">\[
+\int_0^1 x^2\,dx = \frac{1}{3}
+\]</div>
+<h2 id="color-palette">color palette<a class="headerlink" href="#color-palette" title="Link to this section">¶</a></h2>
+<p>the eight accent colors side by side, in the order they are used for tabs, footnotes and the numbered backlinks. the sidebar and page accents follow the same order from top to bottom.</p>
 <div class="swatches">
 <span style="background: var(--rb-0)">1 red</span>
 <span style="background: var(--rb-1)">2 orange</span>
@@ -824,31 +823,46 @@ graph LR
 <span style="background: var(--rb-7)">8 purple</span>
 </div>
 
-<h2 id="escaping">escaping<a class="headerlink" href="#escaping" title="Permanent link">&para;</a></h2>
+<h2 id="escaping">escaping<a class="headerlink" href="#escaping" title="Link to this section">¶</a></h2>
 <p>a backslash in front of a character shows it literally.</p>
-<pre class="highlight"><code class="language-markdown">\*not italic\*
-\# not a heading</code></pre>
+<div class="language-markdown highlight"><pre><span></span><code>\*not italic\*
+\# not a heading
+</code></pre></div>
 <p>*diction* is done with the tip of the tongue on the teeth</p>
-<h2 id="page-metadata">page metadata<a class="headerlink" href="#page-metadata" title="Permanent link">&para;</a></h2>
+<h2 id="page-metadata">page metadata<a class="headerlink" href="#page-metadata" title="Link to this section">¶</a></h2>
 <p>the block at the very top of a note, between two <code>---</code> lines, is its front matter.</p>
-<pre class="highlight"><code class="language-yaml">---
-title: a custom title (otherwise the first heading is used)
-stage: seedling
-tags: [idea, book]
-planted: 2026-11-10
-tended: 2026-11-10
-links_to: [another note, a third note]
-template: home.html
----</code></pre>
+<div class="language-yaml highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a custom title (otherwise the first heading is used)</span>
+<span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seedling</span>
+<span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">idea</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">book</span><span class="p p-Indicator">]</span>
+<span class="nt">planted</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-11-10</span>
+<span class="nt">tended</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-11-10</span>
+<span class="nt">links_to</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">another note</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">a third note</span><span class="p p-Indicator">]</span>
+<span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">home.html</span>
+<span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="c1"># draft: true</span>
+<span class="c1"># aliases: [old-note-name]</span>
+<span class="nn">---</span>
+</code></pre></div>
 <ul>
 <li><code>stage</code> shows a colored badge: <code>seedling</code>, <code>bud</code> or <code>evergreen</code></li>
-<li><code>tags</code> show as pills under the title and in the homepage tag cloud, and each pill links to its section on the by tag page</li>
+<li><code>tags</code> show as pills under the title and link to their section on the by-tag page; search for notes by tag with <code>#tag</code></li>
 <li><code>links_to</code> adds links to other notes by title or filename, even if the text doesn't link to them</li>
 <li><code>planted</code> and <code>tended</code> show as dates, and <code>tended</code> sorts the "recently tended" widget</li>
-<li><code>template: home.html</code> is only for your homepage, to turn on the widgets</li>
+<li><code>template: home.html</code> is only for your homepage; it enables the stats, note of the day, recent notes, clock, stage legend and garden graph widgets</li>
+<li><code>width: full</code> widens the page content; this reference page uses it</li>
+<li><code>draft: true</code> keeps a note out of the built site</li>
+<li><code>aliases</code> creates redirect pages for old note paths</li>
 </ul>
-<h2 id="not-supported">not supported<a class="headerlink" href="#not-supported" title="Permanent link">&para;</a></h2>
-<p>math written as <code>$math$</code> has no equivalent here yet.</p>
+<h2 id="using-the-garden">using the garden<a class="headerlink" href="#using-the-garden" title="Link to this section">¶</a></h2>
+<ul>
+<li>the homepage's <strong>how to read this garden</strong> widget explains the seedling, bud and evergreen stages</li>
+<li>the <strong>index</strong>, <strong>random</strong> and <strong>style</strong> buttons are at the upper left of the header; style switches between light and dark mode</li>
+<li>the search field is at the upper right. Press <code>/</code> outside a text field to focus it. Use <code>#tag</code> in a search to find notes with that tag.</li>
+<li>on pages with a table of contents, use the drawer on the right to open or collapse it</li>
+</ul>
+<h2 id="not-supported">not supported<a class="headerlink" href="#not-supported" title="Link to this section">¶</a></h2>
+<p>Code block titles and line highlighting are not configured.</p>
 <div class="footnote">
 <hr />
 <ol>
@@ -884,35 +898,142 @@ template: home.html
       
 
       
-    </main>
-  </div>
+      <details class="note-history">
+        <summary>note history</summary>
+        <ol><li><time>2026-11-10</time> so uh i went on a bit of a spree today and forgot to commit</li></ol>
+      </details>
+      
 
+      
+    </main>
+
+    
+    <div class="toc-drawer" id="toc-drawer">
+      <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="true" aria-controls="toc-panel"><span class="sr-only">on this page</span></button>
+      <nav class="toc-panel" id="toc-panel" aria-label="on this page">
+        <p class="toc-title">on this page</p>
+        <div id="toc">
+<ul>
+  
+  <li><a href="#reference-page">reference page</a>
+<ul>
+  
+  <li><a href="#headings">headings</a></li>
+  
+</ul>
+</li>
+  
+  <li><a href="#heading-1-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 1: diction is done with the tip of the tongue on the teeth</a>
+<ul>
+  
+  <li><a href="#heading-2-diction-is-done-with-the-tip-of-the-tongue-on-the-teeth">heading 2: diction is done with the tip of the tongue on the teeth</a></li>
+  
+  <li><a href="#emphasis-and-inline-marks">emphasis and inline marks</a></li>
+  
+  <li><a href="#lists">lists</a></li>
+  
+  <li><a href="#links">links</a></li>
+  
+  <li><a href="#images">images</a></li>
+  
+  <li><a href="#outgoing-links-and-backlinks">outgoing links and backlinks</a></li>
+  
+  <li><a href="#embedded-notes">embedded notes</a></li>
+  
+  <li><a href="#blockquotes">blockquotes</a></li>
+  
+  <li><a href="#callouts">callouts</a></li>
+  
+  <li><a href="#code">code</a></li>
+  
+  <li><a href="#tables">tables</a></li>
+  
+  <li><a href="#footnotes">footnotes</a></li>
+  
+  <li><a href="#definition-lists">definition lists</a></li>
+  
+  <li><a href="#abbreviations">abbreviations</a></li>
+  
+  <li><a href="#tabs">tabs</a></li>
+  
+  <li><a href="#attribute-lists">attribute lists</a></li>
+  
+  <li><a href="#raw-html">raw html</a></li>
+  
+  <li><a href="#horizontal-rules">horizontal rules</a></li>
+  
+  <li><a href="#layout-helpers">layout helpers</a></li>
+  
+  <li><a href="#diagrams">diagrams</a></li>
+  
+  <li><a href="#math">math</a></li>
+  
+  <li><a href="#color-palette">color palette</a></li>
+  
+  <li><a href="#escaping">escaping</a></li>
+  
+  <li><a href="#page-metadata">page metadata</a></li>
+  
+  <li><a href="#using-the-garden">using the garden</a></li>
+  
+  <li><a href="#not-supported">not supported</a></li>
+  
+</ul>
+</li>
+  
+</ul>
+</div>
+      </nav>
+    </div>
+    
+
+    <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
+  </div>
   <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
 
   <script>
     var base_url = '../..';
 
-    // sidebar (starts closed on small screens)
+    // sidebar (hidden by default on small screens, remembered on large ones)
     var layout = document.getElementById('garden-layout');
     var toggle = document.getElementById('sidebar-toggle');
-    function syncToggle() {
-      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
     }
-    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
     syncToggle();
     toggle.addEventListener('click', function () {
-      layout.classList.toggle('sidebar-collapsed');
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
       syncToggle();
     });
+    narrow.addEventListener('change', syncToggle);
 
     // light / dark
     var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
     modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
     modeBtn.addEventListener('click', function () {
       var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      setTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
     });
 
     // random note (any element with data-random)
@@ -979,11 +1100,47 @@ template: home.html
       });
     })();
 
-    // on this page: open on wide screens, highlight the current section
+    // on this page drawer
+    (function () {
+      var btn = document.getElementById('toc-toggle');
+      if (!btn) return;
+      var panel = document.getElementById('toc-panel');
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      function syncToc() {
+        btn.setAttribute('aria-expanded', String(tocIsOpen()));
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      syncToc();
+      btn.addEventListener('click', function () {
+        if (wide.matches) {
+          layout.classList.toggle('toc-collapsed');
+          try { localStorage.setItem('toc', layout.classList.contains('toc-collapsed') ? 'closed' : 'open'); } catch (e) {}
+        } else {
+          layout.classList.toggle('toc-open');
+        }
+        syncToc();
+      });
+      wide.addEventListener('change', syncToc);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+        btn.focus();
+      });
+      panel.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+      });
+    })();
+
+    // on this page: highlight the current section
     (function () {
       var toc = document.getElementById('toc');
       if (!toc) return;
-      if (window.innerWidth >= 1300) toc.open = true;
       var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
       var map = {};
       links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
@@ -1001,6 +1158,35 @@ template: home.html
       spy();
     })();
 
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
     // copy buttons on code blocks
     (function () {
       var live = document.createElement('div');
@@ -1016,6 +1202,7 @@ template: home.html
           pre.replaceWith(host);
           host.appendChild(pre);
         }
+        trackScroller(pre, 'code');
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'copy-btn';
@@ -1032,6 +1219,10 @@ template: home.html
       });
     })();
 
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
     // favicons on external links (uses Google's favicon service)
     document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
       try {
@@ -1045,8 +1236,12 @@ template: home.html
       } catch (e) {}
     });
   </script>
-  <script src="../../garden-search.js"></script>
-  <script src="../../garden-mermaid.js"></script>
+  <script src="../../garden-search.js?v=202611110539"></script>
+  <script src="../../garden-mermaid.js?v=202611110539"></script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous" onload="renderMathInElement(document.querySelector('.garden-article') || document.body)"></script>
+  
   
 </body>
 </html>

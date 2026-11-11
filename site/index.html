@@ -7,6 +7,12 @@
 
 
 
+
+
+  
+
+
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -15,15 +21,22 @@
   <title>digital garden</title>
   
   
+  
   <meta property="og:site_name" content="digital garden">
   <meta property="og:type" content="website">
   
   
-  <link rel="canonical" href="https://USERNAME.github.io/REPO/">
-  <meta property="og:url" content="https://USERNAME.github.io/REPO/">
+  <link rel="canonical" href="https://truly-tranquil.github.io/digital-garden/">
+  <meta property="og:url" content="https://truly-tranquil.github.io/digital-garden/">
   
-  <meta name="twitter:card" content="summary">
+  
+  <meta property="og:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  <meta name="twitter:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/atom+xml" title="digital garden" href="https://truly-tranquil.github.io/digital-garden/feed.xml">
   <link rel="icon" href="assets/favicon.ico">
+  
 
   <!-- runs before the page paints so there is no flash of the wrong theme -->
   <script>
@@ -35,10 +48,9 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
-  <link rel="stylesheet" href="main.css">
+  <!-- Newsreader is self-hosted (see @font-face in main.css). the upright file is preloaded so text doesn't jump when it arrives -->
+  <link rel="preload" href="assets/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="main.css?v=202611110539">
 </head>
 <body data-section="home" style="--folder: var(--rb-0)">
   <a class="skip-link" href="#main-content">skip to content</a>
@@ -46,7 +58,8 @@
   <header class="garden-header">
     <div class="header-left">
       <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
-      <a href="./index.html" class="garden-logo">digital garden</a>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
     </div>
 
     <div class="header-right">
@@ -55,8 +68,7 @@
         <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
         <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
       </form>
-      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
-      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+      <a href="./" class="garden-logo">digital garden</a>
     </div>
   </header>
 
@@ -93,6 +105,18 @@
     
       <li >
         <a href="seedlings/" class="">map of contents</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="seedlings/test-note-1/" class="">test note 1</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="seedlings/test-note-2/" class="">test note 2</a>
       </li>
     
   
@@ -159,25 +183,6 @@
       </li>
     
   
-    
-      <li class="nav-folder" style="--folder: var(--rb-7)">
-        <details >
-          <summary>for my reference</summary>
-          
-<ul>
-  
-    
-      <li >
-        <a href="for-my-reference/reference-page/" class="">reference page</a>
-      </li>
-    
-  
-</ul>
-
-        </details>
-      </li>
-    
-  
 </ul>
 
     </nav>
@@ -196,20 +201,54 @@
       
       
 
-      
-        
-      
       <div class="article-wrap">
-        
         <article class="garden-article">
           
-<h1 id="welcome-to-my-digital-garden"><img alt="a gif of a pink and purple star bouncing" src="assets/favicon.gif" /> welcome to my digital garden <img alt="a gif of a pink and purple star bouncing" src="assets/favicon.gif" /><a class="headerlink" href="#welcome-to-my-digital-garden" title="Permanent link">&para;</a></h1>
+<h1 id="welcome-to-my-digital-garden"><picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><img src="assets/favicon.gif" alt=""></picture> welcome to my digital garden <picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><img src="assets/favicon.gif" alt=""></picture><a class="headerlink" href="#welcome-to-my-digital-garden" title="Link to this section">¶</a></h1>
 
 <div class="widgets" id="widgets">
-  <section class="widget widget-wide" id="w-stats"><h2>the garden right now</h2><div class="stat-row" id="stat-row"></div></section>
-  <section class="widget" id="w-today"><h2>note of the day</h2><div id="today"></div></section>
-  <section class="widget" id="w-recent"><h2>recently tended</h2><ul class="note-list" id="recent"></ul></section>
-  <section class="widget" id="w-tags"><h2>tags</h2><div class="tag-cloud" id="tags"></div></section>
+  <section class="widget widget-wide" id="w-stats">
+    <h2>the garden right now</h2>
+    <div class="stat-row">
+      
+      <div class="stat stage-seedling"><strong>2</strong><span>seedlings</span></div>
+      
+      <div class="stat stage-bud"><strong>0</strong><span>buds</span></div>
+      
+      <div class="stat stage-evergreen"><strong>0</strong><span>evergreens</span></div>
+      
+      <div class="stat"><strong>2</strong><span>notes in all</span></div>
+    </div>
+  </section>
+  <section class="widget" id="w-today"><h2>note of the day</h2><div id="today">finding a note from the garden…</div></section>
+  <section class="widget" id="w-recent">
+    <h2>recently tended</h2>
+    
+    <ul class="note-list">
+      
+      <li><a href="seedlings/test-note-1/">test note 1</a> <small>2026-11-10</small></li>
+      
+      <li><a href="seedlings/test-note-2/">test note 2</a> <small>2026-11-10</small></li>
+      
+    </ul>
+    
+  </section>
+  <section class="widget" id="w-clock">
+    <h2>garden clock</h2>
+    <div class="clock">
+      <time class="clock-time" id="clock-time">Enable JavaScript to see the local time.</time>
+      <span class="clock-date" id="clock-date">Local date</span>
+    </div>
+  </section>
+  <section class="widget" id="w-legend">
+    <h2>how to read this garden</h2>
+    <ul>
+      <li><strong>seedling:</strong> new ideas and notes in progress</li>
+      <li><strong>bud:</strong> developing notes with some structure</li>
+      <li><strong>evergreen:</strong> mature notes, revised over time</li>
+    </ul>
+  </section>
+  <section class="widget" id="w-graph"><h2>garden graph</h2><p>Explore how notes in the garden connect.</p><a class="graph-link" href="graph.html">open the garden graph</a></section>
 </div>
 
         </article>
@@ -218,35 +257,59 @@
       
 
       
-    </main>
-  </div>
 
+      
+    </main>
+
+    
+
+    <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
+  </div>
   <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
 
   <script>
     var base_url = '.';
 
-    // sidebar (starts closed on small screens)
+    // sidebar (hidden by default on small screens, remembered on large ones)
     var layout = document.getElementById('garden-layout');
     var toggle = document.getElementById('sidebar-toggle');
-    function syncToggle() {
-      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
     }
-    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
     syncToggle();
     toggle.addEventListener('click', function () {
-      layout.classList.toggle('sidebar-collapsed');
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
       syncToggle();
     });
+    narrow.addEventListener('change', syncToggle);
 
     // light / dark
     var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
     modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
     modeBtn.addEventListener('click', function () {
       var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      setTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
     });
 
     // random note (any element with data-random)
@@ -313,11 +376,47 @@
       });
     })();
 
-    // on this page: open on wide screens, highlight the current section
+    // on this page drawer
+    (function () {
+      var btn = document.getElementById('toc-toggle');
+      if (!btn) return;
+      var panel = document.getElementById('toc-panel');
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      function syncToc() {
+        btn.setAttribute('aria-expanded', String(tocIsOpen()));
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      syncToc();
+      btn.addEventListener('click', function () {
+        if (wide.matches) {
+          layout.classList.toggle('toc-collapsed');
+          try { localStorage.setItem('toc', layout.classList.contains('toc-collapsed') ? 'closed' : 'open'); } catch (e) {}
+        } else {
+          layout.classList.toggle('toc-open');
+        }
+        syncToc();
+      });
+      wide.addEventListener('change', syncToc);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+        btn.focus();
+      });
+      panel.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncToc();
+      });
+    })();
+
+    // on this page: highlight the current section
     (function () {
       var toc = document.getElementById('toc');
       if (!toc) return;
-      if (window.innerWidth >= 1300) toc.open = true;
       var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
       var map = {};
       links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
@@ -335,6 +434,35 @@
       spy();
     })();
 
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
     // copy buttons on code blocks
     (function () {
       var live = document.createElement('div');
@@ -350,6 +478,7 @@
           pre.replaceWith(host);
           host.appendChild(pre);
         }
+        trackScroller(pre, 'code');
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'copy-btn';
@@ -366,6 +495,10 @@
       });
     })();
 
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
     // favicons on external links (uses Google's favicon service)
     document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
       try {
@@ -379,68 +512,102 @@
       } catch (e) {}
     });
   </script>
-  <script src="garden-search.js"></script>
-  <script src="garden-mermaid.js"></script>
+  <script src="garden-search.js?v=202611110539"></script>
+  <script src="garden-mermaid.js?v=202611110539"></script>
+  
   
 <script>
-  fetch(base_url + '/notes.json').then(function (r) { return r.json(); }).then(function (all) {
-    function el(tag, cls, text) {
-      var e = document.createElement(tag);
-      if (cls) e.className = cls;
-      if (text != null) e.textContent = text;
-      return e;
-    }
-    function link(n) {
-      var a = el('a', null, n.title);
-      a.href = base_url + '/' + n.url;
-      return a;
-    }
-    var notes = all.filter(function (n) { return !n.is_index; });
-
-    // stats
-    var row = document.getElementById('stat-row');
-    [['seedling', 'seedlings'], ['bud', 'buds'], ['evergreen', 'evergreens']].forEach(function (s) {
-      var count = notes.filter(function (n) { return n.stage === s[0]; }).length;
-      var tile = el('div', 'stat stage-' + s[0]);
-      tile.appendChild(el('strong', null, String(count)));
-      tile.appendChild(el('span', null, s[1]));
-      row.appendChild(tile);
+  (function () {
+    var time = document.getElementById('clock-time');
+    var date = document.getElementById('clock-date');
+    var timeFormat = new Intl.DateTimeFormat(undefined, {
+      hour: 'numeric', minute: '2-digit', second: '2-digit'
     });
-    var total = el('div', 'stat'); total.appendChild(el('strong', null, String(notes.length))); total.appendChild(el('span', null, 'notes in all'));
-    row.appendChild(total);
-
-    // note of the day (same note all day)
-    if (notes.length) {
-      var pick = notes[Math.floor(Date.now() / 86400000) % notes.length];
-      var t = document.getElementById('today');
-      var h = el('h3'); h.appendChild(link(pick)); t.appendChild(h);
-      t.appendChild(el('p', null, pick.excerpt));
-    }
-
-    // recently tended
-    var recent = notes.slice().sort(function (a, b) { return String(b.tended).localeCompare(String(a.tended)); }).slice(0, 6);
-    var ul = document.getElementById('recent');
-    recent.forEach(function (n) {
-      var li = el('li'); li.appendChild(link(n)); li.appendChild(el('small', null, ' ' + String(n.tended).slice(0, 10)));
-      ul.appendChild(li);
+    var dateFormat = new Intl.DateTimeFormat(undefined, {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
+    var timer;
+    function updateClock() {
+      var now = new Date();
+      time.textContent = timeFormat.format(now);
+      date.textContent = dateFormat.format(now);
+    }
+    function updateVisibility() {
+      clearInterval(timer);
+      if (!document.hidden) {
+        updateClock();
+        timer = setInterval(updateClock, 1000);
+      }
+    }
+    document.addEventListener('visibilitychange', updateVisibility);
+    updateVisibility();
+  })();
 
-    // tags
-    var counts = {}, slugs = {};
-    notes.forEach(function (n) {
-      n.tags.forEach(function (g, i) {
-        counts[g] = (counts[g] || 0) + 1;
-        slugs[g] = n.tag_slugs[i];
+  (function () {
+    var today = document.getElementById('today');
+    fetch(base_url + '/notes.json')
+      .then(function (response) {
+        if (!response.ok) throw new Error('Notes request failed');
+        return response.json();
+      })
+      .then(function (all) {
+        if (!Array.isArray(all)) throw new Error('Notes response is invalid');
+        var notes = all.filter(function (note) {
+          return !note.is_index && !note.unlisted && !note.draft && Boolean(note.stage);
+        });
+        if (!notes.length) {
+          today.textContent = 'No notes in the garden yet.';
+          return;
+        }
+        var pick = notes[Math.floor(Date.now() / 86400000) % notes.length];
+        var title = notes.find(function (note) {
+          return note.title.toLowerCase() === pick.title.toLowerCase();
+        }).title;
+        var heading = document.createElement('h3');
+        var link = document.createElement('a');
+        link.href = base_url + '/' + pick.url;
+        link.textContent = title;
+        heading.style.textAlign = 'center';
+        heading.appendChild(link);
+        today.textContent = '';
+        today.appendChild(heading);
+        if (pick.excerpt) {
+          var excerpt = document.createElement('p');
+          excerpt.style.textAlign = 'center';
+          var titles = notes.map(function (note) { return note.title; })
+            .filter(Boolean)
+            .sort(function (a, b) { return b.length - a.length; });
+          if (titles.length) {
+            var escaped = titles.map(function (title) {
+              return title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var mentions = new RegExp(
+              '(^|[^\\p{L}\\p{N}_])(' + escaped.join('|') + ')(?=$|[^\\p{L}\\p{N}_])',
+              'giu'
+            );
+            var cursor = 0, match;
+            while ((match = mentions.exec(pick.excerpt)) !== null) {
+              excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor, match.index) + match[1]));
+              var mention = document.createElement('a');
+              var target = notes.find(function (note) {
+                return note.title.toLowerCase() === match[2].toLowerCase();
+              });
+              mention.href = base_url + '/' + target.url;
+              mention.textContent = match[2];
+              excerpt.appendChild(mention);
+              cursor = mentions.lastIndex;
+            }
+            excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor)));
+          } else {
+            excerpt.textContent = pick.excerpt;
+          }
+          today.appendChild(excerpt);
+        }
+      })
+      .catch(function () {
+        today.textContent = 'The note of the day is temporarily unavailable.';
       });
-    });
-    var cloud = document.getElementById('tags');
-    Object.keys(counts).sort().forEach(function (g) {
-      var a = el('a', 'tag', '#' + g + ' ' + counts[g]);
-      a.href = base_url + '/by-tag/#tag-' + slugs[g];
-      cloud.appendChild(a);
-    });
-    if (!Object.keys(counts).length) cloud.appendChild(el('p', null, 'no tags yet. add tags: [..] to a note.'));
-  });
+  })();
 </script>
 
 </body>
