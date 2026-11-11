@@ -1,12 +1,57 @@
 site_name: digital garden
+site_url: https://USERNAME.github.io/REPO/
 
 theme:
-  name: dracula
+  name: null
+  custom_dir: my-garden-theme
+  static_templates:
+    - 404.html
+    - search.html
 
-favicon: assets\favicon.gif
+hooks:
+  - hooks.py
+
+plugins:
+  - search
+  - callouts
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - def_list
+  - abbr
+  - toc:
+      permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
 
 nav:
   - home: index.md
+  - manifesto: manifesto.md
   - about: about.md
-  - random note:
-
+  - seedlings:
+      - map of contents: seedlings/index.md
+  - buds:
+      - map of contents: buds/index.md
+  - evergreens:
+      - map of contents: evergreens/index.md
+  - by tag:
+      - map of contents: by-tag/index.md
+  - for my reference:
+    - reference page: for-my-reference/reference-page.md

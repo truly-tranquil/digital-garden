@@ -1,0 +1,4 @@
+mkdocs>=1.6
+mkdocs-callouts
+pymdown-extensions
+pyyaml

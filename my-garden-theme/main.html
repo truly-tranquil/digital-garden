@@ -1,0 +1,331 @@
+{#- on the 404 page base_url is unreliable, so every link there is built from the configured site_url -#}
+{% set root = (config.site_url or '/').rstrip('/') if lost_page else base_url %}
+
+{% macro asset(path) %}{% if lost_page %}{{ root }}/{{ path }}{% else %}{{ path|url }}{% endif %}{% endmacro %}
+
+{#- recursive sidebar: sections become collapsible folders, top level gets a folder color -#}
+{% macro render_nav(items, top=false) %}
+<ul>
+  {% for item in items %}
+    {% if item.children %}
+      <li class="nav-folder" {% if top %}style="--folder: var(--rb-{{ loop.index0 % 8 }})"{% endif %}>
+        <details {% if item.active %}open{% endif %}>
+          <summary>{{ item.title|lower }}</summary>
+          {{ render_nav(item.children) }}
+        </details>
+      </li>
+    {% else %}
+      <li {% if top %}style="--folder: var(--rb-{{ loop.index0 % 8 }})"{% endif %}>
+        <a href="{{ asset(item.url) }}" class="{% if item.active %}active{% endif %}"{% if item.active %} aria-current="page"{% endif %}>{{ item.title|lower }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro render_toc(items, depth=1) %}
+<ul>
+  {% for t in items %}
+  <li><a href="{{ t.url }}">{{ t.title }}</a>{% if t.children and depth < 2 %}{{ render_toc(t.children, depth + 1) }}{% endif %}</li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% set section = 'search' if not page else (page.url.split('/')[0] or 'home') %}
+{% set ns = namespace(i=(0 if page else 6)) %}
+{% if page %}{% for item in nav %}{% if (item.title|lower|replace(' ', '-')) == section %}{% set ns.i = loop.index0 %}{% endif %}{% endfor %}{% endif %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page_title %}{{ page_title|lower }} | {% elif page and page.title and not page.is_homepage %}{{ page.title|lower }} | {% endif %}{{ config.site_name|lower }}</title>
+  {% set meta_desc = page.meta.description if (page and page.meta and page.meta.description) else description %}
+  {% if meta_desc %}
+  <meta name="description" content="{{ meta_desc|e }}">
+  <meta property="og:description" content="{{ meta_desc|e }}">
+  {% endif %}
+  <meta property="og:site_name" content="{{ config.site_name|lower }}">
+  <meta property="og:type" content="{{ 'article' if page and page.meta and page.meta.stage else 'website' }}">
+  {% if page and page.title and not page.is_homepage %}<meta property="og:title" content="{{ page.title|lower|e }}">{% endif %}
+  {% if page and page.canonical_url %}
+  <link rel="canonical" href="{{ page.canonical_url }}">
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="{{ asset('assets/favicon.ico') }}">
+
+  <!-- runs before the page paints so there is no flash of the wrong theme -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var t = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap">
+  <link rel="stylesheet" href="{{ asset('main.css') }}">
+</head>
+<body data-section="{{ section }}" style="--folder: var(--rb-{{ ns.i % 8 }})">
+  <a class="skip-link" href="#main-content">skip to content</a>
+
+  <header class="garden-header">
+    <div class="header-left">
+      <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
+      <a href="{{ root }}/index.html" class="garden-logo">{{ config.site_name }}</a>
+    </div>
+
+    <div class="header-right">
+      <form id="mkdocs-search-form" role="search" action="{{ asset('search.html') }}" method="get">
+        <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden... (/)" autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
+        <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
+        <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
+      </form>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+    </div>
+  </header>
+
+  <div class="garden-container" id="garden-layout">
+    <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
+      {{ render_nav(nav, true) }}
+    </nav>
+
+    <main class="garden-content" id="main-content" tabindex="-1">
+      {% if page %}
+      {% set crumbs = page.ancestors|reverse|list %}
+      {% if crumbs %}
+      <nav class="breadcrumbs" aria-label="breadcrumbs">
+        <ol>
+          <li><a href="{{ root }}/index.html">home</a></li>
+          {% for a in crumbs %}{% set first = a.children|first %}
+          <li>{% if first and first.is_page %}<a href="{{ first.url|url }}">{{ a.title }}</a>{% else %}{{ a.title }}{% endif %}</li>
+          {% endfor %}
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      {% endif %}
+      <div class="page-meta">
+        {% if page.meta and page.meta.stage %}
+          <a class="badge stage-{{ page.meta.stage }}" href="{{ (page.meta.stage ~ 's/')|url }}">{{ page.meta.stage }}</a>
+        {% endif %}
+        {% if page.meta and page.meta.tags %}
+          {% for tag in page.meta.tags %}<a class="tag" href="{{ 'by-tag/'|url }}#tag-{{ slug(tag) }}">#{{ tag }}</a>{% endfor %}
+        {% endif %}
+        {% if page.meta and page.meta.planted %}<span class="date">planted {{ page.meta.planted }}</span>{% endif %}
+        {% if page.meta and page.meta.tended %}<span class="date">tended {{ page.meta.tended }}</span>{% endif %}
+        <span class="date" id="reading-time"></span>
+      </div>
+      {% if outgoing %}
+      <div class="page-meta page-links">
+        <span class="meta-label">outgoing links</span>
+        {% for o in outgoing %}<a class="link-chip" href="{{ o.url|url }}">{{ o.title }}</a>{% endfor %}
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% if page and not page.is_homepage and page.toc and page.toc.items %}
+        {% set toc_items = page.toc.items[0].children if (page.toc.items|length == 1 and page.toc.items[0].children) else page.toc.items %}
+      {% else %}
+        {% set toc_items = [] %}
+      {% endif %}
+      <div class="article-wrap{% if toc_items|length > 1 %} has-toc{% endif %}">
+        {% if toc_items|length > 1 %}
+        <details class="toc" id="toc">
+          <summary>on this page</summary>
+          {{ render_toc(toc_items) }}
+        </details>
+        {% endif %}
+        <article class="garden-article">
+          {% block content %}{{ page.content }}{% endblock %}
+        </article>
+      </div>
+
+      {% if page and backlinks %}
+      <section class="backlinks footnote">
+        <hr>
+        <p class="backlinks-title">backlinks</p>
+        <ol>
+          {% for b in backlinks %}<li><a href="{{ b.url|url }}">{{ b.title }}</a></li>{% endfor %}
+        </ol>
+      </section>
+      {% endif %}
+
+      {% if page and related %}
+      <footer class="garden-footer">
+        <p class="related-title">related notes</p>
+        <ul>
+          {% for r in related %}<li><a href="{{ r.url|url }}">{{ r.title }}</a></li>{% endfor %}
+        </ul>
+      </footer>
+      {% endif %}
+    </main>
+  </div>
+
+  <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
+
+  <script>
+    var base_url = '{{ root }}';
+
+    // sidebar (starts closed on small screens)
+    var layout = document.getElementById('garden-layout');
+    var toggle = document.getElementById('sidebar-toggle');
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(!layout.classList.contains('sidebar-collapsed')));
+    }
+    if (window.innerWidth < 800) layout.classList.add('sidebar-collapsed');
+    syncToggle();
+    toggle.addEventListener('click', function () {
+      layout.classList.toggle('sidebar-collapsed');
+      syncToggle();
+    });
+
+    // light / dark
+    var modeBtn = document.getElementById('mode-toggle');
+    modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    modeBtn.addEventListener('click', function () {
+      var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      modeBtn.setAttribute('aria-pressed', String(next === 'dark'));
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    // random note (any element with data-random)
+    document.querySelectorAll('[data-random]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        fetch(base_url + '/notes.json').then(function (r) { return r.json(); }).then(function (all) {
+          var pool = all.filter(function (n) { return !n.is_index; });
+          if (!pool.length) pool = all;
+          var here = location.pathname;
+          var choices = pool.filter(function (n) { return !here.endsWith('/' + n.url) && n.url !== ''; });
+          if (!choices.length) choices = pool;
+          var n = choices[Math.floor(Math.random() * choices.length)];
+          location.href = base_url + '/' + n.url;
+        });
+      });
+    });
+
+    // rainbow footnotes and backlinks
+    function rainbow(i) { return 'var(--rbt-' + (i % 8) + ')'; }
+    document.querySelectorAll('.footnote-ref').forEach(function (a) {
+      var n = parseInt(a.textContent, 10);
+      if (!n) return;
+      a.style.color = rainbow(n - 1);
+      var li = document.getElementById(a.getAttribute('href').slice(1));
+      if (li) li.style.setProperty('--fnc', rainbow(n - 1));
+    });
+    document.querySelectorAll('.backlinks li').forEach(function (li, i) {
+      li.style.setProperty('--fnc', rainbow(i));
+    });
+
+    // reading time
+    (function () {
+      var el = document.getElementById('reading-time');
+      var art = document.querySelector('.garden-article');
+      if (!el || !art) return;
+      var words = art.innerText.trim().split(/\s+/).length;
+      if (words < 40) { el.remove(); return; }
+      el.textContent = Math.max(1, Math.round(words / 200)) + ' min read';
+    })();
+
+    // press / to jump to search
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+      var box = document.getElementById('mkdocs-search-query');
+      if (!box) return;
+      e.preventDefault();
+      box.focus();
+      box.select();
+    });
+
+    // back to top
+    (function () {
+      var btn = document.getElementById('to-top');
+      if (!btn) return;
+      function show() { btn.hidden = window.scrollY < 600; }
+      window.addEventListener('scroll', show, { passive: true });
+      show();
+      btn.addEventListener('click', function () {
+        var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+        document.getElementById('main-content').focus({ preventScroll: true });
+      });
+    })();
+
+    // on this page: open on wide screens, highlight the current section
+    (function () {
+      var toc = document.getElementById('toc');
+      if (!toc) return;
+      if (window.innerWidth >= 1300) toc.open = true;
+      var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
+      var map = {};
+      links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
+      var heads = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      function spy() {
+        var current = null;
+        heads.forEach(function (h) { if (h.getBoundingClientRect().top <= 120) current = h.id; });
+        links.forEach(function (a) { a.classList.remove('current'); a.removeAttribute('aria-current'); });
+        if (current && map[current]) {
+          map[current].classList.add('current');
+          map[current].setAttribute('aria-current', 'true');
+        }
+      }
+      window.addEventListener('scroll', spy, { passive: true });
+      spy();
+    })();
+
+    // copy buttons on code blocks
+    (function () {
+      var live = document.createElement('div');
+      live.className = 'sr-only';
+      live.setAttribute('role', 'status');
+      live.setAttribute('aria-live', 'polite');
+      document.body.appendChild(live);
+      document.querySelectorAll('.garden-article pre:not(.mermaid)').forEach(function (pre) {
+        var host = pre.parentElement;
+        if (!host.classList.contains('highlight')) {
+          host = document.createElement('div');
+          host.className = 'code-wrap';
+          pre.replaceWith(host);
+          host.appendChild(pre);
+        }
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.textContent = 'copy';
+        btn.addEventListener('click', function () {
+          if (!navigator.clipboard) { btn.textContent = 'unavailable'; return; }
+          navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')).then(function () {
+            btn.textContent = 'copied';
+            live.textContent = 'copied to clipboard';
+            setTimeout(function () { btn.textContent = 'copy'; live.textContent = ''; }, 1800);
+          }).catch(function () { btn.textContent = 'failed'; });
+        });
+        host.appendChild(btn);
+      });
+    })();
+
+    // favicons on external links (uses Google's favicon service)
+    document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        if (u.host === location.host || a.querySelector('img')) return;
+        var img = document.createElement('img');
+        img.className = 'link-favicon';
+        img.alt = '';
+        img.src = 'https://www.google.com/s2/favicons?sz=32&domain=' + u.hostname;
+        a.prepend(img);
+      } catch (e) {}
+    });
+  </script>
+  <script src="{{ asset('garden-search.js') }}"></script>
+  <script src="{{ asset('garden-mermaid.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

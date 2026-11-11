@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% set lost_page = true %}
+{% set page_title = 'lost in the garden' %}
+
+{% block content %}
+<div class="lost">
+  <h1>404</h1>
+  <p>this path hasn't been walked yet. the note you wanted may have been replanted, or never grew.</p>
+  <div class="actions">
+    <a class="random-btn" href="{{ (config.site_url or '/').rstrip('/') }}/"><span aria-hidden="true">🌿</span> back to the garden</a>
+    <button type="button" class="random-btn" data-random><span aria-hidden="true">🎲</span> random note</button>
+  </div>
+</div>
+{% endblock %}
