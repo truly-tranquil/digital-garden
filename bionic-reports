@@ -1,0 +1,64 @@
+I can see the local file structures and have reviewed both websites. Let me now provide a comprehensive analysis of what I've observed, noting that there's a disconnect between the two sites in terms of content structure and design philosophy.
+
+## Analysis Summary
+
+### **Digital Garden** (`https://truly-tranquil.github.io/digital-garden/`)
+
+**Local Files:**
+- `docs/`: Contains individual notes organized by category (seedlings, buds, evergreens) plus a manifesto, about page, and reference page
+- `.garden-zensical.yml`: The Zensical configuration file that powers this site
+- `my-garden-theme/`: Custom theme directory
+
+**Observations:**
+1. **Design**: Minimalist, personal blog-style layout with a custom theme built on Zensical (not MkDocs)
+2. **Structure**: Very small - only a handful of notes plus structural files (manifesto, about, reference page)
+3. **Features**: Search, callouts, navigation breadcrumbs (¶), tasklists, footnotes
+4. **Content**: Personal reflections organized in thematic "gardens" - seeds, buds, evergreens
+5. **Status**: Looks like a work-in-progress or personal portfolio
+
+**Key Concerns:**
+- The site has very little content compared to Treasure Trove
+- `docs/` folder is empty locally but the website shows navigation items that don't exist in the local tree
+- The `.gitignore` and tool setup suggest this should be auto-building, but the push is behind
+
+---
+
+### **Treasure Trove** (`https://truly-tranquil.github.io/treasure-trove/`)
+
+**Local Files:**
+- `docs/`: Contains structured content - index, get-help.md, learning-library.md, meet-the-team.md, whats-next.md, and a full courses structure with modules
+- Material theme (pre-built, not custom)
+
+**Observations:**
+1. **Design**: Professional, modern Material UI design with dark mode toggle, search suggestions, navigation in both top and footer
+2. **Structure**: Well-organized as an educational program with:
+   - Courses (Intro to Student Success 101 with syllabus, capstone, facilitator guide, 3 modules)
+   - Learning Library
+   - Support resources
+   - Team page
+3. **Features**: Search suggest, footer navigation, keyboard shortcuts, copyright banner with CC license
+4. **Status**: Appears to be a production-ready educational platform
+
+**Key Concerns:**
+- Looks complete and well-maintained
+- The local files appear more up-to-date than the website
+- No obvious version control issues visible from the file tree alone
+
+---
+
+### **Cross-Site Observations**
+
+1. **Both sites are push-behind**: The GitHub Pages artifacts don't match what's in the working directory. This could be due to:
+   - Build failures in CI/CD pipelines
+   - Stale artifacts not being rebuilt on merge
+   - Different build commands being used vs what's documented
+
+2. **Different tech stacks**: Digital Garden uses Zensical + MkDocs hybrid (with Python hooks), while Treasure Trove uses pure MkDocs with Material theme
+
+3. **Content strategy difference**: Digital Garden is personal/reflective; Treasure Trove is structured educational content for students
+
+I recommend:
+1. Check the GitHub Actions workflows to understand what's building what
+2. Run local builds to verify they produce correct outputs
+3. Check if there are any build failures in recent CI runs
+4. Consider whether these should be separate projects or consolidated somehow

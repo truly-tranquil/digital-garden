@@ -39,9 +39,6 @@
 
 
 
-  
-
-
 
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -94,7 +91,7 @@
 
     <div class="header-right">
       <form id="mkdocs-search-form" role="search" action="./search/" method="get">
-        <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden... (/)" autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
+        <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden..." autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
         <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
         <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
       </form>
@@ -265,7 +262,7 @@
     
     <ul class="note-list">
       
-      <li><a href="./seedlings/test-note-1/">test note 1</a> <small>2026-11-10</small></li>
+      <li><a href="./seedlings/test-note-1/">test note 1</a> <small>2026-11-11</small></li>
       
       <li><a href="./seedlings/test-note-2/">test note 2</a> <small>2026-11-10</small></li>
       
@@ -300,6 +297,14 @@
       
     </main>
 
+    
+    <div class="toc-drawer" id="toc-drawer">
+      <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-panel"><span class="sr-only">on this page</span></button>
+      <nav class="toc-panel" id="toc-panel" aria-label="on this page">
+        <p class="toc-title">on this page</p>
+        <div id="toc"></div>
+      </nav>
+    </div>
     
 
     <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
@@ -417,8 +422,33 @@
 
     // on this page drawer
     (function () {
+      var drawer = document.getElementById('toc-drawer');
+      if (!drawer) return;
+      var toc = document.getElementById('toc');
+      var headings = Array.prototype.slice.call(
+        document.querySelectorAll('.garden-article h2[id], .garden-article h3[id], .garden-article h4[id], .garden-article h5[id], .garden-article h6[id]')
+      );
+      if (!headings.length) {
+        drawer.hidden = true;
+        return;
+      }
+      var list = document.createElement('ul');
+      headings.forEach(function (heading) {
+        var item = document.createElement('li');
+        var link = document.createElement('a');
+        var label = heading.cloneNode(true);
+        label.querySelectorAll('.headerlink').forEach(function (permalink) {
+          permalink.remove();
+        });
+        link.href = '#' + encodeURIComponent(heading.id);
+        link.textContent = label.textContent.trim();
+        item.appendChild(link);
+        list.appendChild(item);
+      });
+      toc.appendChild(list);
+      layout.classList.add('has-toc');
+
       var btn = document.getElementById('toc-toggle');
-      if (!btn) return;
       var panel = document.getElementById('toc-panel');
       var wide = matchMedia('(min-width: 1100px)');
       function tocIsOpen() {
