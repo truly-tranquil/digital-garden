@@ -525,8 +525,8 @@ a.badge:hover { box-shadow: 0 0 0 var(--bw) var(--accent); }
 .backlinks li small { display: block; color: var(--text); opacity: 0.8; }
 .note-history { margin-top: 1.5rem; }
 .note-history ol { padding-left: 1.5rem; }
-.site-footer { padding: 1rem 2rem; margin-inline: auto; width: 100%; text-align: center; }
-.garden-container > .site-footer { grid-column: 1 / -1; grid-row: 2; }
+.site-footer { padding: 1rem 2rem; margin-inline: auto; text-align: center; }
+.garden-container > .site-footer { grid-column: 2; grid-row: 2; }
 .site-footer a { color: var(--accent-text); }
 .embed { margin: 1.5rem 0; padding: 0.25rem 1.25rem; background: var(--surface); border-left: var(--bw-bar) solid var(--accent); border-radius: 0 var(--r-m) var(--r-m) 0; }
 .embed > p:first-child a { color: var(--accent-text); }

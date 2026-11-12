@@ -23,6 +23,29 @@ exclude_docs: |
 plugins:
   - search
   - callouts
+  - redirects
+  - sitemap
+  - minify:
+      htmlmin_opts:
+        remove_comments: true
+  - git-revision-date-localized:
+      type: date
+      timezone: America/New_York
+  - awesome-pages:
+      filename: .pages
+  - glightbox
+  - mermaid2:
+      theme: default
+      version: 10.9.1
+  - macros
+  - table-reader
+  - print-site
+  - roamlinks
+  - gen-files
+  - htmlproofer
+  - video
+  - embedder
+  - tag
 
 extra:
   feed: feed.xml
@@ -34,6 +57,19 @@ validation:
   links:
     anchors: warn
     unrecognized_links: warn
+
+nav:
+  - home: index.md
+  - manifesto: manifesto.md
+  - about: about.md
+  - seedlings:
+      - index: seedlings/index.md
+      - test note 1: seedlings/test-note-1.md
+      - test note 2: seedlings/test-note-2.md
+  - buds:
+      - index: buds/index.md
+  - evergreens:
+      - index: evergreens/index.md
 
 markdown_extensions:
   - nl2br
@@ -62,19 +98,3 @@ markdown_extensions:
       use_pygments: true
       pygments_lang_class: true
 
-nav:
-  - home: index.md
-  - manifesto: manifesto.md
-  - about: about.md
-  - seedlings:
-      - map of contents: seedlings/index.md
-      - test note 1: seedlings/test-note-1.md
-      - test note 2: seedlings/test-note-2.md
-  - buds:
-      - map of contents: buds/index.md
-  - evergreens:
-      - map of contents: evergreens/index.md
-  - by tag:
-      - map of contents: by-tag/index.md
-  - for my reference:
-    - reference page: for-my-reference/reference-page.md

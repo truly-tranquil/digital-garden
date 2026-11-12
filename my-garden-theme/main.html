@@ -72,7 +72,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page_title %}{{ page_title|lower }} | {% elif page and page.meta.garden_homepage %}{{ config.site_name|lower }}{% elif page and page.meta.title %}{{ page.meta.title|lower }} | {{ config.site_name|lower }}{% elif page and page.title %}{{ page.title|lower }} | {{ config.site_name|lower }}{% else %}{{ config.site_name|lower }}{% endif %}</title>
+  <title>{% if page_title is defined and page_title %}{{ page_title|lower }} | {% elif page is defined and page and page.meta is defined and page.meta.garden_homepage is defined and page.meta.garden_homepage %}{{ config.site_name|lower }}{% elif page is defined and page and page.meta is defined and page.meta.title is defined and page.meta.title %}{{ page.meta.title|lower }} | {{ config.site_name|lower }}{% elif page is defined and page and page.title is defined and page.title %}{{ page.title|lower }} | {{ config.site_name|lower }}{% else %}{{ config.site_name|lower }}{% endif %}</title>
   {% if lost_page or not page %}<meta name="robots" content="noindex">{% endif %}
   {% set meta_desc = page.meta.description if (page and page.meta and page.meta.description) else garden_description %}
   {% if meta_desc %}
