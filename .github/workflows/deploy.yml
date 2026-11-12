@@ -62,6 +62,4 @@ jobs:
       - name: Deploy GitHub Pages artifact
         id: deployment
         uses: actions/deploy-pages@v4
-
-        'what the fuck is going on'
         
