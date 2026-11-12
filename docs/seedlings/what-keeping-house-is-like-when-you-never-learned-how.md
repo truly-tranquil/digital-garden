@@ -1,0 +1,3 @@
+I should say clarify that I was taught the basics; how to put laundry into the wash, how to run a dishwasher, how to vacuum. What I didn't learn is how often you should change your linens, is dusting really necessary, and i definetly missed a lesson or two in how to create a welcoming environment free of mess and decay. 
+
+Today I will explain how I learned these things on my own in my mid-twenties and why it really is important for everyone to know, not just stay-at-homes.

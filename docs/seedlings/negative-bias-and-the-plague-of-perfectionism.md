@@ -1,0 +1,1 @@
+- keep a gratitude and accomplishment journal for yourself <3

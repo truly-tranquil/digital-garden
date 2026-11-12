@@ -1,0 +1,13 @@
+- collect and take out trash
+- gather dishes
+- remove visual distractions
+- empty drying rack/ dishwasher
+- wash dishes
+- clean the sink
+- dust above cabinets
+- spray down upper surfaces
+	- cabinets + appliances on the counter 
+- spray stove + counter + oven
+- spray lower surfaces
+	- cabinets + floor mat 
+-  sweep and mop floor

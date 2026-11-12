@@ -1,0 +1,1 @@
+I don't mean to ever stop learning, but since starting my personal curriculum, I have found an increasing need to pace myself. How do I know when I have researched a topic enough for now? How do I know this art Piece is finished? How do I stop myself from spiraling and editing the same short essay for weeks on end?

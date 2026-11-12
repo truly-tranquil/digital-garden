@@ -1,0 +1,1 @@
+Bro having to track my every move so that when I inevitably am in pain later I can double back and identify its cause effectively, sucks. It sucks worse to not know why though. 

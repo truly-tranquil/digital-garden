@@ -1,0 +1,5 @@
+I have an inate love for learning instilled in me by my family when I was very young. 
+
+My abuela was a nurse and still is one of the wisest and most storied individuals I know. My abuelo tinkered with his computer day in and day out, and taught me how to do the same. My Titi's are brilliant and amazingly talented women who nurtured my every interest, from art to history to video games and so much more. My aunt is an acupuncturist who taught me to investigate the natural world and the human body. My cousins lent me all of their knowledge of the real world and how to carry myself with pride. My mother is an English major, amazing communicator, and a writer that i sincerely hope will some day publish her works so the world can experience the marvel that is her mind.
+
+I can't not want to learn. It's in my blood.
