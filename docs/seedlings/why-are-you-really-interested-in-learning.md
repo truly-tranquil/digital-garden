@@ -1,5 +1,7 @@
-I have an inate love for learning instilled in me by my family when I was very young. 
+# why are you really interested in learning
 
-My abuela was a nurse and still is one of the wisest and most storied individuals I know. My abuelo tinkered with his computer day in and day out, and taught me how to do the same. My Titi's are brilliant and amazingly talented women who nurtured my every interest, from art to history to video games and so much more. My aunt is an acupuncturist who taught me to investigate the natural world and the human body. My cousins lent me all of their knowledge of the real world and how to carry myself with pride. My mother is an English major, amazing communicator, and a writer that i sincerely hope will some day publish her works so the world can experience the marvel that is her mind.
+i have an inate love for learning instilled in me by my family when i was very young.
 
-I can't not want to learn. It's in my blood.
+my abuela was a nurse and still is one of the wisest and most storied individuals i know. my abuelo tinkered with his computer day in and day out, and taught me how to do the same. my titi's are brilliant and amazingly talented women who nurtured my every interest, from art to history to video games and so much more. my aunt is an acupuncturist who taught me to investigate the natural world and the human body. my cousins lent me all of their knowledge of the real world and how to carry myself with pride. my mother is an english major, amazing communicator, and a writer that i sincerely hope will some day publish her works so the world can experience the marvel that is her mind.
+
+i can't not want to learn. it's in my blood.

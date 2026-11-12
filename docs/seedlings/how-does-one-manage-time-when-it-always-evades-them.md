@@ -1,3 +1,5 @@
+# how does one manage time when it always evades them
+
 no but seriously wtf are u guys doing that i'm not?!
 - time blocking
 - separating your days into chunks (false deadlines)

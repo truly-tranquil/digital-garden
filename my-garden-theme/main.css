@@ -186,7 +186,7 @@ body {
   font-weight: 600;
   transition: background 0.15s, border-color 0.15s;
 }
-#sidebar-toggle:hover, #mode-toggle:hover, #random-note:hover, .random-btn:hover, #to-top:hover, .copy-btn:hover, .toc-toggle:hover {
+#sidebar-toggle:hover, #mode-toggle:hover, #random-note:hover, .random-btn:hover, #to-top:hover, .copy-btn:hover, .drawer-tab:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
@@ -674,13 +674,11 @@ a.badge:hover { box-shadow: 0 0 0 var(--bw) var(--accent); }
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   border-left-color: color-mix(in srgb, var(--accent) 60%, transparent);
 }
-.toc-toggle {
+.drawer-tab {
   position: absolute;
-  top: 50%;
   left: -2.2rem;
   width: 2.2rem;
   height: 3.5rem;
-  transform: translateY(-50%);
   padding: 0;
   background: var(--bg);
   color: var(--text);
@@ -693,8 +691,10 @@ a.badge:hover { box-shadow: 0 0 0 var(--bw) var(--accent); }
   line-height: 1;
   transition: background 0.15s, border-color 0.15s;
 }
-.toc-toggle::before { content: "‹" / ""; }
-.toc-toggle[aria-expanded="true"]::before { content: "›" / ""; }
+.toc-toggle { top: calc(50% - 1.9rem); }
+.discussion-toggle { top: calc(50% + 1.9rem); }
+.drawer-tab[aria-expanded="true"] { background: var(--accent); color: var(--on-accent); }
+.discussion-panel h2 { margin-top: 0; }
 
 .article-wrap { display: block; }
 

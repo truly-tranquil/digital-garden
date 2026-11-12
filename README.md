@@ -1,26 +1,45 @@
 # Digital Garden
 
-A personal digital garden built with Zensical and a custom garden preprocessing step.
+A personal garden of notes that grow through reading, learning, making, and revision.
 
-## Local development
+- **Visit the garden:** [truly-tranquil.github.io/digital-garden](https://truly-tranquil.github.io/digital-garden/)
+- **Read the [garden manifesto](https://truly-tranquil.github.io/digital-garden/manifesto/)** for the purpose and principles behind the notes.
+- **Browse the [manifesto source](docs/manifesto.md)** or return to this [project README](https://github.com/truly-tranquil/digital-garden#digital-garden).
 
-Use Python 3.12 or newer, then install the pinned dependencies:
+## How it works
+
+Notes and site content live in `docs/`. The public site is built with Zensical by
+`garden_build.py`, which prepares garden links, metadata, navigation, and generated
+indexes before building. GitHub Actions runs the tests and build, then deploys successful
+changes from `main` to GitHub Pages.
+
+## Run locally
+
+Use Python 3.12 or newer and Node.js for the JavaScript tests. From the repository root,
+install the pinned Python dependencies and start the garden preview:
 
 ```powershell
 python -m pip install -r requirements.txt
 python garden_build.py serve
 ```
 
-The preview watches the source files and refreshes the generated Zensical input when they change.
-If port 8000 is in use, choose another preview address with
-`python garden_build.py serve --dev-addr 127.0.0.1:8001`. For a direct MkDocs preview,
-`python -m mkdocs serve` is also supported.
-The unlisted reference sheet is available only in the local Zensical preview at
-`http://127.0.0.1:8000/digital-garden/for-my-reference/reference-page/`. Zensical excludes it from production builds;
-do not deploy a raw MkDocs build if you want to keep it private, because MkDocs still builds unlisted files.
-Static hosting does not provide access control for files that are included in a deployed build.
+Open `http://127.0.0.1:8000/digital-garden/`. If that port is in use, choose another:
 
-## Validation
+```powershell
+python garden_build.py serve --dev-addr 127.0.0.1:8001
+```
+
+MkDocs is also available for a direct local preview:
+
+```powershell
+python -m mkdocs serve
+```
+
+The Zensical wrapper is the production build path. A raw MkDocs build may include the
+unlisted reference page, so do not deploy it. Unlisted content is not access-controlled;
+never put private or sensitive material in this repository.
+
+## Validate changes
 
 ```powershell
 python -m unittest discover -s tests -v
@@ -28,12 +47,19 @@ node --test tests/garden-pages.test.js tests/garden-search.test.js
 python garden_build.py build
 ```
 
-Zensical does not support MkDocs hooks, so `garden_build.py` expands garden-specific links, builds navigation and metadata, and writes the generated feed, graph, redirects, and JSON indexes around the Zensical build. Keep `mkdocs.yml` as the shared configuration; use the wrapper commands above when building with Zensical. MkDocs remains available for local preview and hook-based builds.
+Pull requests also run internal-link and Lighthouse accessibility checks. To publish,
+set the repository's Pages source to **GitHub Actions** in Settings → Pages; pushes to
+`main` trigger the deployment workflow.
 
-Pull requests run the same tests and build, then check internal links and run a Lighthouse accessibility audit. Changes merged to `main` are uploaded as a GitHub Pages artifact and deployed through GitHub Actions. Set the repository's Pages publishing source to **GitHub Actions** in Settings → Pages.
+## Tend the garden
 
-## Content
+Add Markdown notes under `docs/seedlings/`, `docs/buds/`, or `docs/evergreens/` as they
+develop. Use `draft: true` in front matter to keep an unfinished note out of the public
+site. The unlisted reference page at `docs/for-my-reference/reference-page.md` documents
+note front matter, links, embeds, and formatting.
 
-Write notes as Markdown files under `docs/`. The reference page documents note front matter, links, embeds, formatting, and garden-specific features; it is unlisted and excluded from production Zensical builds. The note template is kept out of the published site.
+When renaming a published note, add its previous path to the note's `aliases` front
+matter so the build can create a redirect.
 
-When a published note moves or is renamed, add its old path to the note's `aliases` front matter; the build hook creates redirect pages for those aliases.
+For questions about what belongs here or how the garden is meant to grow, start with the
+[manifesto](https://truly-tranquil.github.io/digital-garden/manifesto/).

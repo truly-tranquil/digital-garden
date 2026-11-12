@@ -807,6 +807,7 @@ def on_page_markdown(markdown, page, config, files):
             markdown = '# %s\n\n%s' % (posixpath.dirname(src), markdown.lstrip())
         markdown += _stage_index(src, STAGE_INDEX[src])
     n = notes.get(src)
+    page.meta['garden_discussion_enabled'] = src not in {'index.md', 'about.md'}
     page.meta.setdefault('garden_section', src.split('/')[0] if '/' in src else 'home')
     if n and not n['is_index']:
         if n['stage']:
@@ -970,11 +971,54 @@ circle{fill:var(--node);stroke:var(--node-border);stroke-width:2}
 text{font:14px system-ui,sans-serif;fill:var(--text);text-anchor:middle}a:focus circle{stroke:var(--focus);stroke-width:4}
 .empty{padding:1rem;background:var(--surface);border-radius:.75rem}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.discussion-drawer{position:fixed;z-index:5;top:0;right:0;width:min(20rem,85vw);height:100vh;height:100dvh;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.discussion-drawer.open{transform:translateX(0)}
+.discussion-panel{box-sizing:border-box;height:100%;padding:2rem 1rem;overflow-y:auto;background:var(--surface);border-left:1px solid var(--border);overflow-wrap:anywhere}
+.discussion-toggle{position:absolute;top:50%;left:-2.5rem;width:2.5rem;height:3.5rem;transform:translateY(-50%);padding:0;border-right:0;border-radius:12px 0 0 12px;cursor:pointer}
 </style>
 <main><div class="graph-controls"><a class="graph-button" href="./">back to the garden</a><button id="theme-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button></div><h1>garden graph</h1>
 <p>Notes are arranged around the circle; arrows show outgoing links.</p>
 <p id="status" role="status">loading the garden graph…</p>
 <svg id="graph" viewBox="0 0 1000 700" role="group" aria-label="Garden notes and links"></svg></main>
+<aside class="discussion-drawer" id="discussion-drawer">
+<button class="discussion-toggle" id="discussion-toggle" type="button" aria-expanded="false" aria-controls="discussion-panel" aria-label="discussion" title="discussion"><span aria-hidden="true">💬</span><span class="sr-only">discussion</span></button>
+<section class="discussion-panel" id="discussion-panel" aria-labelledby="discussion-heading" aria-hidden="true" inert>
+<h2 id="discussion-heading">discussion</h2>
+<script src="https://giscus.app/client.js"
+        data-repo="truly-tranquil/digital-garden"
+        data-repo-id="R_kgDOVpqNfQ"
+        data-category-id="DIC_kwDOVpqNfc4DK1EY"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="catppuccin_mocha"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+</section>
+</aside>
+<script>
+var discussionDrawer=document.getElementById('discussion-drawer');
+var discussionToggle=document.getElementById('discussion-toggle');
+var discussionPanel=document.getElementById('discussion-panel');
+discussionToggle.addEventListener('click',function(){
+  var open=discussionDrawer.classList.toggle('open');
+  discussionToggle.setAttribute('aria-expanded',String(open));
+  discussionPanel.setAttribute('aria-hidden',String(!open));
+  if(open)discussionPanel.removeAttribute('inert');else discussionPanel.setAttribute('inert','');
+});
+document.addEventListener('keydown',function(event){
+  if(event.key!=='Escape'||!discussionDrawer.classList.contains('open'))return;
+  discussionDrawer.classList.remove('open');
+  discussionToggle.setAttribute('aria-expanded','false');
+  discussionPanel.setAttribute('aria-hidden','true');
+  discussionPanel.setAttribute('inert','');
+  discussionToggle.focus();
+});
+</script>
 <script>
 var themeToggle=document.getElementById('theme-toggle');
 function setGraphTheme(theme){

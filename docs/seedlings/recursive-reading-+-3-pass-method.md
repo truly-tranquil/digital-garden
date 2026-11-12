@@ -1,3 +1,5 @@
+# recursive reading + 3 pass method
+
 - bring prior knowledge of the subject
 - read once with the intent to garner the most important info
 	- headlines
@@ -12,4 +14,4 @@
 - evaluate what you just read
 - apply the reading to other learning and life situations
 
-## this is all cyclical not linear
+### this is all cyclical not linear

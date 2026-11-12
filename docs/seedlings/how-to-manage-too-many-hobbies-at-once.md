@@ -1,4 +1,6 @@
-1. Make a list of everything in progress/ that you want to start now
+# how to manage too many hobbies at once
+
+1. make a list of everything in progress/ that you want to start now
 2. come up with a reasonable goal or benchmark for each
 	1. eg. 1 chapter, 10 minutes, 1 row, etc.
 3. work on each thing in a rotational cycle (this is not a requirement, just what makes it easier for me)

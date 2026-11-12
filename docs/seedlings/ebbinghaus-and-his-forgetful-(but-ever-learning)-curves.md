@@ -1,1 +1,3 @@
+# ebbinghaus and his forgetful (but ever learning) curves
+
 bro figured out that we learn through repetition in spaced intervals and also that the closer you get to forgetting, the more reinforced it gets when you remember

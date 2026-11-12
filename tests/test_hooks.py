@@ -3,6 +3,7 @@ import os
 import subprocess
 import tempfile
 import unittest
+from types import SimpleNamespace
 from urllib.parse import unquote
 from xml.etree import ElementTree
 from pathlib import Path
@@ -238,6 +239,19 @@ class MetadataTests(unittest.TestCase):
             hooks._excerpt('````python\n# code\n````\nA sentence.'),
             'A sentence.',
         )
+
+    def test_discussion_is_disabled_on_home_and_about_pages(self):
+        for src_uri, expected in (
+            ('index.md', False),
+            ('about.md', False),
+            ('seedlings/example.md', True),
+        ):
+            page = SimpleNamespace(
+                file=SimpleNamespace(src_uri=src_uri),
+                meta={},
+            )
+            hooks.on_page_markdown('', page, {}, [])
+            self.assertEqual(page.meta['garden_discussion_enabled'], expected)
 
     def test_related_does_not_fill_with_unrelated_notes(self):
         hooks.notes.clear()

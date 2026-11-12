@@ -24,7 +24,6 @@ plugins:
   - search
   - callouts
   - redirects
-  - sitemap
   - minify:
       htmlmin_opts:
         remove_comments: true
@@ -35,17 +34,14 @@ plugins:
       filename: .pages
   - glightbox
   - mermaid2:
-      theme: default
       version: 10.9.1
   - macros
   - table-reader
-  - print-site
   - roamlinks
-  - gen-files
   - htmlproofer
-  - video
-  - embedder
-  - tag
+  - mkdocs-video
+  - material/tags
+  - print-site
 
 extra:
   feed: feed.xml
@@ -64,8 +60,6 @@ nav:
   - about: about.md
   - seedlings:
       - index: seedlings/index.md
-      - test note 1: seedlings/test-note-1.md
-      - test note 2: seedlings/test-note-2.md
   - buds:
       - index: buds/index.md
   - evergreens:

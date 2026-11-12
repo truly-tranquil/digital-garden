@@ -1,3 +1,5 @@
+# leitner my goat
+
 - leitner created a technique involving 5 boxes and flashcards
 - each box is studied at a different interval
 	- 1 day

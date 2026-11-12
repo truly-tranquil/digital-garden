@@ -1,9 +1,11 @@
-#### 3-5 Goals
+# how to make a personal curriculum
+
+##### 3-5 goals
 - how to draw
 - how to write music
 - how to speak publicly
 
-#### Break The Goals Down (i use wikipedia to find these because i usually have no clue wtf im talking about)
+##### break the goals down (i use wikipedia to find these because i usually have no clue wtf im talking about)
  - how to draw
 	 - materials of the craft
 	 - anatomy
@@ -18,9 +20,9 @@
 	- the psychology of speech
 	- writing personal essays
 	- again probably other stuff idk
-##### This is now your lesson plan
+###### this is now your lesson plan
 
-#### Break The Sub-Goals Into Specific Questions (i once again use wikipedia to find these because i still usually have no clue wtf im talking about)
+##### break the sub-goals into specific questions (i once again use wikipedia to find these because i still usually have no clue wtf im talking about)
 -  how to draw
 	 - materials of the craft
 		 - what do i need to get started?
@@ -37,18 +39,18 @@
 		 - where does light come from and how do i show that?
 		 - what are the different shading techniques?
 		 - etc.
-##### These will be your individual "lectures"
-#### Find A Community To Learn With
-- Discord
-- Reddit
-- Substack
-- Facebook
-- In-person groups
-	- The library is a great resource for this
-- Meetup
-- Literally anywhere you can safely learn in public with no fear of unwanted (and undue) criticism
+###### these will be your individual "lectures"
+##### find a community to learn with
+- discord
+- reddit
+- substack
+- facebook
+- in-person groups
+	- the library is a great resource for this
+- meetup
+- literally anywhere you can safely learn in public with no fear of unwanted (and undue) criticism
 
-#### Make A Schedule
+##### make a schedule
 - this is highly personal
 - if you want more advice on this, id look up:
 	- time blocking

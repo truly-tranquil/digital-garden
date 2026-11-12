@@ -1,1 +1,3 @@
-Even if its just in the youtube comments
+# accountability is easier with others
+
+even if its just in the youtube comments

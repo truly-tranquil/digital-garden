@@ -1,4 +1,6 @@
-This kinda goes hand in hand with one of the core principles of digital gardening, but id argue that it is important for all note taking
+# improve your notes to avoid stagnation
+
+this kinda goes hand in hand with one of the core principles of digital gardening, but id argue that it is important for all note taking
 
 - summarize your own notes
 - redefine key terms
@@ -6,7 +8,7 @@ This kinda goes hand in hand with one of the core principles of digital gardenin
 - paraphrase
 - ask new questions
 
-In note review there are a few tips
+in note review there are a few tips
 - only write the things that matter in the review notes
 	- cut the fluff
 	- big ideas only -summaries, overviews, conclusions
@@ -19,6 +21,6 @@ In note review there are a few tips
 			- physics
 			- math
 - outline method is the goat for handwriting notes as you don't have space constraints to worry about
-	- esp if you are color coding your headings to your notes on them in [[Recursive Reading + 3-Pass Method]]
+	- esp if you are color coding your headings to your notes on them in [[recursive reading + 3-pass method]]
 - cornell method is how i want to start keeping my notes in obsidian but i don't really know to get started after i have already made a mess of things
 	- maybe use it as my daily note template?
