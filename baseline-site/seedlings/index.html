@@ -1,0 +1,785 @@
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>seedlings | digital garden</title>
+  
+  
+  
+  <meta property="og:site_name" content="digital garden">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="index">
+  
+  <link rel="canonical" href="https://truly-tranquil.github.io/digital-garden/seedlings/">
+  <meta property="og:url" content="https://truly-tranquil.github.io/digital-garden/seedlings/">
+  
+  
+  <meta property="og:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  <meta name="twitter:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/atom+xml" title="digital garden" href="https://truly-tranquil.github.io/digital-garden/feed.xml">
+  <link rel="icon" href="../assets/favicon.ico">
+  
+
+  <!-- runs before the page paints so there is no flash of the wrong theme -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var t = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <!-- Newsreader is self-hosted (see @font-face in main.css). the upright file is preloaded so text doesn't jump when it arrives -->
+  <link rel="preload" href="../assets/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../main.css?v=">
+</head>
+<body data-section="seedlings" style="--folder: var(--rb-3)">
+  <a class="skip-link" href="#main-content">skip to content</a>
+
+  <header class="garden-header">
+    <div class="header-left">
+      <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+    </div>
+
+    <div class="header-right">
+      <form id="mkdocs-search-form" role="search" action="../search/" method="get">
+        <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden..." autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
+        <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
+        <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
+      </form>
+      <a href="../" class="garden-logo">digital garden</a>
+    </div>
+  </header>
+
+  <div class="garden-container" id="garden-layout">
+    <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
+      
+<ul>
+  
+    
+      <li style="--folder: var(--rb-0)">
+        <a href="./.." class="">home</a>
+      </li>
+    
+  
+    
+      <li style="--folder: var(--rb-1)">
+        <a href="../manifesto/" class="">manifesto</a>
+      </li>
+    
+  
+    
+      <li style="--folder: var(--rb-2)">
+        <a href="../about/" class="">about</a>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-3)">
+        <details open>
+          <summary>seedlings</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="././" class="active" aria-current="page">index</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./accountability-is-easier-with-others/" class="">accountability is easier with others</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./biodiversity-in-the-digital-garden/" class="">biodiversity in the digital garden</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./cognitive-offloading-is-polluting-yet-necessary/" class="">cognitive offloading is polluting yet necessary</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./desirable-difficulty-and-struggle-avoidance/" class="">desirable difficulty and struggle avoidance</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./developing-taste-in-a-world-that-wants-you-to-be-passive/" class="">developing taste in a world that wants you to be passive</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./ebbinghaus-and-his-forgetful-(but-ever-learning)-curves/" class="">ebbinghaus and his forgetful (but ever learning) curves</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./effort-is-innately-valuable/" class="">effort is innately valuable</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./how-does-one-manage-time-when-it-always-evades-them/" class="">how does one manage time when it always evades them</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./how-the-pandemic-fundamentally-changed-higher-education/" class="">how the pandemic fundamentally changed higher education</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./how-to-clean-your-kitchen/" class="">how to clean your kitchen</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./how-to-make-a-personal-curriculum/" class="">how to make a personal curriculum</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./how-to-manage-too-many-hobbies-at-once/" class="">how to manage too many hobbies at once</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./improve-your-notes-to-avoid-stagnation/" class="">improve your notes to avoid stagnation</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./leitner-my-goat/" class="">leitner my goat</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./negative-bias-and-the-plague-of-perfectionism/" class="">negative bias and the plague of perfectionism</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./on-having-headaches-and-other-ailments/" class="">on having headaches and other ailments</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./pomodoro-method-is-truly-my-favorite-time-management-strategy/" class="">pomodoro method is truly my favorite time management strategy</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./recursive-reading-+-3-pass-method/" class="">recursive reading + 3 pass method</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./spiders-are-the-wisest-of-us-all/" class="">spiders are the wisest of us all</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./stop-auditioning-for-your-own-life/" class="">stop auditioning for your own life</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./the-ego-and-the-home/" class="">the ego and the home</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./the-fundamental-human-need-to-create/" class="">the fundamental human need to create</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./the-magic-of-time-blocking/" class="">the magic of time blocking</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./the-trad-wifeification-of-self/" class="">the trad wifeification of self</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./what-keeping-house-is-like-when-you-never-learned-how/" class="">what keeping house is like when you never learned how</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./why-am-i-learning-this/" class="">why am i learning this</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./why-are-you-really-interested-in-learning/" class="">why are you really interested in learning</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./why-you-need-to-set-end-goals-on-everything-even-your-learning/" class="">why you need to set end goals on everything, even your learning</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./write-like-someone-is-watching/" class="">write like someone is watching</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-4)">
+        <details >
+          <summary>buds</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="../buds/" class="">index</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-5)">
+        <details >
+          <summary>evergreens</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="../evergreens/" class="">index</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+</ul>
+
+    </nav>
+
+    <main class="garden-content" id="main-content" tabindex="-1">
+      
+      
+      
+      <nav class="breadcrumbs" aria-label="breadcrumbs">
+        <ol>
+          <li><a href="../">home</a></li>
+          
+          <li>seedlings</li>
+          
+          <li aria-current="page">index</li>
+        </ol>
+      </nav>
+      
+      <div class="page-meta">
+        
+        
+        
+        
+        <span class="date" id="reading-time"></span>
+      </div>
+      
+      
+
+      <div class="article-wrap">
+        <article class="garden-article">
+          <h1 id="seedlings">seedlings<a class="headerlink" href="#seedlings" title="Link to this section">¶</a></h1>
+<ul>
+<li><a href="accountability-is-easier-with-others/">accountability is easier with others</a> — even if its just in the youtube comments</li>
+<li><a href="biodiversity-in-the-digital-garden/">biodiversity in the digital garden</a> — or: why you should have mixed media in your garden voice notes photos videos art</li>
+<li><a href="cognitive-offloading-is-polluting-yet-necessary/">cognitive offloading is polluting yet necessary</a> — it is inherently both a good and bad thing, either aspect of which can be further enhanced depending on how it is done.</li>
+<li><a href="desirable-difficulty-and-struggle-avoidance/">desirable difficulty and struggle avoidance</a> — we literally cannot learn without challenging ourselves, as that is what creates the neural pathways we need to cement things into our memory. so why then, are…</li>
+<li><a href="developing-taste-in-a-world-that-wants-you-to-be-passive/">developing taste in a world that wants you to be passive</a> — see nyvette&#x27;s video on youtube about the 90&#x27;s</li>
+<li><a href="ebbinghaus-and-his-forgetful-%28but-ever-learning%29-curves/">ebbinghaus and his forgetful (but ever learning) curves</a> — bro figured out that we learn through repetition in spaced intervals and also that the closer you get to forgetting, the more reinforced it gets when you…</li>
+<li><a href="effort-is-innately-valuable/">effort is innately valuable</a> — and on not avoiding challenges</li>
+<li><a href="how-does-one-manage-time-when-it-always-evades-them/">how does one manage time when it always evades them</a> — no but seriously wtf are u guys doing that i&#x27;m not?! time blocking separating your days into chunks (false deadlines) lets say you pretend your day consists of…</li>
+<li><a href="how-the-pandemic-fundamentally-changed-higher-education/">how the pandemic fundamentally changed higher education</a> — i know it changed all education, but that is not the focus of this thought process</li>
+<li><a href="how-to-clean-your-kitchen/">how to clean your kitchen</a> — collect and take out trash gather dishes remove visual distractions empty drying rack/ dishwasher wash dishes clean the sink dust above cabinets spray down…</li>
+<li><a href="how-to-make-a-personal-curriculum/">how to make a personal curriculum</a> — how to draw how to write music how to speak publicly how to draw materials of the craft anatomy still life lighting and shading how to write music the anatomy…</li>
+<li><a href="how-to-manage-too-many-hobbies-at-once/">how to manage too many hobbies at once</a> — make a list of everything in progress/ that you want to start now come up with a reasonable goal or benchmark for each eg. 1 chapter, 10 minutes, 1 row, etc.…</li>
+<li><a href="improve-your-notes-to-avoid-stagnation/">improve your notes to avoid stagnation</a> — this kinda goes hand in hand with one of the core principles of digital gardening, but id argue that it is important for all note taking summarize your own…</li>
+<li><a href="leitner-my-goat/">leitner my goat</a> — leitner created a technique involving 5 boxes and flashcards each box is studied at a different interval 1 day 3 days 7 days 14 days 30 days every time u get…</li>
+<li><a href="negative-bias-and-the-plague-of-perfectionism/">negative bias and the plague of perfectionism</a> — keep a gratitude and accomplishment journal for yourself &lt;3</li>
+<li><a href="on-having-headaches-and-other-ailments/">on having headaches and other ailments</a> — bro having to track my every move so that when i inevitably am in pain later i can double back and identify its cause effectively, sucks. it sucks worse to not…</li>
+<li><a href="pomodoro-method-is-truly-my-favorite-time-management-strategy/">pomodoro method is truly my favorite time management strategy</a> — no but seriously it feels like i&#x27;m giving myself challenges every hour in order to trick my peanut brain into wanting to do the things it needs to</li>
+<li><a href="recursive-reading-%2B-3-pass-method/">recursive reading + 3 pass method</a> — bring prior knowledge of the subject read once with the intent to garner the most important info headlines summary the first and last sentence of each major…</li>
+<li><a href="spiders-are-the-wisest-of-us-all/">spiders are the wisest of us all</a> — they cast their silk out from their body, knowing not where it will land, yet once it does, they immediately work to call that place their own. if that place…</li>
+<li><a href="stop-auditioning-for-your-own-life/">stop auditioning for your own life</a> — you already know, deep down, what it is that you are meant to do. stop trying to earn the right to be where you are, and instead be present with yourself. you…</li>
+<li><a href="the-ego-and-the-home/">the ego and the home</a> — &quot;just as they may put excess stress on personal appearance in an effort to overcome self-doubt, so they may make their homes look forbiddingly perfect in an…</li>
+<li><a href="the-fundamental-human-need-to-create/">the fundamental human need to create</a> — creating is never a waste of time it is why you live creating is not a luxury it is a requirement for life</li>
+<li><a href="the-magic-of-time-blocking/">the magic of time blocking</a> — shits great no but seriously breaking your day down into blocks is scientifically one of the best ways to manage your time. if you prioritize heavier loads…</li>
+<li><a href="the-trad-wifeification-of-self/">the trad wifeification of self</a> — yeah so i, an adult man, feel the draw towards being a house spouse more with every day. it&#x27;s not out of desire to not work, or even to serve anyone else, but…</li>
+<li><a href="what-keeping-house-is-like-when-you-never-learned-how/">what keeping house is like when you never learned how</a> — i should say clarify that i was taught the basics; how to put laundry into the wash, how to run a dishwasher, how to vacuum. what i didn&#x27;t learn is how often…</li>
+<li><a href="why-am-i-learning-this/">why am i learning this</a> — are going to create original work are evaluating and justifying an idea or decision want to analyze and draw connections want to apply the info in new ways…</li>
+<li><a href="why-are-you-really-interested-in-learning/">why are you really interested in learning</a> — i have an inate love for learning instilled in me by my family when i was very young. my abuela was a nurse and still is one of the wisest and most storied…</li>
+<li><a href="why-you-need-to-set-end-goals-on-everything-even-your-learning/">why you need to set end goals on everything, even your learning</a> — i don&#x27;t mean to ever stop learning, but since starting my personal curriculum, i have found an increasing need to pace myself. how do i know when i have…</li>
+<li><a href="write-like-someone-is-watching/">write like someone is watching</a> — because someone should always be watching writing isn&#x27;t solitary even when its personal</li>
+</ul>
+        </article>
+      </div>
+
+      
+
+      
+
+      
+
+    </main>
+
+    
+    <div class="toc-drawer" id="toc-drawer">
+      <button class="drawer-tab toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-view" aria-label="on this page" title="on this page"><span aria-hidden="true">≡</span></button>
+      
+      <button class="drawer-tab discussion-toggle" id="discussion-toggle" type="button" aria-expanded="false" aria-controls="discussion-panel" aria-label="discussion" title="discussion"><span aria-hidden="true">💬</span></button>
+      
+      <div class="toc-panel" id="toc-panel">
+        <nav id="toc-view" aria-label="on this page">
+          <p class="toc-title">on this page</p>
+          <div id="toc"></div>
+        </nav>
+        
+        <section class="discussion-panel" id="discussion-panel" aria-labelledby="discussion-heading" hidden>
+          <h2 id="discussion-heading">discussion</h2>
+          <script src="https://giscus.app/client.js"
+                  data-repo="truly-tranquil/digital-garden"
+                  data-repo-id="R_kgDOVpqNfQ"
+                  data-category-id="DIC_kwDOVpqNfc4DK1EY"
+                  data-mapping="pathname"
+                  data-strict="0"
+                  data-reactions-enabled="1"
+                  data-emit-metadata="0"
+                  data-input-position="bottom"
+                  data-theme="catppuccin_mocha"
+                  data-lang="en"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </section>
+        
+      </div>
+    </div>
+    
+
+    <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
+  </div>
+  <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
+
+  <script>
+    var base_url = '..';
+
+    // sidebar (hidden by default on small screens, remembered on large ones)
+    var layout = document.getElementById('garden-layout');
+    var toggle = document.getElementById('sidebar-toggle');
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
+    }
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
+    syncToggle();
+    toggle.addEventListener('click', function () {
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
+      syncToggle();
+    });
+    narrow.addEventListener('change', syncToggle);
+
+    // light / dark
+    var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
+    modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    modeBtn.addEventListener('click', function () {
+      var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
+    });
+
+    // random note (any element with data-random)
+    document.querySelectorAll('[data-random]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        fetch(base_url + '/notes.json').then(function (r) { return r.json(); }).then(function (all) {
+          var pool = all.filter(function (n) { return !n.is_index; });
+          if (!pool.length) pool = all;
+          var here = location.pathname;
+          var choices = pool.filter(function (n) { return !here.endsWith('/' + n.url) && n.url !== ''; });
+          if (!choices.length) choices = pool;
+          var n = choices[Math.floor(Math.random() * choices.length)];
+          location.href = base_url + '/' + n.url;
+        });
+      });
+    });
+
+    // rainbow footnotes and backlinks
+    function rainbow(i) { return 'var(--rbt-' + (i % 8) + ')'; }
+    document.querySelectorAll('.footnote-ref').forEach(function (a) {
+      var n = parseInt(a.textContent, 10);
+      if (!n) return;
+      a.style.color = rainbow(n - 1);
+      var li = document.getElementById(a.getAttribute('href').slice(1));
+      if (li) li.style.setProperty('--fnc', rainbow(n - 1));
+    });
+    document.querySelectorAll('.backlinks li').forEach(function (li, i) {
+      li.style.setProperty('--fnc', rainbow(i));
+    });
+
+    // reading time
+    (function () {
+      var el = document.getElementById('reading-time');
+      var art = document.querySelector('.garden-article');
+      if (!el || !art) return;
+      var words = art.innerText.trim().split(/\s+/).length;
+      if (words < 40) { el.remove(); return; }
+      el.textContent = Math.max(1, Math.round(words / 200)) + ' min read';
+    })();
+
+    // press / to jump to search
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+      var box = document.getElementById('mkdocs-search-query');
+      if (!box) return;
+      e.preventDefault();
+      box.focus();
+      box.select();
+    });
+
+    // back to top
+    (function () {
+      var btn = document.getElementById('to-top');
+      if (!btn) return;
+      function show() { btn.hidden = window.scrollY < 600; }
+      window.addEventListener('scroll', show, { passive: true });
+      show();
+      btn.addEventListener('click', function () {
+        var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+        document.getElementById('main-content').focus({ preventScroll: true });
+      });
+    })();
+
+    // on this page drawer
+    (function () {
+      var drawer = document.getElementById('toc-drawer');
+      if (!drawer) return;
+      var toc = document.getElementById('toc');
+      var tocView = document.getElementById('toc-view');
+      var discussionPanel = document.getElementById('discussion-panel');
+      var tocButton = document.getElementById('toc-toggle');
+      var discussionButton = document.getElementById('discussion-toggle');
+      var headings = Array.prototype.slice.call(
+        document.querySelectorAll('.garden-article h2[id], .garden-article h3[id], .garden-article h4[id], .garden-article h5[id], .garden-article h6[id]')
+      );
+      var hasToc = headings.length > 0;
+      var hasDiscussion = Boolean(discussionPanel && discussionButton);
+      if (!hasToc) {
+        tocView.hidden = true;
+        tocButton.hidden = true;
+      }
+      if (!hasToc && !hasDiscussion) {
+        drawer.hidden = true;
+        return;
+      }
+      if (hasToc) {
+        var list = document.createElement('ul');
+        headings.forEach(function (heading) {
+          var item = document.createElement('li');
+          var link = document.createElement('a');
+          var label = heading.cloneNode(true);
+          label.querySelectorAll('.headerlink').forEach(function (permalink) {
+            permalink.remove();
+          });
+          link.href = '#' + encodeURIComponent(heading.id);
+          link.textContent = label.textContent.trim();
+          item.appendChild(link);
+          list.appendChild(item);
+        });
+        toc.appendChild(list);
+      }
+      layout.classList.add('has-toc');
+
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      var activeView = hasToc ? 'toc' : 'discussion';
+      function showView(view) {
+        activeView = view;
+        tocView.hidden = view !== 'toc';
+        if (discussionPanel) discussionPanel.hidden = view !== 'discussion';
+      }
+      function syncDrawer() {
+        tocButton.setAttribute('aria-expanded', String(tocIsOpen() && activeView === 'toc'));
+        if (discussionButton) {
+          discussionButton.setAttribute('aria-expanded', String(tocIsOpen() && activeView === 'discussion'));
+        }
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      showView(activeView);
+      syncDrawer();
+      function toggleView(view) {
+        var wasOpen = tocIsOpen();
+        if (activeView !== view) {
+          showView(view);
+          if (!wasOpen) openDrawer();
+        } else if (wasOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+        syncDrawer();
+      }
+      function openDrawer() {
+        if (wide.matches) {
+          layout.classList.remove('toc-collapsed');
+          try { localStorage.setItem('toc', 'open'); } catch (e) {}
+        } else {
+          layout.classList.add('toc-open');
+        }
+      }
+      function closeDrawer() {
+        if (wide.matches) {
+          layout.classList.add('toc-collapsed');
+          try { localStorage.setItem('toc', 'closed'); } catch (e) {}
+        } else {
+          layout.classList.remove('toc-open');
+        }
+      }
+      tocButton.addEventListener('click', function () { toggleView('toc'); });
+      if (discussionButton) {
+        discussionButton.addEventListener('click', function () { toggleView('discussion'); });
+      }
+      wide.addEventListener('change', syncDrawer);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncDrawer();
+        (activeView === 'discussion' ? discussionButton : tocButton).focus();
+      });
+      tocView.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncDrawer();
+      });
+    })();
+
+    // on this page: highlight the current section
+    (function () {
+      var toc = document.getElementById('toc');
+      if (!toc) return;
+      var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
+      var map = {};
+      links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
+      var heads = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      function spy() {
+        var current = null;
+        heads.forEach(function (h) { if (h.getBoundingClientRect().top <= 120) current = h.id; });
+        links.forEach(function (a) { a.classList.remove('current'); a.removeAttribute('aria-current'); });
+        if (current && map[current]) {
+          map[current].classList.add('current');
+          map[current].setAttribute('aria-current', 'true');
+        }
+      }
+      window.addEventListener('scroll', spy, { passive: true });
+      spy();
+    })();
+
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
+    // copy buttons on code blocks
+    (function () {
+      var live = document.createElement('div');
+      live.className = 'sr-only';
+      live.setAttribute('role', 'status');
+      live.setAttribute('aria-live', 'polite');
+      document.body.appendChild(live);
+      document.querySelectorAll('.garden-article pre:not(.mermaid)').forEach(function (pre) {
+        var host = pre.parentElement;
+        if (!host.classList.contains('highlight')) {
+          host = document.createElement('div');
+          host.className = 'code-wrap';
+          pre.replaceWith(host);
+          host.appendChild(pre);
+        }
+        trackScroller(pre, 'code');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.textContent = 'copy';
+        btn.addEventListener('click', function () {
+          if (!navigator.clipboard) { btn.textContent = 'unavailable'; return; }
+          navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')).then(function () {
+            btn.textContent = 'copied';
+            live.textContent = 'copied to clipboard';
+            setTimeout(function () { btn.textContent = 'copy'; live.textContent = ''; }, 1800);
+          }).catch(function () { btn.textContent = 'failed'; });
+        });
+        host.appendChild(btn);
+      });
+    })();
+
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
+    // favicons on external links (uses Google's favicon service)
+    document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        if (u.host === location.host || a.querySelector('img')) return;
+        var img = document.createElement('img');
+        img.className = 'link-favicon';
+        img.alt = '';
+        img.src = 'https://www.google.com/s2/favicons?sz=32&domain=' + u.hostname;
+        a.prepend(img);
+      } catch (e) {}
+    });
+  </script>
+  <script src="../garden-search.js?v="></script>
+  <script src="../garden-mermaid.js?v="></script>
+  
+  
+</body>
+</html>

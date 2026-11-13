@@ -183,6 +183,24 @@ class GardenBuildTests(unittest.TestCase):
             self.assertEqual([note['title'] for note in preview_notes], ['Public'])
             self.assertTrue((generated_docs / 'search' / 'search_index.json').is_file())
 
+    def test_build_and_preview_call_prepare_with_serving_false(self):
+        with patch.object(garden_build, 'prepare', return_value={}) as mock_prepare, \
+             patch.object(garden_build, 'subprocess') as mock_subprocess, \
+             patch.object(garden_build, '_write_generated_assets'):
+            garden_build.build()
+            mock_prepare.assert_called_with(serving=False)
+
+        mock_server = unittest.mock.MagicMock()
+        with patch.object(garden_build, 'prepare', return_value={}) as mock_prepare, \
+             patch.object(garden_build, 'subprocess') as mock_subprocess, \
+             patch.object(garden_build, '_write_generated_assets'), \
+             patch.object(garden_build, 'socketserver') as mock_socketserver, \
+             patch('builtins.print'):
+            mock_socketserver.TCPServer.return_value.__enter__.return_value = mock_server
+            garden_build.preview()
+            mock_prepare.assert_called_with(serving=False)
+            mock_server.serve_forever.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

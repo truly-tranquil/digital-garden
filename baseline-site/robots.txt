@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://truly-tranquil.github.io/digital-garden/sitemap.xml

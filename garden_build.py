@@ -1,5 +1,8 @@
 """Prepare garden content and run Zensical without MkDocs build hooks."""
 import argparse
+import http.server
+import socketserver
+
 import fnmatch
 import json
 import os
@@ -326,9 +329,23 @@ def _zensical_command(action):
 
 
 def build():
-    config = prepare()
+    config = prepare(serving=False)
     subprocess.run(_zensical_command('build') + ['--strict'], cwd=ROOT, check=True)
     _write_generated_assets(config)
+
+def preview(port=8000):
+    build()
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=str(SITE_DIR), **kwargs)
+        def translate_path(self, path):
+            if path.startswith('/digital-garden/'):
+                path = path[len('/digital-garden/'):]
+            return super().translate_path(path)
+    with socketserver.TCPServer(("", port), Handler) as httpd:
+        print(f"Serving at http://localhost:{port}/digital-garden/")
+        httpd.serve_forever()
+
 
 
 def _snapshot():
@@ -388,7 +405,7 @@ def serve(dev_addr='localhost:8000'):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('build', 'serve'))
+    parser.add_argument('action', choices=('build', 'serve', 'preview'))
     parser.add_argument(
         '--dev-addr',
         default='localhost:8000',
@@ -398,6 +415,9 @@ def main():
     try:
         if args.action == 'build':
             build()
+            return 0
+        elif args.action == 'preview':
+            preview()
             return 0
         return serve(args.dev_addr)
     except (OSError, RuntimeError, subprocess.CalledProcessError, ValueError) as exc:

@@ -22,26 +22,6 @@ exclude_docs: |
 
 plugins:
   - search
-  - callouts
-  - redirects
-  - minify:
-      htmlmin_opts:
-        remove_comments: true
-  - git-revision-date-localized:
-      type: date
-      timezone: America/New_York
-  - awesome-pages:
-      filename: .pages
-  - glightbox
-  - mermaid2:
-      version: 10.9.1
-  - macros
-  - table-reader
-  - roamlinks
-  - htmlproofer
-  - mkdocs-video
-  - material/tags
-  - print-site
 
 extra:
   feed: feed.xml

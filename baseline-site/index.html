@@ -1,0 +1,919 @@
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>digital garden</title>
+  
+  
+  
+  <meta property="og:site_name" content="digital garden">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="home">
+  
+  <link rel="canonical" href="https://truly-tranquil.github.io/digital-garden/">
+  <meta property="og:url" content="https://truly-tranquil.github.io/digital-garden/">
+  
+  
+  <meta property="og:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  <meta name="twitter:image" content="https://truly-tranquil.github.io/digital-garden/assets/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/atom+xml" title="digital garden" href="https://truly-tranquil.github.io/digital-garden/feed.xml">
+  <link rel="icon" href="./assets/favicon.ico">
+  
+
+  <!-- runs before the page paints so there is no flash of the wrong theme -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var t = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <!-- Newsreader is self-hosted (see @font-face in main.css). the upright file is preloaded so text doesn't jump when it arrives -->
+  <link rel="preload" href="./assets/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./main.css?v=">
+</head>
+<body data-section="home" style="--folder: var(--rb-0)">
+  <a class="skip-link" href="#main-content">skip to content</a>
+
+  <header class="garden-header">
+    <div class="header-left">
+      <button id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="garden-sidebar"><span aria-hidden="true">🌿</span> index<span class="sr-only"> navigation</span></button>
+      <button id="random-note" type="button" data-random><span aria-hidden="true">🎲</span> random<span class="sr-only"> note</span></button>
+      <button id="mode-toggle" type="button" aria-pressed="false"><span aria-hidden="true">🎨</span> style<span class="sr-only"> dark mode</span></button>
+    </div>
+
+    <div class="header-right">
+      <form id="mkdocs-search-form" role="search" action="./search/" method="get">
+        <input type="text" name="q" id="mkdocs-search-query" placeholder="search the garden..." autocomplete="off" aria-keyshortcuts="/" aria-label="search the garden" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-dd">
+        <div class="search-dd" id="search-dd" role="listbox" aria-label="search suggestions" hidden></div>
+        <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
+      </form>
+      <a href="./" class="garden-logo">digital garden</a>
+    </div>
+  </header>
+
+  <div class="garden-container" id="garden-layout">
+    <nav class="garden-sidebar" id="garden-sidebar" aria-label="Garden index">
+      
+<ul>
+  
+    
+      <li style="--folder: var(--rb-0)">
+        <a href="" class="active" aria-current="page">home</a>
+      </li>
+    
+  
+    
+      <li style="--folder: var(--rb-1)">
+        <a href="./manifesto/" class="">manifesto</a>
+      </li>
+    
+  
+    
+      <li style="--folder: var(--rb-2)">
+        <a href="./about/" class="">about</a>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-3)">
+        <details >
+          <summary>seedlings</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="./seedlings/" class="">index</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/accountability-is-easier-with-others/" class="">accountability is easier with others</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/biodiversity-in-the-digital-garden/" class="">biodiversity in the digital garden</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/cognitive-offloading-is-polluting-yet-necessary/" class="">cognitive offloading is polluting yet necessary</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/desirable-difficulty-and-struggle-avoidance/" class="">desirable difficulty and struggle avoidance</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/developing-taste-in-a-world-that-wants-you-to-be-passive/" class="">developing taste in a world that wants you to be passive</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/ebbinghaus-and-his-forgetful-(but-ever-learning)-curves/" class="">ebbinghaus and his forgetful (but ever learning) curves</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/effort-is-innately-valuable/" class="">effort is innately valuable</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/how-does-one-manage-time-when-it-always-evades-them/" class="">how does one manage time when it always evades them</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/how-the-pandemic-fundamentally-changed-higher-education/" class="">how the pandemic fundamentally changed higher education</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/how-to-clean-your-kitchen/" class="">how to clean your kitchen</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/how-to-make-a-personal-curriculum/" class="">how to make a personal curriculum</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/how-to-manage-too-many-hobbies-at-once/" class="">how to manage too many hobbies at once</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/improve-your-notes-to-avoid-stagnation/" class="">improve your notes to avoid stagnation</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/leitner-my-goat/" class="">leitner my goat</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/negative-bias-and-the-plague-of-perfectionism/" class="">negative bias and the plague of perfectionism</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/on-having-headaches-and-other-ailments/" class="">on having headaches and other ailments</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/pomodoro-method-is-truly-my-favorite-time-management-strategy/" class="">pomodoro method is truly my favorite time management strategy</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/recursive-reading-+-3-pass-method/" class="">recursive reading + 3 pass method</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/spiders-are-the-wisest-of-us-all/" class="">spiders are the wisest of us all</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/stop-auditioning-for-your-own-life/" class="">stop auditioning for your own life</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/the-ego-and-the-home/" class="">the ego and the home</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/the-fundamental-human-need-to-create/" class="">the fundamental human need to create</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/the-magic-of-time-blocking/" class="">the magic of time blocking</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/the-trad-wifeification-of-self/" class="">the trad wifeification of self</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/what-keeping-house-is-like-when-you-never-learned-how/" class="">what keeping house is like when you never learned how</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/why-am-i-learning-this/" class="">why am i learning this</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/why-are-you-really-interested-in-learning/" class="">why are you really interested in learning</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/why-you-need-to-set-end-goals-on-everything-even-your-learning/" class="">why you need to set end goals on everything, even your learning</a>
+      </li>
+    
+  
+    
+      <li >
+        <a href="./seedlings/write-like-someone-is-watching/" class="">write like someone is watching</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-4)">
+        <details >
+          <summary>buds</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="./buds/" class="">index</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+    
+      <li class="nav-folder" style="--folder: var(--rb-5)">
+        <details >
+          <summary>evergreens</summary>
+          
+<ul>
+  
+    
+      <li >
+        <a href="./evergreens/" class="">index</a>
+      </li>
+    
+  
+</ul>
+
+        </details>
+      </li>
+    
+  
+</ul>
+
+    </nav>
+
+    <main class="garden-content" id="main-content" tabindex="-1">
+      
+      
+      
+      <div class="page-meta">
+        
+        
+        
+        
+        <span class="date" id="reading-time"></span>
+      </div>
+      
+      
+
+      <div class="article-wrap">
+        <article class="garden-article">
+          
+<h1 id="welcome-to-my-digital-garden"><picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><a class="glightbox" href="assets/favicon.gif" data-type="image"><img src="assets/favicon.gif" alt=""></a></picture> welcome to my digital garden <picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><a class="glightbox" href="assets/favicon.gif" data-type="image"><img src="assets/favicon.gif" alt=""></a></picture><a class="headerlink" href="#welcome-to-my-digital-garden" title="Link to this section">¶</a></h1>
+
+<div class="widgets" id="widgets">
+  <section class="widget widget-wide" id="w-stats">
+    <h2>the garden right now</h2>
+    <div class="stat-row">
+      
+        
+      
+      
+      <div class="stat stage-seedling"><strong>29</strong><span>seedlings</span></div>
+      
+      <div class="stat stage-bud"><strong>0</strong><span>buds</span></div>
+      
+      <div class="stat stage-evergreen"><strong>0</strong><span>evergreens</span></div>
+      
+      
+        
+      
+      <div class="stat"><strong>29</strong><span>notes in all</span></div>
+    </div>
+  </section>
+  <section class="widget" id="w-today"><h2>note of the day</h2><div id="today">finding a note from the garden…</div></section>
+  <section class="widget" id="w-recent">
+    <h2>recently tended</h2>
+    
+      
+    
+    
+    <ul class="note-list">
+      
+      <li><a href="./seedlings/accountability-is-easier-with-others/">accountability is easier with others</a> <small>2026-11-12</small></li>
+      
+      <li><a href="./seedlings/biodiversity-in-the-digital-garden/">biodiversity in the digital garden</a> <small>2026-11-12</small></li>
+      
+      <li><a href="./seedlings/cognitive-offloading-is-polluting-yet-necessary/">cognitive offloading is polluting yet necessary</a> <small>2026-11-12</small></li>
+      
+      <li><a href="./seedlings/desirable-difficulty-and-struggle-avoidance/">desirable difficulty and struggle avoidance</a> <small>2026-11-12</small></li>
+      
+      <li><a href="./seedlings/developing-taste-in-a-world-that-wants-you-to-be-passive/">developing taste in a world that wants you to be passive</a> <small>2026-11-12</small></li>
+      
+      <li><a href="./seedlings/ebbinghaus-and-his-forgetful-(but-ever-learning)-curves/">ebbinghaus and his forgetful (but ever learning) curves</a> <small>2026-11-12</small></li>
+      
+    </ul>
+    
+  </section>
+  <section class="widget" id="w-clock">
+    <h2>garden clock</h2>
+    <div class="clock">
+      <time class="clock-time" id="clock-time">Enable JavaScript to see the local time.</time>
+      <span class="clock-date" id="clock-date">Local date</span>
+    </div>
+  </section>
+  <section class="widget" id="w-legend">
+    <h2>how to read this garden</h2>
+    <ul>
+      <li><strong>seedling:</strong> new ideas and notes in progress</li>
+      <li><strong>bud:</strong> developing notes with some structure</li>
+      <li><strong>evergreen:</strong> mature notes, revised over time</li>
+    </ul>
+  </section>
+  <section class="widget" id="w-graph"><h2>garden graph</h2><p>Explore how notes in the garden connect.</p><a class="graph-link" href="./graph.html">open the garden graph</a></section>
+</div>
+
+        </article>
+      </div>
+
+      
+
+      
+
+      
+
+    </main>
+
+    
+    <div class="toc-drawer" id="toc-drawer">
+      <button class="drawer-tab toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-view" aria-label="on this page" title="on this page"><span aria-hidden="true">≡</span></button>
+      
+      <div class="toc-panel" id="toc-panel">
+        <nav id="toc-view" aria-label="on this page">
+          <p class="toc-title">on this page</p>
+          <div id="toc"></div>
+        </nav>
+        
+      </div>
+    </div>
+    
+
+    <footer class="site-footer">digital garden © 2026 by truly tranquil is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</footer>
+  </div>
+  <button id="to-top" type="button" hidden><span aria-hidden="true">↑</span> top<span class="sr-only"> of page</span></button>
+
+  <script>
+    var base_url = '.';
+
+    // sidebar (hidden by default on small screens, remembered on large ones)
+    var layout = document.getElementById('garden-layout');
+    var toggle = document.getElementById('sidebar-toggle');
+    var narrow = matchMedia('(max-width: 800px)');
+    function sidebarIsOpen() {
+      return narrow.matches ? layout.classList.contains('sidebar-open') : !layout.classList.contains('sidebar-collapsed');
+    }
+    function syncToggle() {
+      toggle.setAttribute('aria-expanded', String(sidebarIsOpen()));
+    }
+    try { if (localStorage.getItem('sidebar') === 'closed') layout.classList.add('sidebar-collapsed'); } catch (e) {}
+    syncToggle();
+    toggle.addEventListener('click', function () {
+      if (narrow.matches) {
+        layout.classList.toggle('sidebar-open');
+      } else {
+        layout.classList.toggle('sidebar-collapsed');
+        try { localStorage.setItem('sidebar', layout.classList.contains('sidebar-collapsed') ? 'closed' : 'open'); } catch (e) {}
+      }
+      syncToggle();
+    });
+    narrow.addEventListener('change', syncToggle);
+
+    // light / dark
+    var modeBtn = document.getElementById('mode-toggle');
+    var systemDark = matchMedia('(prefers-color-scheme: dark)');
+    function setTheme(t) {
+      document.documentElement.dataset.theme = t;
+      modeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
+    modeBtn.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    modeBtn.addEventListener('click', function () {
+      var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    systemDark.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (err) {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
+    });
+
+    // random note (any element with data-random)
+    document.querySelectorAll('[data-random]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        fetch(base_url + '/notes.json').then(function (r) { return r.json(); }).then(function (all) {
+          var pool = all.filter(function (n) { return !n.is_index; });
+          if (!pool.length) pool = all;
+          var here = location.pathname;
+          var choices = pool.filter(function (n) { return !here.endsWith('/' + n.url) && n.url !== ''; });
+          if (!choices.length) choices = pool;
+          var n = choices[Math.floor(Math.random() * choices.length)];
+          location.href = base_url + '/' + n.url;
+        });
+      });
+    });
+
+    // rainbow footnotes and backlinks
+    function rainbow(i) { return 'var(--rbt-' + (i % 8) + ')'; }
+    document.querySelectorAll('.footnote-ref').forEach(function (a) {
+      var n = parseInt(a.textContent, 10);
+      if (!n) return;
+      a.style.color = rainbow(n - 1);
+      var li = document.getElementById(a.getAttribute('href').slice(1));
+      if (li) li.style.setProperty('--fnc', rainbow(n - 1));
+    });
+    document.querySelectorAll('.backlinks li').forEach(function (li, i) {
+      li.style.setProperty('--fnc', rainbow(i));
+    });
+
+    // reading time
+    (function () {
+      var el = document.getElementById('reading-time');
+      var art = document.querySelector('.garden-article');
+      if (!el || !art) return;
+      var words = art.innerText.trim().split(/\s+/).length;
+      if (words < 40) { el.remove(); return; }
+      el.textContent = Math.max(1, Math.round(words / 200)) + ' min read';
+    })();
+
+    // press / to jump to search
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+      var box = document.getElementById('mkdocs-search-query');
+      if (!box) return;
+      e.preventDefault();
+      box.focus();
+      box.select();
+    });
+
+    // back to top
+    (function () {
+      var btn = document.getElementById('to-top');
+      if (!btn) return;
+      function show() { btn.hidden = window.scrollY < 600; }
+      window.addEventListener('scroll', show, { passive: true });
+      show();
+      btn.addEventListener('click', function () {
+        var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+        document.getElementById('main-content').focus({ preventScroll: true });
+      });
+    })();
+
+    // on this page drawer
+    (function () {
+      var drawer = document.getElementById('toc-drawer');
+      if (!drawer) return;
+      var toc = document.getElementById('toc');
+      var tocView = document.getElementById('toc-view');
+      var discussionPanel = document.getElementById('discussion-panel');
+      var tocButton = document.getElementById('toc-toggle');
+      var discussionButton = document.getElementById('discussion-toggle');
+      var headings = Array.prototype.slice.call(
+        document.querySelectorAll('.garden-article h2[id], .garden-article h3[id], .garden-article h4[id], .garden-article h5[id], .garden-article h6[id]')
+      );
+      var hasToc = headings.length > 0;
+      var hasDiscussion = Boolean(discussionPanel && discussionButton);
+      if (!hasToc) {
+        tocView.hidden = true;
+        tocButton.hidden = true;
+      }
+      if (!hasToc && !hasDiscussion) {
+        drawer.hidden = true;
+        return;
+      }
+      if (hasToc) {
+        var list = document.createElement('ul');
+        headings.forEach(function (heading) {
+          var item = document.createElement('li');
+          var link = document.createElement('a');
+          var label = heading.cloneNode(true);
+          label.querySelectorAll('.headerlink').forEach(function (permalink) {
+            permalink.remove();
+          });
+          link.href = '#' + encodeURIComponent(heading.id);
+          link.textContent = label.textContent.trim();
+          item.appendChild(link);
+          list.appendChild(item);
+        });
+        toc.appendChild(list);
+      }
+      layout.classList.add('has-toc');
+
+      var wide = matchMedia('(min-width: 1100px)');
+      function tocIsOpen() {
+        return wide.matches ? !layout.classList.contains('toc-collapsed') : layout.classList.contains('toc-open');
+      }
+      var activeView = hasToc ? 'toc' : 'discussion';
+      function showView(view) {
+        activeView = view;
+        tocView.hidden = view !== 'toc';
+        if (discussionPanel) discussionPanel.hidden = view !== 'discussion';
+      }
+      function syncDrawer() {
+        tocButton.setAttribute('aria-expanded', String(tocIsOpen() && activeView === 'toc'));
+        if (discussionButton) {
+          discussionButton.setAttribute('aria-expanded', String(tocIsOpen() && activeView === 'discussion'));
+        }
+      }
+      try { if (localStorage.getItem('toc') === 'closed') layout.classList.add('toc-collapsed'); } catch (e) {}
+      showView(activeView);
+      syncDrawer();
+      function toggleView(view) {
+        var wasOpen = tocIsOpen();
+        if (activeView !== view) {
+          showView(view);
+          if (!wasOpen) openDrawer();
+        } else if (wasOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+        syncDrawer();
+      }
+      function openDrawer() {
+        if (wide.matches) {
+          layout.classList.remove('toc-collapsed');
+          try { localStorage.setItem('toc', 'open'); } catch (e) {}
+        } else {
+          layout.classList.add('toc-open');
+        }
+      }
+      function closeDrawer() {
+        if (wide.matches) {
+          layout.classList.add('toc-collapsed');
+          try { localStorage.setItem('toc', 'closed'); } catch (e) {}
+        } else {
+          layout.classList.remove('toc-open');
+        }
+      }
+      tocButton.addEventListener('click', function () { toggleView('toc'); });
+      if (discussionButton) {
+        discussionButton.addEventListener('click', function () { toggleView('discussion'); });
+      }
+      wide.addEventListener('change', syncDrawer);
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape' || wide.matches || !layout.classList.contains('toc-open')) return;
+        layout.classList.remove('toc-open');
+        syncDrawer();
+        (activeView === 'discussion' ? discussionButton : tocButton).focus();
+      });
+      tocView.addEventListener('click', function (e) {
+        if (wide.matches || !e.target.closest('a')) return;
+        layout.classList.remove('toc-open');
+        syncDrawer();
+      });
+    })();
+
+    // on this page: highlight the current section
+    (function () {
+      var toc = document.getElementById('toc');
+      if (!toc) return;
+      var links = Array.prototype.slice.call(toc.querySelectorAll('a'));
+      var map = {};
+      links.forEach(function (a) { map[decodeURIComponent(a.getAttribute('href').slice(1))] = a; });
+      var heads = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      function spy() {
+        var current = null;
+        heads.forEach(function (h) { if (h.getBoundingClientRect().top <= 120) current = h.id; });
+        links.forEach(function (a) { a.classList.remove('current'); a.removeAttribute('aria-current'); });
+        if (current && map[current]) {
+          map[current].classList.add('current');
+          map[current].setAttribute('aria-current', 'true');
+        }
+      }
+      window.addEventListener('scroll', spy, { passive: true });
+      spy();
+    })();
+
+    // tables and code blocks that scroll sideways become keyboard focusable
+    var scrollers = [];
+    function trackScroller(el, label) {
+      scrollers.push({ el: el, label: label });
+    }
+    function checkScrollers() {
+      scrollers.forEach(function (s) {
+        if (s.el.scrollWidth > s.el.clientWidth) {
+          s.el.tabIndex = 0;
+          s.el.setAttribute('role', 'region');
+          s.el.setAttribute('aria-label', s.label);
+        } else {
+          s.el.removeAttribute('tabindex');
+          s.el.removeAttribute('role');
+          s.el.removeAttribute('aria-label');
+        }
+      });
+    }
+
+    // wrap tables so they scroll without losing table semantics
+    document.querySelectorAll('.garden-article table').forEach(function (t) {
+      if (t.parentElement.classList.contains('table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      t.replaceWith(wrap);
+      wrap.appendChild(t);
+      trackScroller(wrap, 'scrollable table');
+    });
+
+    // copy buttons on code blocks
+    (function () {
+      var live = document.createElement('div');
+      live.className = 'sr-only';
+      live.setAttribute('role', 'status');
+      live.setAttribute('aria-live', 'polite');
+      document.body.appendChild(live);
+      document.querySelectorAll('.garden-article pre:not(.mermaid)').forEach(function (pre) {
+        var host = pre.parentElement;
+        if (!host.classList.contains('highlight')) {
+          host = document.createElement('div');
+          host.className = 'code-wrap';
+          pre.replaceWith(host);
+          host.appendChild(pre);
+        }
+        trackScroller(pre, 'code');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.textContent = 'copy';
+        btn.addEventListener('click', function () {
+          if (!navigator.clipboard) { btn.textContent = 'unavailable'; return; }
+          navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')).then(function () {
+            btn.textContent = 'copied';
+            live.textContent = 'copied to clipboard';
+            setTimeout(function () { btn.textContent = 'copy'; live.textContent = ''; }, 1800);
+          }).catch(function () { btn.textContent = 'failed'; });
+        });
+        host.appendChild(btn);
+      });
+    })();
+
+    checkScrollers();
+    window.addEventListener('resize', checkScrollers);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkScrollers);
+
+    // favicons on external links (uses Google's favicon service)
+    document.querySelectorAll('.garden-article a[href^="http"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        if (u.host === location.host || a.querySelector('img')) return;
+        var img = document.createElement('img');
+        img.className = 'link-favicon';
+        img.alt = '';
+        img.src = 'https://www.google.com/s2/favicons?sz=32&domain=' + u.hostname;
+        a.prepend(img);
+      } catch (e) {}
+    });
+  </script>
+  <script src="./garden-search.js?v="></script>
+  <script src="./garden-mermaid.js?v="></script>
+  
+  
+<script>
+  (function () {
+    var time = document.getElementById('clock-time');
+    var date = document.getElementById('clock-date');
+    var timeFormat = new Intl.DateTimeFormat(undefined, {
+      hour: 'numeric', minute: '2-digit', second: '2-digit'
+    });
+    var dateFormat = new Intl.DateTimeFormat(undefined, {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    var timer;
+    function updateClock() {
+      var now = new Date();
+      time.textContent = timeFormat.format(now);
+      date.textContent = dateFormat.format(now);
+    }
+    function updateVisibility() {
+      clearInterval(timer);
+      if (!document.hidden) {
+        updateClock();
+        timer = setInterval(updateClock, 1000);
+      }
+    }
+    document.addEventListener('visibilitychange', updateVisibility);
+    updateVisibility();
+  })();
+
+  (function () {
+    var today = document.getElementById('today');
+    var notes;
+    var dayTimer;
+
+    function renderNote() {
+      if (!notes) return;
+      var now = new Date();
+      var dateKey = [
+        now.getFullYear(),
+        String(now.getMonth() + 1).padStart(2, '0'),
+        String(now.getDate()).padStart(2, '0')
+      ].join('-');
+      var todaysNotes = notes.filter(function (note) {
+        return String(note.planted || '').slice(0, 10) === dateKey;
+      });
+      if (!todaysNotes.length) {
+        today.textContent = 'No notes were planted in the garden today.';
+        return;
+      }
+      var day = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+      var index = ((day % todaysNotes.length) + todaysNotes.length) % todaysNotes.length;
+      var pick = todaysNotes[index];
+      var heading = document.createElement('h3');
+      var link = document.createElement('a');
+      link.href = base_url + '/' + pick.url;
+      link.textContent = pick.title;
+      heading.style.textAlign = 'center';
+      heading.appendChild(link);
+      today.textContent = '';
+      today.appendChild(heading);
+      if (pick.excerpt) {
+        var excerpt = document.createElement('p');
+        excerpt.style.textAlign = 'center';
+        var titles = notes.map(function (note) { return note.title; })
+          .filter(Boolean)
+          .sort(function (a, b) { return b.length - a.length; });
+        if (titles.length) {
+          var escaped = titles.map(function (title) {
+            return title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          });
+          var mentions = new RegExp(
+            '(^|[^\\p{L}\\p{N}_])(' + escaped.join('|') + ')(?=$|[^\\p{L}\\p{N}_])',
+            'giu'
+          );
+          var cursor = 0, match;
+          while ((match = mentions.exec(pick.excerpt)) !== null) {
+            excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor, match.index) + match[1]));
+            var mention = document.createElement('a');
+            var target = notes.find(function (note) {
+              return note.title.toLowerCase() === match[2].toLowerCase();
+            });
+            mention.href = base_url + '/' + target.url;
+            mention.textContent = match[2];
+            excerpt.appendChild(mention);
+            cursor = mentions.lastIndex;
+          }
+          excerpt.appendChild(document.createTextNode(pick.excerpt.slice(cursor)));
+        } else {
+          excerpt.textContent = pick.excerpt;
+        }
+        today.appendChild(excerpt);
+      }
+    }
+
+    function scheduleNextDay() {
+      clearTimeout(dayTimer);
+      if (document.hidden || !notes) return;
+      var now = new Date();
+      var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      dayTimer = setTimeout(function () {
+        renderNote();
+        scheduleNextDay();
+      }, midnight.getTime() - now.getTime() + 25);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        clearTimeout(dayTimer);
+      } else {
+        renderNote();
+        scheduleNextDay();
+      }
+    });
+
+    fetch(base_url + '/notes.json', { cache: 'no-store' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Notes request failed');
+        return response.json();
+      })
+      .then(function (all) {
+        if (!Array.isArray(all)) throw new Error('Notes response is invalid');
+        notes = all.filter(function (note) {
+          return !note.is_index && !note.unlisted && !note.draft && Boolean(note.stage);
+        });
+        renderNote();
+        scheduleNextDay();
+      })
+      .catch(function () {
+        today.textContent = 'The note of the day is temporarily unavailable.';
+      });
+  })();
+</script>
+
+</body>
+</html>
