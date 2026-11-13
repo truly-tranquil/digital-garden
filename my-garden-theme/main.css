@@ -797,3 +797,11 @@ a.random-btn { display: inline-block; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+cat >> main.css << 'EOF'
+
+@media (max-width: 800px) {
+  .garden-container { display: block; }
+  .garden-content { width: auto; max-width: 100%; min-width: 0; }
+}
+EOF
