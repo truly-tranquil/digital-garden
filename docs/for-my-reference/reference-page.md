@@ -1,6 +1,5 @@
 ---
 stage: evergreen
-unlisted: true
 tags: [reference, formatting, markdown]
 planted: 2026-11-10
 tended: 2026-11-10
@@ -518,17 +517,17 @@ add classes, ids and attributes to almost any element. the classes below come fr
 <pre><code>a paragraph turned into a card.
 {: .card }
 &nbsp;
-&lt;span class="badge stage-seedling"&gt;seedling&lt;/span&gt;
-&lt;span class="badge stage-bud"&gt;bud&lt;/span&gt;
-&lt;span class="badge stage-evergreen"&gt;evergreen&lt;/span&gt;
-&lt;span class="tag"&gt;#reference&lt;/span&gt;
+&lt;a class="badge stage-seedling" href="../seedlings/"&gt;seedling&lt;/a&gt;
+&lt;a class="badge stage-bud" href="../buds/"&gt;bud&lt;/a&gt;
+&lt;a class="badge stage-evergreen" href="../evergreens/"&gt;evergreen&lt;/a&gt;
+&lt;a class="tag" href="../by-tag/#tag-reference"&gt;#reference&lt;/a&gt;
 [a link](https://en.wikipedia.org/wiki/Diction){ target="_blank" }
 ![alt text](../assets/favicon.ico){ width="48" }</code></pre>
 
 diction is done with the tip of the tongue on the teeth.
 {: .card }
 
-<span class="badge stage-seedling">seedling</span> <span class="badge stage-bud">bud</span> <span class="badge stage-evergreen">evergreen</span> <span class="tag">#reference</span> <span class="tag">#formatting</span>
+<a class="badge stage-seedling" href="../../seedlings/">seedling</a> <a class="badge stage-bud" href="../../buds/">bud</a> <a class="badge stage-evergreen" href="../../evergreens/">evergreen</a> <a class="tag" href="../../by-tag/#tag-reference">#reference</a> <a class="tag" href="../../by-tag/#tag-formatting">#formatting</a>
 
 ## raw html
 

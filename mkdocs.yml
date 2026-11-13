@@ -44,6 +44,7 @@ nav:
       - index: buds/index.md
   - evergreens:
       - index: evergreens/index.md
+  - reference: for-my-reference/reference-page.md
 
 markdown_extensions:
   - nl2br
