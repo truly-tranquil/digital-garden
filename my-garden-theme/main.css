@@ -420,28 +420,43 @@ a.badge:hover { box-shadow: 0 0 0 var(--bw) var(--accent); }
 .garden-article .admonition-title, .garden-article details > summary { font-weight: 700; color: var(--ct); padding-top: 0.6rem; }
 .garden-article .admonition-title::before, .garden-article details > summary::before { content: var(--icon, none); margin-right: 0.5em; }
 
-.garden-article :is(.admonition, details):is(.danger, .failure, .error, .fail, .missing) { --c: var(--rb-0); --ct: var(--rbt-0); }
-.garden-article :is(.admonition, details):is(.warning, .caution, .attention) { --c: var(--rb-1); --ct: var(--rbt-1); }
-.garden-article :is(.admonition, details):is(.tip, .example, .hint, .important) { --c: var(--rb-2); --ct: var(--rbt-2); }
-.garden-article :is(.admonition, details):is(.success, .check, .done) { --c: var(--rb-3); --ct: var(--rbt-3); }
-.garden-article :is(.admonition, details):is(.abstract, .todo, .summary, .tldr) { --c: var(--rb-4); --ct: var(--rbt-4); }
-.garden-article :is(.admonition, details):is(.note) { --c: var(--rb-5); --ct: var(--rbt-5); }
-.garden-article :is(.admonition, details):is(.info, .question, .help, .faq) { --c: var(--rb-6); --ct: var(--rbt-6); }
-.garden-article :is(.admonition, details):is(.quote, .cite, .bug) { --c: var(--rb-7); --ct: var(--rbt-7); }
+.garden-article .admonition.danger, .garden-article .admonition.failure, .garden-article .admonition.error, .garden-article .admonition.fail, .garden-article .admonition.missing,
+.garden-article details.danger, .garden-article details.failure, .garden-article details.error, .garden-article details.fail, .garden-article details.missing { --c: var(--rb-0) !important; --ct: var(--rbt-0) !important; }
+.garden-article .admonition.warning, .garden-article .admonition.caution, .garden-article .admonition.attention,
+.garden-article details.warning, .garden-article details.caution, .garden-article details.attention { --c: var(--rb-1) !important; --ct: var(--rbt-1) !important; }
+.garden-article .admonition.tip, .garden-article .admonition.example, .garden-article .admonition.hint, .garden-article .admonition.important,
+.garden-article details.tip, .garden-article details.example, .garden-article details.hint, .garden-article details.important { --c: var(--rb-2) !important; --ct: var(--rbt-2) !important; }
+.garden-article .admonition.success, .garden-article .admonition.check, .garden-article .admonition.done,
+.garden-article details.success, .garden-article details.check, .garden-article details.done { --c: var(--rb-3) !important; --ct: var(--rbt-3) !important; }
+.garden-article .admonition.abstract, .garden-article .admonition.todo, .garden-article .admonition.summary, .garden-article .admonition.tldr,
+.garden-article details.abstract, .garden-article details.todo, .garden-article details.summary, .garden-article details.tldr { --c: var(--rb-4) !important; --ct: var(--rbt-4) !important; }
+.garden-article .admonition.note, .garden-article details.note { --c: var(--rb-5) !important; --ct: var(--rbt-5) !important; }
+.garden-article .admonition.info, .garden-article .admonition.question, .garden-article .admonition.help, .garden-article .admonition.faq,
+.garden-article details.info, .garden-article details.question, .garden-article details.help, .garden-article details.faq { --c: var(--rb-6) !important; --ct: var(--rbt-6) !important; }
+.garden-article .admonition.quote, .garden-article .admonition.cite, .garden-article .admonition.bug,
+.garden-article details.quote, .garden-article details.cite, .garden-article details.bug { --c: var(--rb-7) !important; --ct: var(--rbt-7) !important; }
 
-.garden-article :is(.admonition, details).note { --icon: "\270E\FE0E" / ""; }
-.garden-article :is(.admonition, details):is(.abstract, .summary, .tldr) { --icon: "\2261" / ""; }
-.garden-article :is(.admonition, details).info { --icon: "\2139\FE0E" / ""; }
-.garden-article :is(.admonition, details).todo { --icon: "\2610" / ""; }
-.garden-article :is(.admonition, details):is(.tip, .hint, .important) { --icon: "\2726\FE0E" / ""; }
-.garden-article :is(.admonition, details):is(.success, .check, .done) { --icon: "\2713\FE0E" / ""; }
-.garden-article :is(.admonition, details):is(.question, .help, .faq) { --icon: "?" / ""; }
-.garden-article :is(.admonition, details):is(.warning, .caution, .attention) { --icon: "\26A0\FE0E" / ""; }
-.garden-article :is(.admonition, details):is(.failure, .fail, .missing) { --icon: "\2717\FE0E" / ""; }
-.garden-article :is(.admonition, details):is(.danger, .error) { --icon: "\2620\FE0E" / ""; }
-.garden-article :is(.admonition, details).bug { --icon: "\2731\FE0E" / ""; }
-.garden-article :is(.admonition, details).example { --icon: "\25C6\FE0E" / ""; }
-.garden-article :is(.admonition, details):is(.quote, .cite) { --icon: "\275D\FE0E" / ""; }
+.garden-article .admonition.note, .garden-article details.note { --icon: "\270E\FE0E" / ""; }
+.garden-article .admonition.abstract, .garden-article .admonition.summary, .garden-article .admonition.tldr,
+.garden-article details.abstract, .garden-article details.summary, .garden-article details.tldr { --icon: "\2261" / ""; }
+.garden-article .admonition.info, .garden-article details.info { --icon: "\2139\FE0E" / ""; }
+.garden-article .admonition.todo, .garden-article details.todo { --icon: "\2610" / ""; }
+.garden-article .admonition.tip, .garden-article .admonition.hint, .garden-article .admonition.important,
+.garden-article details.tip, .garden-article details.hint, .garden-article details.important { --icon: "\2726\FE0E" / ""; }
+.garden-article .admonition.success, .garden-article .admonition.check, .garden-article .admonition.done,
+.garden-article details.success, .garden-article details.check, .garden-article details.done { --icon: "\2713\FE0E" / ""; }
+.garden-article .admonition.question, .garden-article .admonition.help, .garden-article .admonition.faq,
+.garden-article details.question, .garden-article details.help, .garden-article details.faq { --icon: "?" / ""; }
+.garden-article .admonition.warning, .garden-article .admonition.caution, .garden-article .admonition.attention,
+.garden-article details.warning, .garden-article details.caution, .garden-article details.attention { --icon: "\26A0\FE0E" / ""; }
+.garden-article .admonition.failure, .garden-article .admonition.fail, .garden-article .admonition.missing,
+.garden-article details.failure, .garden-article details.fail, .garden-article details.missing { --icon: "\2717\FE0E" / ""; }
+.garden-article .admonition.danger, .garden-article .admonition.error,
+.garden-article details.danger, .garden-article details.error { --icon: "\2620\FE0E" / ""; }
+.garden-article .admonition.bug, .garden-article details.bug { --icon: "\2731\FE0E" / ""; }
+.garden-article .admonition.example, .garden-article details.example { --icon: "\25C6\FE0E" / ""; }
+.garden-article .admonition.quote, .garden-article .admonition.cite,
+.garden-article details.quote, .garden-article details.cite { --icon: "\275D\FE0E" / ""; }
 
 .tabbed-set { margin: 1.5rem 0; }
 .tabbed-set > input { position: absolute; opacity: 0; }

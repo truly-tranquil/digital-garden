@@ -330,7 +330,7 @@ def _zensical_command(action):
 
 def build():
     config = prepare(serving=False)
-    subprocess.run(_zensical_command('build') + ['--strict'], cwd=ROOT, check=True)
+    subprocess.run(_zensical_command('build') + ['--clean', '--strict'], cwd=ROOT, check=True)
     _write_generated_assets(config)
 
 def preview(port=8000):

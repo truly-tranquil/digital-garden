@@ -795,11 +795,46 @@ def _related(src, limit=3):
     return [{'title': n['title'], 'url': n['url']} for n in picks]
 
 
+def _convert_obsidian_callouts(text):
+    """Convert Obsidian-style callouts (> [!type]) to raw HTML admonition divs."""
+    lines = text.split('\n')
+    result = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        # Match callout start: > [!TYPE] or > [!TYPE] title or > [!TYPE]- title / + title
+        m = re.match(r'^>\s*\[!([a-zA-Z]+)\]([-+]?)(\s+(.*))?$', line)
+        if m:
+            callout_type = m.group(1)
+            title = m.group(4) or ''
+            result.append('')
+            result.append('<div class="admonition %s">' % callout_type)
+            if title:
+                result.append('<p class="admonition-title">%s</p>' % title)
+            i += 1
+            # Collect body lines (lines starting with >)
+            while i < len(lines):
+                body_line = lines[i]
+                body_m = re.match(r'^>\s?(.*)$', body_line)
+                if body_m:
+                    result.append('<p>%s</p>' % body_m.group(1))
+                    i += 1
+                else:
+                    break
+            result.append('</div>')
+            result.append('')
+        else:
+            result.append(line)
+            i += 1
+    return '\n'.join(result)
+
+
 @event_priority(100)
 def on_page_markdown(markdown, page, config, files):
     src = page.file.src_uri
     markdown = _outside_code(markdown, lambda t: _expand(t, src, (src,), 0))
     markdown = _outside_code(markdown, lambda t: _links(t, src))
+    markdown = _convert_obsidian_callouts(markdown)
     if src == TAG_PAGE:
         markdown += _tag_index(src)
     if src in STAGE_INDEX:
