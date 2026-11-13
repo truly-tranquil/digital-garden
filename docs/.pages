@@ -1,7 +1,0 @@
-# Hide templates and unlisted pages from navigation
-for-my-reference/note-template.md:
-  nav: false
-for-my-reference/reference-page.md:
-  nav: false
-search/index.md:
-  nav: false

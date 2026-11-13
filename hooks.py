@@ -1129,3 +1129,9 @@ def on_post_build(config):
     sitemap = urljoin(config['site_url'].rstrip('/') + '/', 'sitemap.xml')
     with open(os.path.join(config['site_dir'], 'robots.txt'), 'w', encoding='utf-8') as fh:
         fh.write('User-agent: *\nAllow: /\nSitemap: %s\n' % sitemap)
+
+def on_config(config):
+    """Register the slug filter in the Jinja environment"""
+    from slugify import slugify
+    # Ensure the 'slug' filter is available for templates
+    config['jinja_env'].filters['slug'] = slugify

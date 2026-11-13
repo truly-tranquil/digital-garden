@@ -233,7 +233,10 @@ def prepare(serving=False):
 
     _copy_sources(files, transformed)
     generated_config = dict(config)
-    generated_config['docs_dir'] = GENERATED_DOCS.relative_to(ROOT).as_posix()
+    # Set docs_dir to the repository root so Zensical can access
+    # root-level files (README.md, CONTRIBUTING.md, .github/, etc.).
+    # The generated files in .garden-build are excluded via exclude_docs patterns.
+    generated_config['docs_dir'] = '.'
     site_dir = PREVIEW_DIR if serving else SITE_DIR
     generated_config['site_dir'] = site_dir.relative_to(ROOT).as_posix()
     generated_config['nav'] = _prepare_nav(config.get('nav'))

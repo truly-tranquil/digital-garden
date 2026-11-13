@@ -56,3 +56,23 @@ matter so the build can create a redirect.
 
 For questions about what belongs here or how the garden is meant to grow, start with the
 [manifesto](https://truly-tranquil.github.io/digital-garden/manifesto/).
+
+## Governance
+
+This repository is a personal garden, but it has light governance to keep the build
+and content consistent.
+
+- **Code of governance**: read [`CODEOWNERS`](.github/CODEOWNERS) and
+  [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to contribute and who reviews changes.
+- **Issue templates**: use the templates in `.github/ISSUE_TEMPLATE/` for bug reports,
+  feature requests, and documentation improvements.
+- **Content policy**: this is not a verified source of factual information. We welcome
+  respectful disagreement and discussion, but the garden is not a space for hatred.
+
+---
+
+## License
+
+This project is private and not published under an open-source license. Use of this
+repository is governed by the terms set by the maintainers.
+
