@@ -807,4 +807,8 @@ cat >> main.css << 'EOF'
 }
 EOF
 
-echo 'body { background: red !important; }' >> main.css
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+.garden-article { overflow-wrap: break-word; }
+@media (max-width: 800px) { .garden-container { display: block; } .garden-content { padding: 2rem 1.25rem; width: 100%; } }
