@@ -1,0 +1,56 @@
+site_name: digital garden
+site_url: https://truly-tranquil.github.io/digital-garden/
+docs_dir: docs
+site_dir: site
+
+theme:
+  custom_dir: my-garden-theme
+
+exclude_docs: |
+  **/drafts/**
+  **/draft-*.md
+  **/templates/**
+  **/*template*.md
+  **/.obsidian/**
+
+extra:
+  feed: feed.xml
+  og_image: assets/og-image.png
+
+nav:
+  - home: index.md
+  - manifesto: manifesto.md
+  - about: about.md
+  - seedlings:
+      - index: seedlings/index.md
+  - buds:
+      - index: buds/index.md
+  - evergreens:
+      - index: evergreens/index.md
+
+markdown_extensions:
+  - nl2br
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - def_list
+  - abbr
+  - pymdownx.saneheaders
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: "¶"
+      permalink_title: "Link to this section"
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.superfences:
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
