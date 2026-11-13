@@ -29,14 +29,7 @@ Open `http://127.0.0.1:8000/digital-garden/`. If that port is in use, choose ano
 python garden_build.py serve --dev-addr 127.0.0.1:8001
 ```
 
-MkDocs is also available for a direct local preview:
-
-```powershell
-python -m mkdocs serve
-```
-
-The Zensical wrapper is the production build path. A raw MkDocs build may include the
-unlisted reference page, so do not deploy it. Unlisted content is not access-controlled;
+The Zensical wrapper is the production build path. Unlisted content is not access-controlled;
 never put private or sensitive material in this repository.
 
 ## Validate changes
