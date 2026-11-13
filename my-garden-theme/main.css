@@ -800,8 +800,9 @@ a.random-btn { display: inline-block; text-decoration: none; }
 
 cat >> main.css << 'EOF'
 
+.garden-article { overflow-wrap: break-word; min-width: 0; width: 100%; }
 @media (max-width: 800px) {
   .garden-container { display: block; }
-  .garden-content { width: auto; max-width: 100%; min-width: 0; }
+  .garden-content { width: 100%; max-width: 100%; }
 }
 EOF
