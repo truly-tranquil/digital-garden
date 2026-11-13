@@ -23,7 +23,7 @@ SOURCE_DIR = ROOT / 'docs'
 BUILD_DIR = ROOT / '.garden-build'
 GENERATED_DOCS = BUILD_DIR / 'docs'
 GENERATED_CONFIG = ROOT / '.garden-zensical.yml'
-CONFIG_FILE = ROOT / 'mkdocs.yml'
+GARDEN_CONFIG = ROOT / 'garden.yml'
 SITE_DIR = ROOT / 'site'
 PREVIEW_DIR = ROOT / '.garden-preview'
 
@@ -211,7 +211,7 @@ def _copy_sources(files, transformed):
 
 
 def prepare(serving=False):
-    with CONFIG_FILE.open(encoding='utf-8') as stream:
+    with GARDEN_CONFIG.open(encoding='utf-8') as stream:
         config = yaml.safe_load(stream)
     patterns = [
         line.strip()
@@ -220,7 +220,7 @@ def prepare(serving=False):
     ]
     files = GardenFiles(GardenFile(src) for src in _source_files(patterns))
     hooks.serving = serving
-    hooks.on_files(files, {'config_file_path': str(CONFIG_FILE)})
+    hooks.on_files(files, {'config_file_path': str(GARDEN_CONFIG)})
 
     transformed = {}
     for file in files.documentation_pages():
