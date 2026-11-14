@@ -5,9 +5,4 @@ tags: [intro]
 date: "2026-11-13"
 ---
 
-## heading test
-### heading test
-#### heading test
-##### heading test
-###### heading test
-write what this garden is about here.
+this is what this garden is about here.

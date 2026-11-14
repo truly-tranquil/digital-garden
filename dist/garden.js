@@ -1,3 +1,8 @@
+var GARDEN_BASE = (function () {
+  var s = document.querySelector('script[src$="garden.js"]');
+  return s ? new URL(s.src).pathname.replace(/garden\.js$/, "") : "/";
+})();
+
 (function () {
   var root = document.documentElement;
   var btn = document.getElementById("mode-toggle");
@@ -37,7 +42,7 @@
 
   function load() {
     if (index) return Promise.resolve();
-    return fetch("/search-index.json")
+    return fetch(GARDEN_BASE + "search-index.json")
       .then(function (r) { return r.json(); })
       .then(function (data) { index = data; })
       .catch(function () { index = []; });
@@ -152,7 +157,7 @@
 
   if (random) {
     random.addEventListener("click", function () {
-      fetch("/search-index.json")
+      fetch(GARDEN_BASE + "search-index.json")
         .then(function (r) { return r.json(); })
         .then(function (notes) {
           var listed = notes.filter(function (n) { return n.listed; });

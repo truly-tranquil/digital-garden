@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-meta">
+    {% if stage %}<a class="badge stage-{{ stage }}" href="/{{ stage_folder }}/index.html">{{ stage }}</a>{% endif %}
+    {% for tag in tags %}<a class="tag" href="/by-tag/index.html#tag-{{ tag.slug }}">#{{ tag.name }}</a>{% endfor %}
+    {% if planted %}<time class="date">planted {{ planted }}</time>{% endif %}
+    {% if tended %}<time class="date">tended {{ tended }}</time>{% endif %}
+</div>
+{% if outgoing %}
+<div class="page-meta">
+    <span class="meta-label">outgoing links</span>
+    {% for l in outgoing %}<a class="link-chip" href="/{{ l.url }}">{{ l.title }}</a>{% endfor %}
+</div>
+{% endif %}
+<article class="garden-article">
+    {% if show_title %}<h1>{{ title }}</h1>{% endif %}
+    {{ content | safe }}
+</article>
+{% if backlinks %}
+<section class="backlinks">
+    <hr>
+    <p class="backlinks-title">backlinks</p>
+    <ol>
+        {% for b in backlinks %}
+        <li><a href="/{{ b.url }}">{{ b.title }}</a>{% if b.context %}<small>{{ b.context }}</small>{% endif %}</li>
+        {% endfor %}
+    </ol>
+</section>
+{% endif %}
+{% if related %}
+<footer class="garden-footer">
+    <p class="related-title">related notes</p>
+    <ul>
+        {% for r in related %}<li><a href="/{{ r.url }}">{{ r.title }}</a></li>{% endfor %}
+    </ul>
+</footer>
+{% endif %}
+{% endblock %}

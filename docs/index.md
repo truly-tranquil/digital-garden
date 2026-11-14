@@ -1,4 +1,6 @@
 ---
-template: home.html
+title: welcome
+date: "2026-11-13"
 ---
-# <picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><img src="assets/favicon.gif" alt=""></picture> welcome to my digital garden <picture><source srcset="assets/favicon.ico" media="(prefers-reduced-motion: reduce)"><img src="assets/favicon.gif" alt=""></picture>
+
+this is my garden.
