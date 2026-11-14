@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reference page - truly tranquil&#39;s</title>
+    <link rel="stylesheet" href="/garden.css">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (!t && window.matchMedia("(prefers-color-scheme: dark)").matches) { t = "dark"; }
+                if (t) { document.documentElement.setAttribute("data-theme", t); }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <header class="garden-header">
+        <div class="header-left">
+            <button id="sidebar-toggle" type="button" aria-expanded="false" aria-controls="site-map">index</button>
+            <button id="random-note" type="button">random</button>
+        </div>
+        <form id="mkdocs-search-form" role="search">
+            <input id="search-input" type="search" placeholder="search" autocomplete="off" aria-label="Search the garden">
+            <div class="search-dd" id="search-dd" hidden></div>
+        </form>
+        <div class="header-brand">
+            <button id="mode-toggle" type="button" aria-label="Toggle dark mode"></button>
+            <a class="garden-logo" href="/">truly tranquil&#39;s</a>
+        </div>
+    </header>
+    <div class="garden-container sidebar-collapsed has-toc toc-collapsed" id="garden-container">
+        <nav class="garden-sidebar" id="site-map" aria-label="Site map">
+            
+<ul>
+    
+    
+    <li><a href="/index.html">welcome</a></li>
+    
+    
+    
+    <li><a href="/manifesto.html">manifesto</a></li>
+    
+    
+    
+    <li><a href="/about.html">about the author</a></li>
+    
+    
+    
+    <li>
+        <details>
+            <summary>seedlings</summary>
+            
+<ul>
+    
+    
+    <li><a href="/seedlings/reference-page.html">reference page</a></li>
+    
+    
+</ul>
+
+        </details>
+    </li>
+    
+    
+    
+    <li>
+        <details>
+            <summary>buds</summary>
+            
+<ul>
+    
+</ul>
+
+        </details>
+    </li>
+    
+    
+    
+    <li>
+        <details>
+            <summary>evergreens</summary>
+            
+<ul>
+    
+</ul>
+
+        </details>
+    </li>
+    
+    
+    
+    <li>
+        <details>
+            <summary>by-tag</summary>
+            
+<ul>
+    
+    
+    <li>
+        <details>
+            <summary>intro</summary>
+            
+<ul>
+    
+    
+    <li><a href="/seedlings/reference-page.html">reference page</a></li>
+    
+    
+</ul>
+
+        </details>
+    </li>
+    
+    
+</ul>
+
+        </details>
+    </li>
+    
+    
+</ul>
+
+        </nav>
+        <main class="garden-content">
+            
+<div class="page-meta">
+    <a class="badge stage-seedling" href="/seedlings/index.html">seedling</a>
+    <a class="tag" href="/by-tag/index.html#tag-intro">#intro</a>
+    
+    <time class="date">tended 2026-11-13</time>
+</div>
+
+<article class="garden-article">
+    <h1>reference page</h1>
+    <h2 id="extensions-test">Extensions test<a class="headerlink" href="#extensions-test" title="Link to this section">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">a note</p>
+<p>a work.</p>
+</div>
+<details class="tip">
+<summary>collapsible</summary>
+<p>click to open.</p>
+</details>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">tab one</label><label for="__tabbed_1_2">tab two</label><label for="__tabbed_1_3">tab three</label><label for="__tabbed_1_4">tab four</label><label for="__tabbed_1_5">tab five</label><label for="__tabbed_1_6">tab six</label><label for="__tabbed_1_7">tab seven</label><label for="__tabbed_1_8">tab eight</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+<div class="tabbed-block">
+<p>not the first tab.</p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> done task</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> open task</li>
+</ul>
+<p><mark>highlight</mark> and H<sub>2</sub>O and x<sup>2</sup> and ++ctrl+c++</p>
+<p>footnote here.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<pre class="highlight"><code class="language-python">print("hello")</code></pre>
+<div class="mermaid">graph LR
+  A --&gt; B</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>the footnote text.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+</article>
+
+
+<footer class="garden-footer">
+    <p class="related-title">related notes</p>
+    <ul>
+        <li><a href="/about.html">about the author</a></li><li><a href="/manifesto.html">manifesto</a></li>
+    </ul>
+</footer>
+
+
+        </main>
+        
+        <aside class="toc-drawer" id="toc-drawer">
+            <button class="drawer-tab toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-panel" aria-label="Toggle table of contents">&#8801;</button>
+            <div class="toc-panel" id="toc-panel">
+                <p class="toc-title">on this page</p>
+                <div class="toc">
+<ul>
+<li><a href="#extensions-test">Extensions test</a></li>
+</ul>
+</div>
+
+            </div>
+        </aside>
+        
+    </div>
+    <script src="/garden.js"></script>
+</body>
+</html>
