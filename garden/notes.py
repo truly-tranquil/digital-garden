@@ -10,7 +10,6 @@ from urllib.parse import unquote
 import yaml
 
 from garden.dates import git_dates_for_files, validated_date
-from garden.icons import ICON_NAMES
 from garden.garden_state import (
     backlinks,
     lookup,
@@ -21,6 +20,7 @@ from garden.garden_state import (
     warn,
     warnings,
 )
+from garden.icons import ICON_NAMES
 from garden.links import link_context
 from garden.parsing import (
     FRONT,
@@ -38,6 +38,7 @@ from garden.parsing import (
 STAGE_BY_FOLDER = {'seedlings': 'seedling', 'buds': 'bud', 'evergreens': 'evergreen'}
 STAGE_INDEX = {folder + '/index.md': stage for folder, stage in STAGE_BY_FOLDER.items()}
 TAG_PAGE = 'by-tag/index.md'
+
 
 def is_listed(note):
     """True for notes that appear in indexes, the feed and the graph."""
