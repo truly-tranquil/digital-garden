@@ -11,6 +11,7 @@ import tempfile
 import yaml
 
 from garden.garden_state import referenced_media
+from garden.notes import is_listed
 from garden.output import listed_tag_slugs, write_site_files
 from garden.utils import garden
 from garden.utils.assets import (
@@ -155,6 +156,32 @@ def build_garden(dist_dir=None):
             os.path.join(temp_dir, "graph.html"),
             rebase(render_graph(config, nav_notes=nav_notes, graph=graph), base),
         )
+
+        # --- Search Index ---
+        search_entries = []
+        for src, n in notes.items():
+            if n.get("draft"):
+                continue
+            # URL should be rebased with base prefix
+            url = _rebase_url("/" + src[:-3] + ".html", base)
+            search_entries.append(
+                {
+                    "title": n.get("title", ""),
+                    "url": url,
+                    "stage": n.get("stage"),
+                    "tags": n.get("tags") or [],
+                    "excerpt": n.get("excerpt", ""),
+                    "text": n.get("_body", ""),
+                    "listed": is_listed(n),
+                    "random": n.get("random", True),
+                    "icon": n.get("icon"),
+                }
+            )
+        write(
+            os.path.join(temp_dir, "search-index.json"),
+            json.dumps(search_entries, ensure_ascii=False, indent=2),
+        )
+
         write(
             os.path.join(temp_dir, "404.html"),
             rebase(render_404(config, nav_notes=nav_notes), base),

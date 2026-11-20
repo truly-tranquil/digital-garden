@@ -2,12 +2,8 @@
 title: start here
 ---
 
-# Start Here
+welcome to the digital garden. here are a few paths to begin:
 
-Welcome to the digital garden. Here are a few paths to begin:
-
-- [[about]] — a brief intro
-- [[manifesto]] — guiding principles
+- [[manifesto]] — guiding principles and philosophies
+- [[about]] — a brief introduction to me!
 - [tags](/by-tag/index.html) — by topic
-
-Each note is at its own pace. Some are seedlings, some are evergreens. Browse at your own speed.

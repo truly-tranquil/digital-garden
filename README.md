@@ -48,9 +48,16 @@ The build renders each listed note into `dist/`, plus:
 - `/sitemap.xml` — sitemap of listed pages
 - `/robots.txt` — robots exclusion file
 
-## navigation
+## navigation and appearance
 
-The header has a "nav." button (opens the site compass dialog), a random note button, a theme look switcher, a light/dark toggle, and a search form. The compass dialog has wells for home, manifesto, about, seedlings, buds, and evergreens. The footer links to about. The default look is **dusk** in light mode, which the look switcher names **dawn**; the theme and dark-mode choices are remembered in localStorage.
+The header contains:
+- Left: "nav." button (opens the site compass dialog) and a random note button
+- Center: search box (the single global search form)
+- Right: an appearance menu (combining look theme and light/dark mode) and the site title / logo
+
+The sliding TOC drawer is removed in favor of an in-article Table of Contents inside `.garden-article`. All four looks (`bubblegum`, `meadow`, `pond`, `dusk`) are preserved, with `dusk` in light mode (dawn) as the default. Choices are remembered in localStorage.
+
+The compass dialog has wells for home, manifesto, about, seedlings, buds, and evergreens. The footer links to about.
 
 ## note pages
 

@@ -20,18 +20,28 @@ export function initNav() {
   }
 
   if (random) {
+    let cachedNotes = null;
     random.addEventListener("click", () => {
-      fetch(GARDEN_BASE + "search-index.json")
-        .then((r) => { return r.json(); })
+      const fetchPromise = cachedNotes
+        ? Promise.resolve(cachedNotes)
+        : fetch(GARDEN_BASE + "search-index.json")
+            .then((r) => r.json())
+            .then((data) => {
+              cachedNotes = data;
+              return data;
+            });
+
+      fetchPromise
         .then((notes) => {
-          const randomPool = notes.filter((n) => { return n.listed && n.random !== false; });
+          const randomPool = notes.filter((n) => n.listed && n.random !== false);
           const here = window.location.pathname;
-          const others = randomPool.filter((n) => { return n.url !== here; });
+          const others = randomPool.filter((n) => n.url !== here);
           const pool = others.length ? others : randomPool;
           if (pool.length) {
             window.location.href = pool[Math.floor(Math.random() * pool.length)].url;
           }
-        });
+        })
+        .catch(() => {});
     });
   }
 

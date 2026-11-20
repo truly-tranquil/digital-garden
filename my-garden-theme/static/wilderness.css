@@ -353,13 +353,22 @@
   color: var(--on-accent);
 }
 
-/* tags grow like leaves */
+/* tags grow like leaves: organic, asymmetrical curves and gentle tilts */
 .tag {
-  border-radius: 70% 30% 65% 35% / 45% 60% 40% 55%;
-  transform: rotate(-0.4deg);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  transform: rotate(-0.5deg);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 a.tag:nth-child(even) {
-  transform: rotate(0.5deg);
+  border-radius: 18px 255px 20px 225px / 225px 20px 240px 18px;
+  transform: rotate(0.6deg);
+}
+a.tag:nth-child(3n) {
+  border-radius: 240px 22px 190px 25px / 18px 230px 25px 210px;
+  transform: rotate(-0.8deg);
+}
+a.tag:hover {
+  transform: rotate(0deg) scale(1.05);
 }
 /* badges settle like pebbles */
 .badge {
