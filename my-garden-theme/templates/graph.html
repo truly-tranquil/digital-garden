@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="garden-article graph-page">
+    <h1>garden graph</h1>
+    <p class="graph-hint">each dot is a note. solid lines are links between notes, and dashed lines connect notes to their tags. drag to rearrange, scroll or pinch to zoom, and click or tap a note to open it.</p>
+    <div class="graph-controls">
+        <button class="graph-btn" id="graph-tags" type="button" aria-pressed="true">tags</button>
+        <button class="graph-btn" id="graph-fit" type="button">reset view</button>
+        <button class="graph-chip" type="button" data-stage="seedling" aria-pressed="true" style="--dot: var(--rb-3)"><span class="dot"></span>seedlings</button>
+        <button class="graph-chip" type="button" data-stage="bud" aria-pressed="true" style="--dot: var(--rb-4)"><span class="dot"></span>buds</button>
+        <button class="graph-chip" type="button" data-stage="evergreen" aria-pressed="true" style="--dot: var(--rb-5)"><span class="dot"></span>evergreens</button>
+    </div>
+    <div class="graph-stage" id="graph-stage">
+        <canvas id="graph-canvas" role="img" aria-label="Graph of garden notes and how they link to each other. A plain text list of the notes and their links is available below."></canvas>
+        <div class="graph-status" id="graph-status" role="status">growing the graph&hellip;</div>
+    </div>
+    <noscript><p>the graph needs javascript to draw. a plain text list of the notes it shows is available below.</p></noscript>
+    {% if graph_view.notes or graph_view.tags %}
+    <details class="graph-text" id="graph-text">
+        <summary>text list of the graph</summary>
+        <p class="graph-text-intro">every note in the graph, the notes it connects to, and its tags &mdash; for keyboard users, screen readers, and anyone who cannot use the canvas. each title links to the note.</p>
+        <ul class="graph-note-list">
+            {% for note in graph_view.notes %}
+            <li>
+                <div class="graph-note-head">
+                    <a href="{{ note.url }}">{{ note.title }}</a>
+                    {% if note.stage %}<small class="graph-note-stage">{{ note.stage }}</small>{% endif %}
+                </div>
+                {% if note.links %}
+                <div class="graph-note-links">connected to: {% for link in note.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</div>
+                {% endif %}
+                {% if note.tags %}
+                <div class="graph-note-tags">tags: {% for tag in note.tags %}<a href="{{ tag.url }}">{{ tag.title }}</a>{% if not loop.last %} {% endif %}{% endfor %}</div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% if graph_view.tags %}
+        <h2>tags</h2>
+        <ul class="graph-tag-list">
+            {% for tag in graph_view.tags %}
+            <li><a href="{{ tag.url }}">{{ tag.title }}</a> <small>{{ tag.count }} note{% if tag.count != 1 %}s{% endif %}</small></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </details>
+    {% endif %}
+</article>
+<script type="module" src="/graph.js"></script>
+{% endblock %}

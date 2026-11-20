@@ -1,0 +1,25 @@
+---
+title: "Leitner my goat"
+stage: 
+tags: []
+planted: "2026-11-15"
+tended: "2026-11-15"
+links_to: []
+unlisted: false
+archived: false
+random: true
+icon: 
+aliases: []
+draft: true
+---
+# leitner my goat
+
+- leitner created a technique involving 5 boxes and flashcards
+- each box is studied at a different interval
+	- 1 day
+	- 3 days
+	- 7 days
+	- 14 days
+	- 30 days
+- every time u get an answer right it moves up a box
+	- every time u get it wrong, go all the way back to the first box

@@ -1,0 +1,69 @@
+/* Print stylesheet for the digital garden */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .page-meta,
+  .page-tools,
+  .widgets,
+  .backlinks,
+  .mentions,
+  .related,
+  .webmentions,
+  .site-footer,
+  .garden-header,
+  .garden-container,
+  .path-trail,
+  .skip-link,
+  .garden-sidebar,
+  .garden-content,
+  .toc-drawer,
+  .trailmap,
+  #to-top {
+    visibility: visible;
+  }
+  .garden-article {
+    visibility: visible;
+    margin: 0;
+    padding: 0;
+  }
+  .garden-article * {
+    visibility: visible !important;
+    position: static !important;
+    box-sizing: border-box !important;
+  }
+  .doodle {
+    page-break-inside: avoid;
+  }
+  figcaption {
+    font-style: italic;
+    font-size: smaller;
+    margin-top: 0.5em;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  pre,
+  code {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 2px 4px;
+  }
+  .stage-card,
+  .stage-cards {
+    break-inside: avoid;
+  }
+  .backlink-group,
+  .mention-group {
+    page-break-inside: avoid;
+  }
+  .health-block {
+    margin-bottom: 1em;
+  }
+  .tag-description,
+  .tag-count {
+    orphans: 3;
+    widows: 3;
+  }
+}

@@ -1,0 +1,527 @@
+/* Small shared UI pieces: utilities, graph and keyboard hints. */
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 300;
+  padding: 0.6rem 1.2rem;
+  border: var(--bw) solid var(--accent);
+  border-radius: var(--r-m);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.garden-content:focus {
+  outline: none;
+}
+
+.search-dd mark {
+  background: none;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.garden-article .lost {
+  max-width: 640px;
+  margin: 4vh auto;
+  text-align: center;
+}
+
+.garden-article .lost h1 {
+  margin: 0;
+  font-size: 4rem;
+}
+
+.garden-article .lost p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
+.lost .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+a.random-btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.garden-article a.random-btn {
+  color: var(--text);
+}
+
+.garden-article a.random-btn:hover {
+  color: var(--on-accent);
+}
+
+.skip-link, .toc-drawer, .breadcrumbs, .copy-btn, #to-top, .garden-header, .garden-sidebar, .page-meta, .garden-footer, .backlinks, .widgets,
+.search-dd, .lost, .garden-radio,
+.garden-article h1, .garden-article h2, .garden-article h3,
+.garden-article h4, .garden-article h5, .garden-article h6 {
+  text-transform: lowercase;
+}
+
+.graph-hint {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.graph-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.25rem 0;
+}
+
+.graph-btn, .graph-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.3rem 0.9rem;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: var(--r-m);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+.graph-btn:hover, .graph-btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.graph-chip {
+  border-color: var(--dot, var(--ui-border));
+}
+
+.graph-chip:hover {
+  background: var(--surface);
+}
+
+.graph-chip[aria-pressed="false"] {
+  border-style: dashed;
+  opacity: 0.5;
+}
+
+.graph-chip .dot {
+  display: block;
+  flex: none;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: var(--dot, var(--accent));
+}
+
+.graph-stage {
+  position: relative;
+  overflow: hidden;
+  height: min(72vh, 720px);
+  min-height: 340px;
+  border: var(--bw) solid var(--border);
+  border-radius: var(--r-l);
+  background: var(--surface);
+}
+
+.graph-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.graph-status {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  text-align: center;
+}
+
+.graph-status[hidden] {
+  display: none;
+}
+
+.graph-text {
+  margin: 1.25rem 0;
+  text-align: left;
+}
+
+.graph-text summary {
+  font-weight: 700;
+}
+
+.graph-text summary:hover {
+  color: var(--accent-text);
+}
+
+.graph-text-intro {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.graph-note-list {
+  padding-inline: 0;
+  list-style: none;
+}
+
+.graph-note-list > li {
+  padding: 0.4rem 0;
+  border-top: var(--bw) solid var(--ui-border);
+}
+
+.graph-note-list > li:first-child {
+  border-top: none;
+}
+
+.graph-note-stage {
+  margin-left: 0.5em;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.graph-note-links, .graph-note-tags {
+  font-size: 0.9rem;
+}
+
+.graph-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  padding-inline: 0;
+  list-style: none;
+}
+
+/* Stage index cards and sidebar counts. */
+.nav-count {
+  display: inline-block;
+  min-width: 1.6em;
+  margin-left: 0.45em;
+  padding: 0.05em 0.45em;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.72em;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.nav-count.stage-seedling {
+  border-color: var(--rb-3);
+}
+
+.nav-count.stage-bud {
+  border-color: var(--rb-4);
+}
+
+.nav-count.stage-evergreen {
+  border-color: var(--rb-5);
+}
+
+.stage-count {
+  margin: 0 0 0.5rem;
+  color: var(--text);
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.stage-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+}
+
+.stage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.8rem 1rem;
+  border: var(--bw) solid var(--ui-border);
+  border-left: var(--bw-bar) solid var(--accent);
+  border-radius: var(--r-m);
+  background: var(--bg);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.stage-card:hover {
+  border-color: var(--accent);
+}
+
+.stage-card.stage-seedling {
+  border-left-color: var(--rb-3);
+}
+
+.stage-card.stage-bud {
+  border-left-color: var(--rb-4);
+}
+
+.stage-card.stage-evergreen {
+  border-left-color: var(--rb-5);
+}
+
+.stage-card-title {
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.stage-card-excerpt {
+  color: var(--text);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* Component library: content building blocks. All are opt-in classes. */
+
+/* Inline icon from the svg sprite in base.html. Full name list:
+   docs/for-my-reference/icons.md. Usage: <svg class="icon"><use href="#i-book"/></svg> */
+.icon {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+}
+
+/* Note icon: the glyph a note registered in its front matter. Injected
+   automatically on links to the note (body links, outgoing chips, backlinks,
+   related, tag and stage lists, search results, widgets). */
+.note-icon {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.28em;
+  vertical-align: middle;
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Card with an icon: <div class="card card-icon" markdown> icon + content.
+   The icon may land as a direct svg child (raw html) or wrapped in a
+   paragraph (md_in_html) â€” handle both. */
+.card-icon {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.card-icon > .icon,
+.card-icon > p:first-child > .icon {
+  flex: none;
+  width: 1.6em;
+  height: 1.6em;
+  color: var(--accent-text);
+}
+
+.card-icon > p:first-child {
+  margin: 0.05em 0 0;
+}
+
+/* Cards tinted by stage instead of the page accent. */
+.card.stage-seedling {
+  border-top-color: var(--rb-3);
+}
+
+.card.stage-bud {
+  border-top-color: var(--rb-4);
+}
+
+.card.stage-evergreen {
+  border-top-color: var(--rb-5);
+}
+
+/* Seed packet: an unplanted thought. Dashed border, sprout marker. */
+.seed-packet {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.1rem 0.75rem 2.75rem;
+  border: var(--bw) dashed var(--rb-3);
+  border-radius: var(--r-l);
+  background: color-mix(in srgb, var(--rb-3) 12%, var(--surface));
+}
+
+.seed-packet::before {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  top: 0.85rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: var(--rb-3);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21v-7'/%3E%3Cpath d='M12 14c0-4 3-7 8-7 0 5-3 8-8 7z'/%3E%3Cpath d='M12 12c0-4-2.5-6.5-8-6.5 0 5 3 7.5 8 6.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21v-7'/%3E%3Cpath d='M12 14c0-4 3-7 8-7 0 5-3 8-8 7z'/%3E%3Cpath d='M12 12c0-4-2.5-6.5-8-6.5 0 5 3 7.5 8 6.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Pull quote: a quote lifted out of the flow, centred and oversized. */
+.garden-article blockquote.pull {
+  margin: 2.5rem auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  text-align: center;
+  color: var(--accent-text);
+  font-size: 1.4rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.garden-article blockquote.pull::before {
+  display: block;
+  content: "\201C";
+  color: var(--accent);
+  font-size: 3rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+/* Sidenote: a note in the margin on wide screens, full width on narrow. */
+.sidenote {
+  float: right;
+  clear: right;
+  width: 12.5rem;
+  margin: 0.2em 0 0.9rem 1.4rem;
+  padding: 0.5rem 0.75rem;
+  border-left: var(--bw-bar) solid var(--border);
+  border-radius: var(--r-s);
+  background: var(--surface);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 800px) {
+  .sidenote {
+    float: none;
+    width: auto;
+    margin: 1rem 0;
+  }
+}
+
+/* Vine divider: <hr class="vine">, Anna Magenta's open leaf-vine on a dashed rule. */
+.garden-article hr.vine {
+  position: relative;
+  margin: 2.5rem auto;
+  border: 0;
+  height: 1.5rem;
+  background: none;
+  overflow: visible;
+}
+
+.garden-article hr.vine::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: var(--bw) dashed var(--border);
+}
+
+.garden-article hr.vine::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9.2rem;
+  height: 1.5rem;
+  transform: translate(-50%, -50%);
+  background: var(--rb-3);
+  -webkit-mask: var(--vine-mask) center / contain no-repeat;
+  mask: var(--vine-mask) center / contain no-repeat;
+}
+
+/* Whimsy: the brand sprout grows in on load and can be clicked to grow again.
+   Static under reduced motion. It takes the current look's accent. */
+.brand-sprout {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  color: var(--accent);
+  cursor: pointer;
+}
+.brand-sprout:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.brand-sprout .sprout-leaf {
+  fill: color-mix(in srgb, var(--accent) 30%, transparent);
+  transform-box: fill-box;
+}
+.brand-sprout .sprout-leaf-l {
+  transform-origin: 100% 90%;
+}
+.brand-sprout .sprout-leaf-r {
+  transform-origin: 0% 90%;
+}
+.brand-sprout path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-sprout.sprout-play .sprout-soil {
+    animation: sprout-draw 0.45s ease-out backwards;
+  }
+  .brand-sprout.sprout-play .sprout-stem {
+    animation: sprout-draw 0.5s 0.1s ease-out backwards;
+  }
+  .brand-sprout.sprout-play .sprout-leaf-l {
+    animation: sprout-pop 0.5s 0.45s backwards;
+  }
+  .brand-sprout.sprout-play .sprout-leaf-r {
+    animation: sprout-pop 0.5s 0.58s backwards;
+  }
+}
+@keyframes sprout-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sprout-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,136 @@
+{% set site_cfg = (config.get('site') or {}) if config is mapping else {} %}
+{% set license_cfg = site_cfg.get('license') or {} %}
+{% set author_cfg = site_cfg.get('author') or {} %}
+{% macro render_items(items) %}
+<ul>
+    {% for item in items %}
+    {% if item.children is defined %}
+    <li>
+        <details>
+            <summary>{{ item.title }}{% if item.count is defined %}<span class="nav-count{% if item.stage is defined %} stage-{{ item.stage }}{% endif %}">{{ item.count }}</span>{% endif %}</summary>
+            {{ render_items(item.children) }}
+        </details>
+    </li>
+    {% else %}
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endmacro %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>document.documentElement.classList.remove("no-js");</script>
+    <title>{{ title }} - {{ config.site.title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta property="og:title" content="{{ og_title }}">
+    <meta property="og:description" content="{{ og_description }}">
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    {% if og_image %}
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:width" content="{{ config.get('og_image_width', 1200) }}">
+    <meta property="og:image:height" content="{{ config.get('og_image_height', 630) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="author" content="{{ author_cfg.get('name', 'Truly Tranquil') }}">
+    <link rel="license" href="{{ license_cfg.get('url', 'https://creativecommons.org/licenses/by-nc-sa/4.0/') }}">
+    <link rel="icon" href="{{ base_url }}/assets/images/favicon.ico">
+    <link rel="alternate" type="application/atom+xml" title="{{ config.site.title }} — atom" href="/feed.xml">
+    <link rel="alternate" type="application/feed+json" title="{{ config.site.title }} — json" href="/feed.json">
+    <link rel="stylesheet" href="/tokens.css">
+    <link rel="stylesheet" href="/layout.css">
+    <link rel="stylesheet" href="/content.css">
+    <link rel="stylesheet" href="/components.css">
+    <link rel="stylesheet" href="/wilderness.css">
+    <link rel="stylesheet" href="/print.css" media="print">
+    <script>
+        (function () {
+            try {
+                const t = localStorage.getItem("theme") || "light";
+                document.documentElement.setAttribute("data-theme", t);
+                const look = localStorage.getItem("look");
+                const known = look === "classic" ? "bubblegum" : look;
+                const looks = ["bubblegum", "meadow", "pond", "dusk"];
+                document.documentElement.setAttribute(
+                    "data-look",
+                    known && looks.includes(known) ? known : "dusk"
+                );
+            } catch {}
+        })();
+    </script>
+</head>
+<body data-page="{{ page_url | default('') }}">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+        {% include "_icons.html" %}
+    </svg>
+    <a class="skip-link" href="#main">skip to content</a>
+    <header class="garden-header">
+        <div class="header-left">
+            <button id="trailmap-toggle" type="button" aria-expanded="false" aria-label="Open the site compass" title="nav. (m)">nav.</button>
+            <button id="random-note" type="button" aria-haspopup="menu" aria-expanded="false" title="random note">random</button>
+            <button id="look-toggle" type="button" data-current="dusk" aria-label="Switch theme">theme</button>
+            <button id="mode-toggle" type="button" aria-label="Toggle dark mode"></button>
+        </div>
+        <form id="garden-search-form" role="search" action="/search/index.html" method="get">
+            <input id="search-input"
+                   type="search"
+                   name="q"
+                   role="combobox"
+                   aria-autocomplete="list"
+                   aria-controls="search-listbox"
+                   aria-expanded="false"
+                   aria-activedescendant=""
+                   placeholder="search (press /)"
+                   autocomplete="off"
+                   aria-label="Search the garden">
+            <div class="sr-only" id="search-status" role="status" aria-live="polite"></div>
+        </form>
+        <div class="header-brand">
+            <a class="garden-logo" href="/">{{ config.site.title }}</a>
+        </div>
+    </header>
+    <div class="garden-container sidebar-collapsed has-toc toc-collapsed" id="garden-container">
+        <nav class="garden-sidebar" id="site-map" aria-label="Site map">
+            {{ render_items(nav_notes) }}
+        </nav>
+        <main class="garden-content" id="main" tabindex="-1">
+            {% block content %}{% endblock %}
+        </main>
+        <nav class="path-trail" id="path-trail" aria-label="Your path through the garden"></nav>
+        <footer class="site-footer">
+            <p class="footer-license">
+                <a href="/">Digital Garden</a>
+                <span class="footer-copy">&copy; {{ site_cfg.get('copyright_year', 2026) }} by</span>
+                <a href="{{ author_cfg.get('url', 'https://linktr.ee/truly.tranquil') }}" rel="me">{{ author_cfg.get('name', 'Truly Tranquil') }}</a>
+                <span class="footer-copy">is licensed under</span>
+                <a href="{{ license_cfg.get('url', 'https://creativecommons.org/licenses/by-nc-sa/4.0/') }}" rel="license">{{ license_cfg.get('name', 'CC BY-NC-SA 4.0') }}</a>
+            </p>
+            <p class="footer-links">
+                <a href="/about.html">about</a>
+            </p>
+        </footer>
+        <div class="trailmap" id="trailmap" hidden role="dialog" aria-modal="true" aria-labelledby="trailmap-title">
+            <div class="trailmap-panel">
+                <button class="trailmap-close" id="trailmap-close" type="button" aria-label="Close the site compass">&times;</button>
+                <p class="trailmap-hint">press <kbd>m</kbd> to toggle the compass, <kbd>esc</kbd> to close it.</p>
+                <div class="trailmap-wells">
+                    <ul class="trailmap-grid">
+                        <li><a class="well" href="/"><svg class="icon" aria-hidden="true"><use href="#i-house"></use></svg>home</a></li>
+                        <li><a class="well" href="/manifesto.html"><svg class="icon" aria-hidden="true"><use href="#i-article"></use></svg>manifesto</a></li>
+                        <li><a class="well" href="/about.html"><svg class="icon" aria-hidden="true"><use href="#i-profile"></use></svg>about</a></li>
+                        <li><a class="well" href="/seedlings/index.html"><svg class="icon" aria-hidden="true"><use href="#i-plant"></use></svg>seedlings</a></li>
+                        <li><a class="well" href="/buds/index.html"><svg class="icon" aria-hidden="true"><use href="#i-flower"></use></svg>buds</a></li>
+                        <li><a class="well" href="/evergreens/index.html"><svg class="icon" aria-hidden="true"><use href="#i-tree-evergreen"></use></svg>evergreens</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="to-top" type="button" hidden aria-label="Back to top">&uarr; top</button>
+    <script type="module" src="/garden.js"></script>
+</body>
+</html>

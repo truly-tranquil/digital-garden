@@ -1,0 +1,25 @@
+dist/
+garden_dist_*/
+garden_backup_*/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# virtual environments
+.venv/
+venv/
+
+# tool caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# editors and operating systems
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-meta">
+    {% if stage %}<a class="badge stage-{{ stage }}" href="/{{ stage_folder }}/index.html">{{ stage }}</a>{% endif %}
+    {% for tag in tags %}{% if tag.linked %}<a class="tag" href="/tags/{{ tag.slug }}/index.html">#{{ tag.name }}</a>{% else %}<span class="tag">#{{ tag.name }}</span>{% endif %}{% endfor %}
+    {% if planted %}<time class="date" datetime="{{ planted }}">planted {{ planted }}</time>{% endif %}
+    {% if tended %}<time class="date" datetime="{{ tended }}" title="{{ tended }}">tended {{ tended_rel }}</time>{% endif %}
+    {% if reading_minutes %}<span class="date read-time">{{ reading_minutes }} min read</span>{% endif %}
+</div>
+<article class="garden-article{% if stage %} stage-{{ stage }}{% endif %}" data-page-url="{{ page_url }}" data-page-title="{{ title }}">
+    {% if show_title %}<h1>{{ title }}</h1>{% endif %}
+    {{ content | safe }}
+</article>
+{% endblock %}

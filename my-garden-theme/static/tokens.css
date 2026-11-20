@@ -1,0 +1,165 @@
+/* Design tokens, self-hosted fonts and base element styles. */
+
+:root {
+  color-scheme: light;
+
+  --bg: #EEE6DD;
+  --surface: #E6DCD1;
+  --text: #575279;
+  --select: #D0CFCE;
+  --border: #D0CFCE;
+  --ui-border: #80798A;
+  --outline-l: #EEB796;
+  --outline-r: #A0CDF3;
+  --permalink: #000000;
+
+  --footer-bg: #DED2C5;
+  --footer-link: #7E356F;
+
+  --accent: #C87EB9;
+  --accent-text: #964085;
+  --on-accent: #262B40;
+  --tag-bg: #EBDEDA;
+
+  --on-folder: #262B40;
+
+  --r-s: 10px;
+  --r-m: 16px;
+  --r-l: 24px;
+  --bw: 3px;
+  --bw-bar: 6px;
+
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+  --c-red: #DB788E;
+  --c-orange: #EE7A45;
+  --c-yellow: #E8BA78;
+  --c-green: #92C17E;
+  --c-turquoise: #7BB9B9;
+  --c-blue: #5AAEF0;
+  --c-indigo: #85A6EA;
+  --c-purple: #A68BC0;
+
+  --rb-0: var(--c-red);
+  --rb-1: var(--c-orange);
+  --rb-2: var(--c-yellow);
+  --rb-3: var(--c-green);
+  --rb-4: var(--c-turquoise);
+  --rb-5: var(--c-blue);
+  --rb-6: var(--c-indigo);
+  --rb-7: var(--c-purple);
+
+  --rbt-0: color-mix(in srgb, var(--rb-0) 52%, #262B40);
+  --rbt-1: color-mix(in srgb, var(--rb-1) 50%, #262B40);
+  --rbt-2: color-mix(in srgb, var(--rb-2) 36%, #262B40);
+  --rbt-3: color-mix(in srgb, var(--rb-3) 39%, #262B40);
+  --rbt-4: color-mix(in srgb, var(--rb-4) 41%, #262B40);
+  --rbt-5: color-mix(in srgb, var(--rb-5) 43%, #262B40);
+  --rbt-6: color-mix(in srgb, var(--rb-6) 43%, #262B40);
+  --rbt-7: color-mix(in srgb, var(--rb-7) 50%, #262B40);
+
+  --rbh-0: color-mix(in srgb, var(--rb-0) 77%, #262B40);
+  --rbh-1: color-mix(in srgb, var(--rb-1) 73%, #262B40);
+  --rbh-2: color-mix(in srgb, var(--rb-2) 53%, #262B40);
+  --rbh-3: color-mix(in srgb, var(--rb-3) 58%, #262B40);
+  --rbh-4: color-mix(in srgb, var(--rb-4) 61%, #262B40);
+  --rbh-5: color-mix(in srgb, var(--rb-5) 65%, #262B40);
+  --rbh-6: color-mix(in srgb, var(--rb-6) 65%, #262B40);
+  --rbh-7: color-mix(in srgb, var(--rb-7) 75%, #262B40);
+
+  --h1: var(--rbh-7);
+  --h2: var(--rbh-0);
+  --h3: var(--rbh-1);
+  --h4: var(--rbh-2);
+  --h5: var(--rbh-3);
+  --h6: var(--rbh-6);
+
+  --folder: var(--rb-0);
+
+  /* The vine glyph used by the vine dividers.
+     Artwork: Anna Magenta, Unsplash (free to use, credited voluntarily). */
+  --vine-mask: url('assets/images/vine-divider.svg');
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #262B40;
+  --surface: #1D2234;
+  --text: #C6CEEF;
+  --select: #62677E;
+  --border: #62677E;
+  --ui-border: #8B92B3;
+  --outline-l: #7CB8EE;
+  --outline-r: #C185B3;
+  --permalink: #C6CEEF;
+
+  --footer-bg: #191E2E;
+  --footer-link: #C87EB9;
+
+  --accent-text: #C87EB9;
+  --tag-bg: #1D2234;
+
+  --c-red: #E96882;
+  --c-orange: #E0865C;
+
+  --rbt-0: var(--rb-0);
+  --rbt-1: var(--rb-1);
+  --rbt-2: var(--rb-2);
+  --rbt-3: var(--rb-3);
+  --rbt-4: var(--rb-4);
+  --rbt-5: var(--rb-5);
+  --rbt-6: var(--rb-6);
+  --rbt-7: var(--rb-7);
+  --rbh-0: var(--rb-0);
+  --rbh-1: var(--rb-1);
+  --rbh-2: var(--rb-2);
+  --rbh-3: var(--rb-3);
+  --rbh-4: var(--rb-4);
+  --rbh-5: var(--rb-5);
+  --rbh-6: var(--rb-6);
+  --rbh-7: var(--rb-7);
+}
+
+/* self-hosted Newsreader (variable weight and optical size). files live in docs/assets/fonts/ */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('assets/fonts/newsreader-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('assets/fonts/newsreader-italic-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  cursor: url('assets/images/cursor.cur'), auto;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  margin: 0;
+  overflow-x: clip;
+}
+
+input,
+textarea {
+  cursor: text;
+}
+
+::selection {
+  background: var(--select);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: var(--bw) solid var(--accent-text);
+  outline-offset: 2px;
+}

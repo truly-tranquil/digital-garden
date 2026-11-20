@@ -1,0 +1,24 @@
+# Tooling configuration. Dependency pins live in requirements.txt and
+# requirements-dev.txt so the install steps stay explicit and reviewable.
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = [".git", "__pycache__", "dist", "docs"]
+
+[tool.ruff.lint]
+# Explicit selection keeps CI stable when Ruff's built-in defaults change.
+select = ["E4", "E7", "E9", "F", "I", "UP", "B", "PIE"]
+ignore = [
+    "UP031", # printf-style % formatting is used throughout the build modules
+]
+
+[tool.ruff.format]
+quote-style = "preserve"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true
+

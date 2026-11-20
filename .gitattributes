@@ -1,0 +1,14 @@
+# Normalise text to LF in the repository; git converts on checkout if needed.
+* text=auto eol=lf
+
+# Never touch binary assets.
+*.woff2 binary
+*.woff binary
+*.cur binary
+*.ico binary
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.mp3 binary
+*.ogg binary

@@ -1,0 +1,15 @@
+site:
+  title: "digital garden"
+  description: "a place where ideas grow"
+  url: "https://truly-tranquil.github.io/digital-garden/"
+  copyright_year: 2026
+  author:
+    name: "Truly Tranquil"
+    url: "https://linktr.ee/truly.tranquil"
+  license:
+    name: "CC BY-NC-SA 4.0"
+    url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+
+paths:
+  source: docs
+  output: dist

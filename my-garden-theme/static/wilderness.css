@@ -1,0 +1,848 @@
+/* The wilderness experiment: wild, natural, untamed — with a well-trodden path through it.
+   Loaded after the rest of the theme; overrides the classics on purpose.
+
+   Four looks, each with a light and a dark face:
+     bubblegum — the classic palette (tokens.css supplies both modes; no overrides here)
+     meadow    — straw and moss; the default look
+     pond      — deep water and mint, leaning blue
+     dusk      — plum and ember; its light face is called *dawn*
+   The look lives in data-look, the mode in data-theme. Palettes are scoped to
+   both so any combination works. */
+
+/* ---------- look: bubblegum (the classic palette, light and dark) ---------- */
+/* Nothing to do: tokens.css owns :root and :root[data-theme="dark"]. */
+
+/* ---------- look: meadow (straw and moss) ---------- */
+
+:root[data-look="meadow"]:not([data-theme="dark"]) {
+  color-scheme: light;
+  --bg: #F1ECDC;
+  --surface: #E9E1C9;
+  --text: #47502E;
+  --select: #DCD4AF;
+  --border: #CFC29C;
+  --ui-border: #857C53;
+  --outline-l: #C9A36B;
+  --outline-r: #8FAE5C;
+  --permalink: #47502E;
+
+  --footer-bg: #E4DABD;
+  --footer-link: #5B7431;
+
+  --accent: #7C9A45;
+  --accent-text: #55682C;
+  --on-accent: #F7F4E6;
+  --tag-bg: #E1E9CB;
+
+  --on-folder: #F7F4E6;
+  --folder: #7C9A45;
+
+  --c-red: #C4775B;
+  --c-orange: #D0873F;
+  --c-yellow: #C9AE5A;
+  --c-green: #4F7B45;      /* seedling: a deeper leaf green, clear of the olive accent */
+  --c-turquoise: #5E8F7B;
+  --c-blue: #4F7A8F;
+  --c-indigo: #6B6FA3;
+  --c-purple: #8A6B93;
+}
+
+:root[data-look="meadow"][data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #23281B;
+  --surface: #1B2014;
+  --text: #D8DCC0;
+  --select: #3A4030;
+  --border: #3A4030;
+  --ui-border: #7E8662;
+  --outline-l: #8C7A4C;
+  --outline-r: #5F7A46;
+  --permalink: #D8DCC0;
+
+  --footer-bg: #181C11;
+  --footer-link: #A8C070;
+
+  --accent: #93B45C;
+  --accent-text: #B7D488;
+  --on-accent: #1E2416;
+  --tag-bg: #262B1C;
+
+  --on-folder: #1E2416;
+  --folder: #93B45C;
+
+  --c-red: #C97D6B;
+  --c-orange: #D79A5C;
+  --c-yellow: #CDB96B;
+  --c-green: #6FAF6A;
+  --c-turquoise: #5FA894;
+  --c-blue: #5C8FB0;
+  --c-indigo: #8280C0;
+  --c-purple: #A47FB8;
+
+  /* dark faces keep their hues at full strength, as pond and dusk do */
+  --rbt-0: var(--rb-0);
+  --rbt-1: var(--rb-1);
+  --rbt-2: var(--rb-2);
+  --rbt-3: var(--rb-3);
+  --rbt-4: var(--rb-4);
+  --rbt-5: var(--rb-5);
+  --rbt-6: var(--rb-6);
+  --rbt-7: var(--rb-7);
+  --rbh-0: var(--rb-0);
+  --rbh-1: var(--rb-1);
+  --rbh-2: var(--rb-2);
+  --rbh-3: var(--rb-3);
+  --rbh-4: var(--rb-4);
+  --rbh-5: var(--rb-5);
+  --rbh-6: var(--rb-6);
+  --rbh-7: var(--rb-7);
+}
+
+/* ---------- look: pond (deep water and mint, blue-leaning) ---------- */
+
+:root[data-look="pond"]:not([data-theme="dark"]) {
+  color-scheme: light;
+  --bg: #E4EFEC;
+  --surface: #D8E7E2;
+  --text: #24423D;
+  --select: #C4DAD2;
+  --border: #C4DAD2;
+  --ui-border: #5E8078;
+  --outline-l: #6FA394;
+  --outline-r: #5C86AE;
+  --permalink: #24423D;
+
+  --footer-bg: #D3E4DE;
+  --footer-link: #3C6E62;
+
+  --accent: #3E8F7A;
+  --accent-text: #2F6E5E;
+  --on-accent: #F2FAF6;
+  --tag-bg: #D8E9E2;
+
+  --on-folder: #F2FAF6;
+  --folder: #3E8F7A;
+
+  --c-red: #C06A6A;
+  --c-orange: #C58544;
+  --c-yellow: #B7A255;
+  --c-green: #5C9E5C;      /* seedling: leaf green, clear of the teal accent */
+  --c-turquoise: #3E9C92;
+  --c-blue: #3F7FB8;
+  --c-indigo: #6A74B8;
+  --c-purple: #8A6FB0;
+}
+
+:root[data-look="pond"][data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #152028;
+  --surface: #101A22;
+  --text: #B7CBD4;
+  --select: #293B4A;
+  --border: #293B4A;
+  --ui-border: #566980;
+  --outline-l: #3B6B6B;
+  --outline-r: #2E5E86;
+  --permalink: #B7CBD4;
+
+  --footer-bg: #0E1820;
+  --footer-link: #8CC9D6;
+
+  --accent: #4E9E8A;
+  --accent-text: #93D4C4;
+  --on-accent: #0D1B1F;
+  --tag-bg: #142027;
+
+  --on-folder: #0D1B1F;
+  --folder: #4E9E8A;
+
+  --c-red: #C97A86;
+  --c-orange: #C98F5A;
+  --c-yellow: #BFA35E;
+  --c-green: #68A96F;
+  --c-turquoise: #4F93A6;
+  --c-blue: #5289C4;
+  --c-indigo: #7480C8;
+  --c-purple: #9C7DC4;
+
+  --rbt-0: var(--rb-0);
+  --rbt-1: var(--rb-1);
+  --rbt-2: var(--rb-2);
+  --rbt-3: var(--rb-3);
+  --rbt-4: var(--rb-4);
+  --rbt-5: var(--rb-5);
+  --rbt-6: var(--rb-6);
+  --rbt-7: var(--rb-7);
+  --rbh-0: var(--rb-0);
+  --rbh-1: var(--rb-1);
+  --rbh-2: var(--rb-2);
+  --rbh-3: var(--rb-3);
+  --rbh-4: var(--rb-4);
+  --rbh-5: var(--rb-5);
+  --rbh-6: var(--rb-6);
+  --rbh-7: var(--rb-7);
+}
+
+/* ---------- look: dusk (plum and ember; its light face is "dawn") ---------- */
+
+:root[data-look="dusk"]:not([data-theme="dark"]) {
+  color-scheme: light;
+  --bg: #F8F0E9;
+  --surface: #F1E3D8;
+  --text: #4A3240;
+  --select: #E5D1C4;
+  --border: #E5D1C4;
+  --ui-border: #8C6E7E;
+  --outline-l: #D08A62;
+  --outline-r: #8A6FA8;
+  --permalink: #4A3240;
+
+  --footer-bg: #F0E1D4;
+  --footer-link: #9A5436;
+
+  --accent: #C97B3F;
+  --accent-text: #A05E2C;
+  --on-accent: #FFF6EC;
+  --tag-bg: #F0DFD2;
+
+  --on-folder: #FFF6EC;
+  --folder: #C97B3F;
+
+  --c-red: #C06262;
+  --c-orange: #C97B3F;
+  --c-yellow: #C4A34C;
+  --c-green: #6F9A4E;
+  --c-turquoise: #4E9C8C;
+  --c-blue: #5C7FB8;
+  --c-indigo: #7E6FC0;
+  --c-purple: #A46FB0;
+}
+
+:root[data-look="dusk"][data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #221A26;
+  --surface: #1B1420;
+  --text: #E5CDBB;
+  --select: #3C2F42;
+  --border: #3C2F42;
+  --ui-border: #6E5C77;
+  --outline-l: #8A5A44;
+  --outline-r: #5A4470;
+  --permalink: #E5CDBB;
+
+  --footer-bg: #181220;
+  --footer-link: #E3B073;
+
+  --accent: #C98A4B;
+  --accent-text: #E7B478;
+  --on-accent: #241712;
+  --tag-bg: #251D29;
+
+  --on-folder: #241712;
+  --folder: #C98A4B;
+
+  --c-red: #D08080;
+  --c-orange: #C9834F;
+  --c-yellow: #CBA85C;
+  --c-green: #7EA35C;
+  --c-turquoise: #5F9E94;
+  --c-blue: #5E85C2;
+  --c-indigo: #8A7BD6;
+  --c-purple: #B17FD0;
+
+  --rbt-0: var(--rb-0);
+  --rbt-1: var(--rb-1);
+  --rbt-2: var(--rb-2);
+  --rbt-3: var(--rb-3);
+  --rbt-4: var(--rb-4);
+  --rbt-5: var(--rb-5);
+  --rbt-6: var(--rb-6);
+  --rbt-7: var(--rb-7);
+  --rbh-0: var(--rb-0);
+  --rbh-1: var(--rb-1);
+  --rbh-2: var(--rb-2);
+  --rbh-3: var(--rb-3);
+  --rbh-4: var(--rb-4);
+  --rbh-5: var(--rb-5);
+  --rbh-6: var(--rb-6);
+  --rbh-7: var(--rb-7);
+}
+
+/* ---------- the shapes of the wild: lumpy borders, leaves, stones, pebbles ---------- */
+
+:root {
+  --blob-1: 58% 42% 55% 45% / 48% 58% 42% 52%;
+  --blob-2: 42% 58% 45% 55% / 55% 45% 60% 40%;
+  --blob-3: 55% 45% 62% 38% / 45% 60% 40% 55%;
+  --blob-4: 48% 52% 38% 62% / 52% 48% 55% 45%;
+}
+
+/* header buttons: the trailhead signpost — a leaf, a stone and a sun disc */
+#sidebar-toggle {
+  border-radius: var(--blob-1);
+  border-width: var(--bw);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+  color: var(--accent-text);
+  transform: rotate(-1.1deg);
+}
+#sidebar-toggle:hover {
+  transform: rotate(0.8deg) scale(1.06);
+  border-color: var(--accent-text);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+#random-note {
+  border-radius: var(--blob-2);
+  transform: rotate(0.9deg);
+}
+#random-note:hover {
+  transform: rotate(-0.6deg) scale(1.06);
+}
+#mode-toggle {
+  border-radius: 50%;
+  border-color: var(--outline-l);
+}
+#mode-toggle:hover {
+  transform: rotate(12deg) scale(1.08);
+}
+#look-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.85rem;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: var(--blob-4);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s, transform 0.35s;
+}
+#look-toggle:hover {
+  transform: rotate(-8deg) scale(1.08);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* the trail map button: a handwritten signpost on the trailhead post */
+#trailmap-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: 46% 54% 50% 60% / 55% 45% 55% 45%;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: transform 0.35s, background 0.15s, border-color 0.15s;
+}
+#trailmap-toggle:hover {
+  transform: rotate(-10deg) scale(1.12);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* tags grow like leaves */
+.tag {
+  border-radius: 70% 30% 65% 35% / 45% 60% 40% 55%;
+  transform: rotate(-0.4deg);
+}
+a.tag:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+/* badges settle like pebbles */
+.badge {
+  border-radius: 45% 55% 50% 60% / 55% 45% 60% 50%;
+}
+
+/* the drawer's tabs and links get the same hand-cut corners */
+.panel-tabs {
+  border-bottom: 0;
+}
+.panel-tab {
+  border-radius: 18px 22px 14px 20px / 20px 14px 22px 18px;
+}
+.panel-tab[aria-selected="true"] {
+  border-bottom-color: transparent;
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+}
+.toc-panel a.current {
+  border-left-color: transparent;
+  border-radius: 12px 18px 16px 10px / 16px 10px 18px 12px;
+}
+
+/* pebble-stepping divider: a dotted trail you can follow with your eyes */
+hr.path {
+  margin: 2.25rem auto;
+  border: 0;
+  height: 0.9rem;
+  background-image: radial-gradient(circle at center, var(--ui-border) 0 2.2px, transparent 2.4px);
+  background-size: 1.35rem 0.9rem;
+  background-repeat: repeat-x;
+  opacity: 0.65;
+}
+
+/* vine divider: the vine alone, tinted with the look's accent */
+.garden-article hr.vine::before {
+  display: none;
+}
+.garden-article hr.vine::after {
+  background: var(--accent);
+}
+
+/* ---------- the trail map: a signposted way to wander ---------- */
+
+.trailmap {
+  position: fixed;
+  inset: 0;
+  z-index: 280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  overflow-y: auto;
+}
+.trailmap[hidden] {
+  display: none;
+}
+.trailmap-panel {
+  position: relative;
+  width: min(56rem, 100%);
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: var(--bw-bar) solid var(--ui-border);
+  border-radius: 30px 24px 34px 20px / 22px 32px 20px 34px;
+  background:
+    radial-gradient(ellipse at 20% 15%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%),
+    radial-gradient(ellipse at 80% 85%, color-mix(in srgb, var(--c-turquoise) 12%, transparent), transparent 55%),
+    var(--surface);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+.trailmap-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  padding: 0.2rem 0.7rem;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: 50% 46% 55% 45% / 48% 52% 46% 54%;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+.trailmap-close:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.trailmap-title {
+  margin: 0 0 0.15rem;
+  font-size: 1.6rem;
+  color: var(--accent-text);
+  text-transform: lowercase;
+}
+.trailmap-hint {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-style: italic;
+}
+.trailmap-hint kbd {
+  padding: 0 0.35em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-style: normal;
+}
+.trailmap-wells {
+  position: relative;
+}
+.trailmap-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.well {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  width: 100%;
+  min-height: 5.2rem;
+  padding: 0.5rem 0.4rem;
+  border: var(--bw) solid var(--ui-border);
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.25;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+.well .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--accent-text);
+}
+.well:hover {
+  transform: rotate(0deg) scale(1.08);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+  z-index: 2;
+}
+.well:hover .icon {
+  color: var(--on-accent);
+}
+@media (max-width: 700px) {
+  .trailmap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .trailmap-wells li:nth-child(2n) {
+    transform: none;
+  }
+}
+
+/* ---------- the well-trodden path ---------- */
+
+.path-trail {
+  grid-column: 1 / -1;
+  padding: 0.55rem 2rem 0.8rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.82rem;
+}
+.path-trail:empty {
+  display: none;
+}
+.path-trail ol {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  margin: 0.3rem 0 0;
+  padding: 0.2rem 0.2rem 0.4rem;
+  list-style: none;
+  scrollbar-width: thin;
+}
+.path-trail-label {
+  font-style: italic;
+  opacity: 0.65;
+}
+.path-stone {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.1rem 0.55rem;
+  border: var(--bw) solid var(--border);
+  border-radius: 45% 55% 50% 60% / 60% 45% 55% 50%;
+  color: var(--accent-text);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--surface);
+  transform: rotate(-0.7deg);
+}
+.path-stone:nth-child(2n) {
+  transform: rotate(0.6deg);
+}
+.path-stone:hover {
+  border-color: var(--accent);
+  color: var(--on-accent);
+  background: var(--accent);
+}
+.path-stone[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent-text);
+  color: var(--on-accent);
+}
+.path-pebble {
+  display: inline-flex;
+  gap: 3px;
+  margin: 0 0.45rem;
+  opacity: 0.55;
+  color: var(--ui-border);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+@media (max-width: 800px) {
+  .path-trail {
+    padding: 0.5rem 1.25rem 0.7rem;
+  }
+}
+
+/* ---------- the pin board: a docked rail, never over the text ---------- */
+
+.garden-content.has-pin-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15.5rem;
+  align-items: start;
+  gap: 1.75rem;
+}
+.garden-content.has-pin-board > :not(.pin-board) {
+  grid-column: 1;
+}
+.pin-board {
+  grid-column: 2;
+  grid-row: 1 / span 60;
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pin-board-title {
+  margin: 0;
+  color: var(--accent-text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  opacity: 0.8;
+}
+.pin-board-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.pin-card {
+  border: var(--bw) solid var(--ui-border);
+  border-left: var(--bw-bar) solid var(--accent);
+  border-radius: 18px 24px 16px 28px / 24px 16px 28px 18px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  transform: rotate(-0.4deg);
+}
+.pin-card:nth-child(2n) {
+  transform: rotate(0.45deg);
+}
+.pin-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.55rem 0.35rem;
+  border-bottom: 1px dashed var(--border);
+}
+.pin-card-head .icon {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--accent-text);
+}
+.pin-card-title {
+  flex: 1;
+  overflow: hidden;
+  color: var(--accent-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-overflow: ellipsis;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+.pin-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem 0.4rem;
+  border: 0;
+  border-radius: var(--r-s);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+}
+.pin-card-btn:hover {
+  background: var(--bg);
+  color: var(--accent-text);
+}
+.pin-card-body {
+  max-height: 40dvh;
+  overflow-y: auto;
+  padding: 0.5rem 0.65rem 0.6rem;
+  font-size: 0.9rem;
+}
+.pin-card-body p {
+  margin: 0.2rem 0;
+  line-height: 1.45;
+}
+.pin-card-body h2 {
+  display: none;
+}
+.pin-card-body a {
+  color: var(--accent-text);
+  font-weight: 600;
+}
+.pin-card-body .status-list {
+  padding: 0;
+}
+.pin-card-body textarea {
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.4rem 0.5rem;
+  border: var(--bw) solid var(--border);
+  border-radius: var(--r-s);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  resize: vertical;
+}
+.pin-excerpt {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.clock-big {
+  display: block;
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.clock-small {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+.wander-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.3rem 0.6rem;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: var(--blob-2);
+  background: var(--bg);
+  color: var(--accent-text);
+  font: inherit;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s;
+}
+.wander-btn:hover {
+  transform: scale(1.05);
+  border-color: var(--accent-text);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* the picker itself is an intentional overlay: it only opens on request */
+.pin-tray {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 5rem;
+  z-index: 250;
+  width: min(17rem, calc(100vw - 2.5rem));
+  max-height: min(70dvh, 32rem);
+  overflow-y: auto;
+  padding: 0.7rem 0.75rem 0.8rem;
+  border: var(--bw) solid var(--ui-border);
+  border-radius: 22px 28px 20px 30px / 30px 20px 28px 22px;
+  background: var(--surface);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+}
+.pin-tray[hidden] {
+  display: none;
+}
+.pin-tray h2 {
+  margin: 0 0 0.2rem;
+  color: var(--accent-text);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+.pin-tray-hint {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  opacity: 0.7;
+}
+.pin-tray ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pin-tray li + li {
+  margin-top: 0.3rem;
+}
+.pin-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: var(--bw) solid transparent;
+  border-radius: var(--r-m);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+}
+.pin-toggle:hover {
+  border-color: var(--border);
+  background: var(--bg);
+}
+.pin-toggle .icon {
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--accent-text);
+}
+.pin-toggle[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+}
+.pin-toggle[aria-pressed="true"] .pin-word {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+.pin-word {
+  margin-left: auto;
+  font-size: 0.72rem;
+  opacity: 0.6;
+}
+
+@media (max-width: 1280px) {
+  .garden-content.has-pin-board {
+    display: flex;
+    flex-direction: column;
+  }
+  .pin-board {
+    position: static;
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .pin-board-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+  .pin-card {
+    transform: none;
+  }
+  .pin-card-body {
+    max-height: none;
+  }
+}
+
